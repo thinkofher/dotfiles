@@ -1,0 +1,230 @@
+---
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+env:
+  # TERM variable
+  #
+  # This value is used to set the `$TERM` environment variable for
+  # each instance of Alacritty. If it is not present, alacritty will
+  # check the local terminfo database and use `alacritty` if it is
+  # available, otherwise `xterm-256color` is used.
+  TERM: xterm-256color
+
+window:
+  # Window decorations
+  #
+  # Values for `decorations`:
+  #     - full: Borders and title bar
+  #     - none: Neither borders nor title bar
+  #
+  # Values for `decorations` (macOS only):
+  #     - transparent: Title bar, transparent background
+  #       and title bar buttons
+  #     - buttonless: Title bar, transparent background,
+  #       but no title bar buttons
+  decorations: full
+
+  # GTK theme variant (Linux/BSD only)
+  #
+  # Override the variant of the GTK theme.
+  # Commonly supported values are `dark` and `light`.
+  # Set this to `None` to use the default theme variant.
+  gtk_theme_variant: dark
+
+# Font configuration
+font:
+  # Normal (roman) font face
+  normal:
+    # Font family
+    #
+    # Default:
+    #   - (macOS) Menlo
+    #   - (Linux/BSD) monospace
+    #   - (Windows) Consolas
+    family: "terminus"
+
+    # The `style` can be specified to pick a specific face.
+    style: Regular
+
+  # Point size
+  siz: 10.5
+
+# Any time the BEL code is received, Alacritty "rings" the visual bell. Once
+# rung, the terminal background will be set to white and transition back to the
+# default background color. You can control the rate of this transition by
+# setting the `duration` property (represented in milliseconds). You can also
+# configure the transition function by setting the `animation` property.
+#
+# Values for `animation`:
+#   - Ease
+#   - EaseOut
+#   - EaseOutSine
+#   - EaseOutQuad
+#   - EaseOutCubic
+#   - EaseOutQuart
+#   - EaseOutQuint
+#   - EaseOutExpo
+#   - EaseOutCirc
+#   - Linear
+#
+# Specifying a `duration` of `0` will disable the visual bell.
+bell:
+  animation: EaseOutExpo
+  duration: 0 # 75
+  color: '0x7B7A79'
+
+# Background opacity
+#
+# Window opacity as a floating point number from `0.0` to `1.0`.
+# The value `0.0` is completely transparent and `1.0` is opaque.
+background_opacity: 0.99
+
+cursor:
+  # Cursor style
+  #
+  # Values for `style`:
+  #   - ▇ Block
+  #   - _ Underline
+  #   - | Beam
+  style: Block
+
+  # If this is `true`, the cursor will be rendered as a hollow box when the
+  # window is not focused.
+  unfocused_hollow: true
+
+# Live config reload (changes require restart)
+live_config_reload: true
+
+# Shell
+#
+# You can set `shell.program` to the path of your favorite
+# shell, e.g. `/bin/fish`. Entries in `shell.args` are passed
+# unmodified as arguments to the shell.
+#
+# Default:
+#   - (macOS) /bin/bash --login
+#   - (Linux/BSD) user login shell
+#   - (Windows) powershell
+shell:
+  program: /bin/fish
+  args:
+    - --login
+mouse:
+  # If this is `true`, the cursor is temporarily hidden when typing.
+  hide_when_typing: true
+
+schemes:
+  base16-ocean: &ocean
+    # Base16 Ocean 256 - alacritty color config
+    # Chris Kempson (http://chriskempson.com)
+    # Default colors
+    primary:
+      background: '0x2b303b'
+      foreground: '0xc0c5ce'
+
+    # Colors the cursor will use if `custom_cursor_colors` is true
+    cursor:
+      text: '0x2b303b'
+      cursor: '0xc0c5ce'
+
+    # Normal colors
+    normal:
+      black: '0x2b303a'
+      red: '0xbf616a'
+      green: '0xa3be8c'
+      yellow: '0xebcb8b'
+      blue: '0x8fa1b3'
+      magenta: '0xb48ead'
+      cyan: '0x96b5b4'
+      white: '0xc0c5ce'
+
+    # Bright colors
+    bright:
+      black: '0x65737e'
+      red: '0xbf616a'
+      green: '0xa3be8c'
+      yellow: '0xebcb8b'
+      blue: '0x8fa1b3'
+      magenta: '0xb48ead'
+      cyan: '0x96b5b4'
+      white: '0xeff1f5'
+
+      # indexed_colors:
+      #   - {index: 16, color: '0xd08770'}
+      #   - {index: 17, color: '0xab7967'}
+      #   - {index: 18, color: '0x343d46'}
+      #   - {index: 19, color: '0x4f5b66'}
+      #   - {index: 20, color: '0xa7adba'}
+      #   - {index: 21, color: '0xdfe1e8'}
+
+    # Colors (Jellybeans)
+    jellybeans: &jellybeans
+      # Default colors
+      primary:
+        background: '#161616'
+        foreground: '#e4e4e4'
+
+      # Cursor volors
+      cursor:
+        text: '#feffff'
+        cursor: '#ffb472'
+
+      # Normal colors
+      normal:
+        black: '#a3a3a3'
+        red: '#e98885'
+        green: '#a3c38b'
+        yellow: '#ffc68d'
+        blue: '#a6cae2'
+        magenta: '#e7cdfb'
+        cyan: '#00a69f'
+        white: '#e4e4e4'
+
+      # Bright colors
+      bright:
+        black: '#c8c8c8'
+        red: '#ffb2b0'
+        green: '#c8e2b9'
+        yellow: '#ffe1af'
+        blue: '#bddff7'
+        magenta: '#fce2ff'
+        cyan: '#0bbdb6'
+        white: '#feffff'
+
+      # Selection colors
+      selection:
+        text: '#5963a2'
+        background: '#f6f6f6'
+
+
+    # Colors (iTerm 2 default theme)
+    items: &iterm
+      # Default colors
+      primary:
+        background: '0x101421'
+        foreground: '0xfffbf6'
+
+      # Normal colors
+      normal:
+        black:   '0x2e2e2e'
+        red:     '0xeb4129'
+        green:   '0xabe047'
+        yellow:  '0xf6c744'
+        blue:    '0x47a0f3'
+        magenta: '0x7b5cb0'
+        cyan:    '0x64dbed'
+        white:   '0xe5e9f0'
+
+      # Bright colors
+      bright:
+        black:   '0x565656'
+        red:     '0xec5357'
+        green:   '0xc0e17d'
+        yellow:  '0xf9da6a'
+        blue:    '0x49a4f8'
+        magenta: '0xa47de9'
+        cyan:    '0x99faf2'
+        white:   '0xffffff'
+colors: *iterm
+
+key_bindings:
+    - { key: F11, action: ToggleFullscreen }
