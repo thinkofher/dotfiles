@@ -1,7 +1,31 @@
 #!/bin/bash
+#
+# author: thinkofher <beniamin.dudek at yahoo.com>
+#
+# Simple bootstraping script for installing dotfiles and other
+# configuration files and scripts stored withing this repository.
 
 BACKUP_DIR=".backup"
 FILES=$(find . -type f | grep -v bootstrap | grep -v .git | grep -v $BACKUP_DIR)
+
+print_help() {
+    echo "Usage: bootstrap <command>"
+    echo
+    echo "Script for bootstraping dotfiles, configuration files"
+    echo "and different scripts."
+    echo
+    echo "Commands:"
+    echo
+    echo "    help      prints this to stdout."
+    echo
+    echo "    install   links files from this repository into users home"
+    echo "              directory. Backups conflict files in .backup at"
+    echo "              current directory."
+    echo
+    echo "    clean     removes links associated to files in this repository."
+    echo
+    echo "    restore   restores files from .backup directory."
+}
 
 install_dotfiles() {
     mkdir -p $BACKUP_DIR
@@ -62,6 +86,9 @@ case $1 in
     "restore")
         restore_backup
         ;;
-    *) echo "Doesn't recognize \"$1\"."
+    "help")
+        print_help
+        ;;
+    *) echo "Doesn't recognize \"$1\". Use help command for more info."
         ;;
 esac
