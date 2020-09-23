@@ -1,0 +1,14 @@
+#!/bin/sh
+# nvim-up
+# author: thinkofher <beniamin.dudek@yahoo.com>
+#
+# Simple script for downloading nightly version of neovim for linux x64.
+
+DOWNLOAD_PATH=$HOME/.local/bin
+NEOVIM_FILENAME=nvim
+NEOVIM_APPIMAGE=$NEOVIM_FILENAME.appimage
+NOEVIM_NIGHTLY=https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+
+mkdir -p $DOWNLOAD_PATH
+curl -Lo $DOWNLOAD_PATH/$NEOVIM_APPIMAGE https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+chmod u+x $DOWNLOAD_PATH/$NEOVIM_APPIMAGE
