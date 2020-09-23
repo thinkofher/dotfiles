@@ -25,6 +25,9 @@ export PATH=$HOME/.local/node_modules/bin:$PATH
 # CABAL
 export PATH=$HOME/.cabal/bin:$PATH
 
+# DOTNET
+export PATH=$HOME/.dotnet/tools:$PATH
+
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then
     . ~/.bashrc
