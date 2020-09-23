@@ -58,9 +58,6 @@ Plug 'junegunn/rainbow_parentheses.vim'
 " For elixir development
 Plug 'elixir-editors/vim-elixir'
 
-" For reason development
-Plug 'reasonml-editor/vim-reason-plus'
-
 " Initialize plugin system
 call plug#end()
 
@@ -178,11 +175,6 @@ autocmd FileType go set shiftwidth=4
 autocmd FileType lisp,racket,scheme set tabstop=2
 autocmd FileType lisp,racket,scheme set softtabstop=2
 autocmd FileType lisp,racket,scheme set shiftwidth=2
-
-" < REASON >
-lua require'nvim_lsp'.reasonls.setup{}
-autocmd FileType reason set list listchars=eol:¬
-autocmd Filetype reason setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " < YAML >
 autocmd FileType yaml set tabstop=2
