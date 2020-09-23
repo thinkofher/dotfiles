@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# bpazzz
+# author: thinkofher <beniamin.dudek@yahoo.com>
+#
+# bpazzz exec commands from xpazzz.public history text
+# file through bemenu
+# bpazzz depends on pazzz, fzf and xpazzz shell script
+# read more about pazzz here: https://www.github.com/thinkofher/pazzz
+bemenu -p bpazzz::clipboard -l 10 --fn "terminus 8" -H 15 --hf "#2d85b7" --tf "#2d85b7" --tb "#323232" --fb "#323232" --nb "#323232" --hb "#323232" --nf "#5c5c5c" --ff "#ffffff" < $HOME/.config/xpazzz/xpazzz.public | xargs swaymsg exec --
