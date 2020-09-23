@@ -1,0 +1,67 @@
+#!/bin/bash
+
+BACKUP_DIR=".backup"
+FILES=$(find . -type f | grep -v bootstrap | grep -v .git | grep -v $BACKUP_DIR)
+
+install_dotfiles() {
+    mkdir -p $BACKUP_DIR
+
+    for f in $FILES
+    do
+        src=$(pwd)/${f:2}
+        target=$HOME/${f:2}
+        backup=$(pwd)/$BACKUP_DIR/${f:2}
+
+        if [ ! -f "$target" ]; then
+            mkdir -p $(dirname $target)
+            echo -n "linking "; ln --verbose --symbolic $src $target
+        elif [ ! -L "$target" ]; then
+            mkdir -p $(dirname $backup)
+            echo -n "backup "; cp --verbose $target $backup
+
+            rm --verbose $target
+            echo -n "linking "; ln --verbose --symbolic $src $target
+        fi
+
+    done
+}
+
+clean_dotfiles() {
+    for f in $FILES
+    do
+        target=$HOME/${f:2}
+
+        if [ -L "$target" ]; then
+            rm --verbose $target
+        fi
+
+    done
+}
+
+restore_backup() {
+    BACKUP_FILES=$(find $BACKUP_DIR -type f)
+    for f in $BACKUP_FILES
+    do
+        target=$HOME/${f:8}
+        if [ -L "$target" ]; then
+            rm --verbose $target
+        fi
+
+        mkdir -p $(dirname $target)
+        echo -n "restoring "; cp --verbose $f $target
+    done
+}
+
+case $1 in
+    "install")
+        install_dotfiles
+        ;;
+    "clean")
+        clean_dotfiles
+        ;;
+    "restore")
+        restore_backup
+        ;;
+    *) echo "Doesn't recognize \"$1\"."
+        ;;
+esac
