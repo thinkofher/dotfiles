@@ -28,5 +28,7 @@ export EDITOR=$CLEAN_VIM
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # pyenv
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
