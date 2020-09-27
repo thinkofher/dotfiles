@@ -12,8 +12,8 @@ CONFIG_DIR=$HOME/.config/xpazzz
 CONFIG_FILE=$CONFIG_DIR/xpazzz.public
 TMP_FILE=/tmp/xpazzz.tmp.txt
 
-pazzz $1 $2 | tr -d '\n' | xsel -i
+pazzz $* | tr -d '\n' | xsel -i
 mkdir -p $CONFIG_DIR
-echo "xpazzz $1 $2" >> $CONFIG_FILE
+echo "xpazzz $*" >> $CONFIG_FILE
 sort < $CONFIG_FILE | uniq > $TMP_FILE
 cat $TMP_FILE > $CONFIG_FILE
