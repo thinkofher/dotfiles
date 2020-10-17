@@ -6,7 +6,11 @@
 # configuration files and scripts stored withing this repository.
 
 BACKUP_DIR=".backup"
-FILES=$(find . -type f | grep -v bootstrap | grep -v .git | grep -v $BACKUP_DIR)
+FILES=$(find . -type f | grep -v bootstrap | grep -v -e ".gitignore" -we ".git" | grep -v $BACKUP_DIR)
+
+print_files() {
+    echo $FILES | tr " " "\n"
+}
 
 print_help() {
     echo "Usage: bootstrap <command>"
@@ -25,6 +29,8 @@ print_help() {
     echo "    clean     removes links associated to files in this repository."
     echo
     echo "    restore   restores files from .backup directory."
+    echo
+    echo "    print     prints all files that will be installed."
 }
 
 install_dotfiles() {
@@ -88,6 +94,9 @@ case $1 in
         ;;
     "help")
         print_help
+        ;;
+    "print")
+        print_files
         ;;
     *) echo "Doesn't recognize \"$1\". Use help command for more info."
         ;;
