@@ -112,8 +112,9 @@ autocmd FileType haskell autocmd BufWritePost * silent !hasktags --ctags .
 
 " < C, CPP >
 lua require'nvim_lsp'.clangd.setup{}
-autocmd FileType make,c,cpp set list listchars=eol:¬,tab:\|\ 
-autocmd FileType make,c,cpp set noexpandtab
+autocmd FileType c,cpp set tabstop=2
+autocmd FileType c,cpp set softtabstop=2
+autocmd FileType c,cpp set shiftwidth=2
 autocmd FileType c,cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " < RUST >
