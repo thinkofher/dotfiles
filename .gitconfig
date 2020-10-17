@@ -1,0 +1,9 @@
+[user]
+	email = piaskupiasku@gmail.com
+	name = thinkofher
+[alias]
+	default-branch = "!git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d/"
+	diff = diff $(git default-branch)
+	pom = push origin $(git default-branch)
+	merged-branches = "!git branch --merged $(git default-branch)"
+	sync = "!git fetch -p && git rebase origin/$(git default-branch)"
