@@ -1,4 +1,5 @@
 [user]
+	signingkey = 0B45C0C1B0426D47
 	email = piaskupiasku@gmail.com
 	name = thinkofher
 [alias]
@@ -7,3 +8,5 @@
 	pom = push origin $(git default-branch)
 	merged-branches = "!git branch --merged $(git default-branch)"
 	sync = "!git fetch -p && git rebase origin/$(git default-branch)"
+[commit]
+	gpgsign = true
