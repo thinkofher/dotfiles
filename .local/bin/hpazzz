@@ -6,4 +6,4 @@
 # file through fzf
 # hpazzz depends on pazzz, fzf and xpazzz shell script
 # read more about pazzz here: https://www.github.com/thinkofher/pazzz
-fzf --height 10 < $HOME/.config/xpazzz/xpazzz.public | sh
+fzf --no-mouse --height 10 < $HOME/.config/xpazzz/xpazzz.public | sh
