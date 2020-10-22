@@ -21,6 +21,7 @@ export CLEAN_VIM="nvim -u $HOME/.config/nvim/clean.vim"
 alias v=$CLEAN_VIM
 alias vi=nvim
 alias vim=nvim
+alias mmosh="mosn main -- tmux a"
 
 export EDITOR=$CLEAN_VIM
 

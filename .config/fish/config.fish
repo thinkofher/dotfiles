@@ -20,6 +20,7 @@ alias v "nvim -u ~/.config/nvim/clean.vim"
 alias e v
 alias vi nvim
 alias vim nvim
+alias mmosh "mosh main -- tmux a"
 
 # path
 # set -Ua fish_user_paths $HOME/.local/bin
