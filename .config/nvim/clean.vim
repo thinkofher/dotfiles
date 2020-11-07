@@ -31,6 +31,9 @@ Plug 'mhinz/vim-signify'
 " For lisp development
 Plug 'junegunn/rainbow_parentheses.vim'
 
+" Editing gpg files
+Plug 'jamessan/vim-gnupg'
+
 call plug#end()
 
 " BASICS
