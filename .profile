@@ -19,3 +19,7 @@ export PATH=$HOME/.cabal/bin:$PATH
 
 # DOTNET
 export PATH=$HOME/.dotnet/tools:$PATH
+
+# DENO
+export DENO_INSTALL="/home/beniamin/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
