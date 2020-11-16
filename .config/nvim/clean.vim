@@ -100,6 +100,11 @@ nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> glf   <cmd>lua vim.lsp.buf.formatting()<CR>
 
+" < WEB DEV >
+autocmd FileType javascript,html,css set tabstop=2
+autocmd FileType javascript,html,css set softtabstop=2
+autocmd FileType javascript,html,css set shiftwidth=2
+
 " < PYTHON >
 lua require'nvim_lsp'.pyls.setup{}
 autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc

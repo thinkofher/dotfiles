@@ -149,9 +149,9 @@ EOF
 autocmd Filetype elixir setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " < WEB DEV >
-autocmd FileType html,css set tabstop=2
-autocmd FileType html,css set softtabstop=2
-autocmd FileType html,css set shiftwidth=2
+autocmd FileType javascript,html,css set tabstop=2
+autocmd FileType javascript,html,css set softtabstop=2
+autocmd FileType javascript,html,css set shiftwidth=2
 
 " < GOLANG >
 lua require'nvim_lsp'.gopls.setup{}
