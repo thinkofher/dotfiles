@@ -20,7 +20,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'neovimhaskell/haskell-vim'
 
 " Built-in lsp
-Plug 'neovim/nvim-lsp'
+Plug 'neovim/nvim-lspconfig'
 
 " Plugin for elm syntax
 Plug 'ElmCast/elm-vim'
@@ -106,7 +106,7 @@ autocmd FileType javascript,html,css set softtabstop=2
 autocmd FileType javascript,html,css set shiftwidth=2
 
 " < PYTHON >
-lua require'nvim_lsp'.pyls.setup{}
+lua require'lspconfig'.pyls.setup{}
 autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
 let g:pyindent_open_paren = 'shiftwidth()'
 let g:pyindent_nested_paren = 'shiftwidth()'
@@ -119,19 +119,19 @@ autocmd FileType haskell set list listchars=eol:¬
 autocmd FileType haskell autocmd BufWritePost * silent !hasktags --ctags .
 
 " < C, CPP >
-lua require'nvim_lsp'.clangd.setup{}
+lua require'lspconfig'.clangd.setup{}
 autocmd FileType c,cpp set tabstop=2
 autocmd FileType c,cpp set softtabstop=2
 autocmd FileType c,cpp set shiftwidth=2
 autocmd FileType c,cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " < RUST >
-lua require'nvim_lsp'.rust_analyzer.setup{}
+lua require'lspconfig'.rust_analyzer.setup{}
 autocmd FileType rust set list listchars=eol:¬
 autocmd Filetype rust setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " < GOLANG >
-lua require'nvim_lsp'.gopls.setup{}
+lua require'lspconfig'.gopls.setup{}
 autocmd Filetype go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 function GoFmt()

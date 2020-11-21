@@ -5,7 +5,7 @@ call plug#begin(stdpath('data') . '/plugged')
 " Make sure you use single quotes
 
 " Built-in lsp for neovim
-Plug 'neovim/nvim-lsp'
+Plug 'neovim/nvim-lspconfig'
 
 " Asynchronous linting and make framework for Neovim/Vim
 Plug 'neomake/neomake'
@@ -132,17 +132,17 @@ autocmd FileType c,cpp,make set list listchars=eol:¬,tab:\|\
 autocmd FileType c,cpp,make set noexpandtab
 
 " < RUST >
-lua require'nvim_lsp'.rust_analyzer.setup{}
+lua require'lspconfig'.rust_analyzer.setup{}
 autocmd FileType rust set list listchars=eol:¬
 autocmd Filetype rust setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " < PYTHON >
-lua require'nvim_lsp'.pyls.setup{}
+lua require'lspconfig'.pyls.setup{}
 autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " < ELIXIR >
 lua << EOF
-require'nvim_lsp'.elixirls.setup{
+require'lspconfig'.elixirls.setup{
     cmd = { "/home/beniamin/.local/bin/elixirlsp/language_server.sh" };
 }
 EOF
@@ -154,7 +154,7 @@ autocmd FileType javascript,html,css set softtabstop=2
 autocmd FileType javascript,html,css set shiftwidth=2
 
 " < GOLANG >
-lua require'nvim_lsp'.gopls.setup{}
+lua require'lspconfig'.gopls.setup{}
 autocmd Filetype go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " autocmd BufNewFile,BufRead *.mod set list listchars=eol:¬,tab:\|\ 
