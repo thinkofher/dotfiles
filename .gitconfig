@@ -10,3 +10,5 @@
 	sync = "!git fetch -p && git rebase origin/$(git default-branch)"
 [commit]
 	gpgsign = true
+[pull]
+	rebase = false
