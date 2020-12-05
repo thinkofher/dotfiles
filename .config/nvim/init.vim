@@ -106,6 +106,10 @@ set laststatus=2
 set completeopt-=preview
 set omnifunc=syntaxcomplete#Complete
 
+" backup functionalities
+set undofile
+set undodir="~/.local/share/nvim/undodir"
+
 " removes trailing spaces
 function TrimWhiteSpace()
     %s/\s*$//

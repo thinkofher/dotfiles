@@ -80,6 +80,10 @@ set laststatus=2
 set completeopt-=preview
 set omnifunc=syntaxcomplete#Complete
 
+" backup functionalities
+set undofile
+set undodir="~/.local/share/nvim/undodir"
+
 " removes trailing spaces
 function TrimWhiteSpace()
     %s/\s*$//
@@ -117,6 +121,9 @@ let g:pyindent_continue = 'shiftwidth() * 2'
 " requirement: hasktags
 autocmd FileType haskell set list listchars=eol:¬
 autocmd FileType haskell autocmd BufWritePost * silent !hasktags --ctags .
+autocmd FileType haskell set tabstop=2
+autocmd FileType haskell set softtabstop=2
+autocmd FileType haskell set shiftwidth=2
 
 " < C, CPP >
 lua require'lspconfig'.clangd.setup{}
