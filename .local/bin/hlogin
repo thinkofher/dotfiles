@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# hlogin
+# author: thinkofher <beniamin.dudek@yahoo.com>
+#
+# hlogin pumps choosen login into X-selection buffer.
+
+CONFIG_DIR="$HOME/.config/hlogin"
+CONFIG_FILE="$CONFIG_DIR/config"
+
+if [ ! -f CONFIG_FILE ]; then
+    mkdir -p $CONFIG_DIR
+    touch $CONFIG_FILE
+fi
+
+fzf --no-mouse --height 10 < $HOME/.config/hlogin/config | xsel -i
