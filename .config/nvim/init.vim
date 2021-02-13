@@ -52,11 +52,17 @@ Plug 'tpope/vim-commentary'
 Plug 'ryanoasis/vim-devicons'
 
 " Clojure plugins
-Plug 'Olical/conjure', { 'tag': 'v2.1.2', 'do': 'bin/compile' }
+Plug 'Olical/conjure', {'tag': 'v4.9.0'}
 Plug 'junegunn/rainbow_parentheses.vim'
+
+" For racket development
+Plug 'wlangstroth/vim-racket'
 
 " For elixir development
 Plug 'elixir-editors/vim-elixir'
+
+" Deoplete
+Plug 'Shougo/deoplete.nvim'
 
 " Initialize plugin system
 call plug#end()
@@ -105,6 +111,9 @@ set laststatus=2
 " autocompletion
 set completeopt-=preview
 set omnifunc=syntaxcomplete#Complete
+
+" column
+set colorcolumn=80
 
 " backup functionalities
 set undofile
@@ -271,8 +280,11 @@ let g:go_echo_go_info = 0
 " < CONJURE >
 let g:conjure_log_direction = "horizontal"
 let g:conjure_log_blacklist = ["up", "ret", "ret-multiline", "load-file", "eval"]
+nnoremap gcj :ConjureEval<CR>
 
 augroup rainbow_lisp
   autocmd!
-  autocmd FileType lisp,clojure,scheme RainbowParentheses
+  autocmd FileType lisp,clojure,scheme,racket RainbowParentheses
 augroup END
+
+let g:deoplete#enable_at_startup = 1

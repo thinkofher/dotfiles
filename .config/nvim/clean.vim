@@ -34,6 +34,9 @@ Plug 'junegunn/rainbow_parentheses.vim'
 " Editing gpg files
 Plug 'jamessan/vim-gnupg'
 
+" Janet programming language support
+Plug 'bakpakin/janet.vim'
+
 call plug#end()
 
 " BASICS
@@ -108,6 +111,7 @@ nnoremap <silent> glf   <cmd>lua vim.lsp.buf.formatting()<CR>
 autocmd FileType javascript,html,css set tabstop=2
 autocmd FileType javascript,html,css set softtabstop=2
 autocmd FileType javascript,html,css set shiftwidth=2
+autocmd BufNewFile,BufRead *.tpl set filetype=html
 
 " < PYTHON >
 lua require'lspconfig'.pyls.setup{}
@@ -197,3 +201,13 @@ tnoremap <ESC> <C-\><C-n>
 
 " PLUGINS SETTINGS
 " ----------------
+
+" Tweaks for browsing
+let g:netrw_banner=0        " disable annoying banner
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+
+" fzf
+nnoremap <silent> <c-p> <cmd>Files<CR>
