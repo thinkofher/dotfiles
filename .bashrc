@@ -24,6 +24,7 @@ alias vim=nvim
 alias mmosh="mosn main -- tmux a"
 
 export EDITOR=$CLEAN_VIM
+export MANPAGER="nvim -c 'set ft=man' -"
 
 # fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
