@@ -16,9 +16,6 @@ Plug 'sbdchd/neoformat'
 " Insert or delete brackets, parens, quotes in pair
 Plug 'jiangmiao/auto-pairs'
 
-" A Git wrapper so awesome, it should be illegal
-Plug 'tpope/vim-fugitive'
-
 " Colorschemes
 Plug 'nanotech/jellybeans.vim'
 
@@ -32,6 +29,12 @@ Plug 'mhinz/vim-signify'
 " The plugin provides mappings to easily delete, change and add such surroundings in pairs
 Plug 'tpope/vim-surround'
 
+" A Git wrapper so awesome, it should be illegal
+Plug 'tpope/vim-fugitive'
+
+" Vim comments plugin
+Plug 'tpope/vim-commentary'
+
 " plugin that provides Rust file detection, syntax highlighting, formatting
 " etc..
 Plug 'rust-lang/rust.vim'
@@ -41,9 +44,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Emmet plugin
 Plug 'mattn/emmet-vim'
-
-" Vim comments plugin
-Plug 'tpope/vim-commentary'
 
 " Clojure plugins
 Plug 'Olical/conjure', {'tag': 'v4.9.0'}
