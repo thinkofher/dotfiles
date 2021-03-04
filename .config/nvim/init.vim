@@ -22,9 +22,6 @@ Plug 'tpope/vim-fugitive'
 " Colorschemes
 Plug 'nanotech/jellybeans.vim'
 
-" Nerdtree
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-
 " fzf stands for “fuzzy finder” and works similarly to the Goto
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -250,12 +247,12 @@ set updatetime=100
 " < FZF >
 let $FZF_DEFAULT_COMMAND = 'ag --hidden -l -g ""'
 
-" < NERDTREE >
-map <C-p> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+" < NETRW >
+let g:netrw_banner=0        " disable annoying banner
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
 " < TAGBAR >
 nmap <F8> :TagbarToggle<CR>
