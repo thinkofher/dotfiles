@@ -45,9 +45,6 @@ Plug 'mattn/emmet-vim'
 " Vim comments plugin
 Plug 'tpope/vim-commentary'
 
-" Nerd font icons
-Plug 'ryanoasis/vim-devicons'
-
 " Clojure plugins
 Plug 'Olical/conjure', {'tag': 'v4.9.0'}
 Plug 'junegunn/rainbow_parentheses.vim'
@@ -57,9 +54,6 @@ Plug 'wlangstroth/vim-racket'
 
 " For elixir development
 Plug 'elixir-editors/vim-elixir'
-
-" Deoplete
-Plug 'Shougo/deoplete.nvim'
 
 " Initialize plugin system
 call plug#end()
@@ -284,4 +278,3 @@ augroup rainbow_lisp
   autocmd FileType lisp,clojure,scheme,racket RainbowParentheses
 augroup END
 
-let g:deoplete#enable_at_startup = 1
