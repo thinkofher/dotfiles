@@ -209,5 +209,9 @@ let g:netrw_liststyle=3     " tree view
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
-" fzf
+" < FZF >
+let $FZF_DEFAULT_COMMAND = 'ag --hidden -l -g ""'
+let g:fzf_layout = { 'down': '25%' }
+
+" Ctrl+P command
 nnoremap <silent> <c-p> <cmd>Files<CR>
