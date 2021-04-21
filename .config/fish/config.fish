@@ -21,6 +21,7 @@ alias e v
 alias vi nvim
 alias vim nvim
 alias mmosh "mosh main -- tmux a"
+alias gowtf "go clean -cache -modcache -i -r"
 
 # path
 # set -Ua fish_user_paths $HOME/.local/bin

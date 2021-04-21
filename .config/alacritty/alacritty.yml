@@ -30,6 +30,8 @@ window:
   # Set this to `None` to use the default theme variant.
   gtk_theme_variant: dark
 
+  title: haha terminal go ^C^C^C^C^C^C^C^C
+
 # Font configuration
 font:
   # Normal (roman) font face

@@ -7,9 +7,6 @@ call plug#begin(stdpath('data') . '/plugged')
 " Built-in lsp for neovim
 Plug 'neovim/nvim-lspconfig'
 
-" Asynchronous linting and make framework for Neovim/Vim
-Plug 'neomake/neomake'
-
 " Vim code formatter plugin
 Plug 'sbdchd/neoformat'
 
@@ -157,9 +154,14 @@ autocmd FileType javascript,html,css set tabstop=2
 autocmd FileType javascript,html,css set softtabstop=2
 autocmd FileType javascript,html,css set shiftwidth=2
 
+" < PROTO >
+autocmd FileType proto set tabstop=2
+autocmd FileType proto set softtabstop=2
+autocmd FileType proto set shiftwidth=2
+
 " < GOLANG >
-lua require'lspconfig'.gopls.setup{}
-autocmd Filetype go setlocal omnifunc=v:lua.vim.lsp.omnifunc
+" lua require'lspconfig'.gopls.setup{}
+" autocmd Filetype go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " autocmd BufNewFile,BufRead *.mod set list listchars=eol:¬,tab:\|\ 
 autocmd BufNewFile,BufRead *.mod set list listchars=tab:\|\ 
@@ -169,7 +171,7 @@ autocmd BufNewFile,BufRead *.mod set softtabstop=4
 autocmd BufNewFile,BufRead *.mod set shiftwidth=4
 
 " autocmd FileType go set list listchars=eol:¬,tab:\|\ 
-autocmd FileType go set list listchars=tab:\|\ 
+autocmd FileType go set list listchars=tab:\ \ 
 autocmd FileType go set noexpandtab
 autocmd FileType go set tabstop=4
 autocmd FileType go set softtabstop=4
@@ -221,25 +223,15 @@ tnoremap <ESC> <C-\><C-n>
 " PLUGINS SETTINGS
 " ----------------
 
-" < NEOMAKE >
-" when writing a buffer (no delay).
-call neomake#configure#automake('w')
-" when writing a buffer (no delay), and on normal mode changes (after 750ms).
-call neomake#configure#automake('nw', 750)
-" When reading a buffer (after 1s), and when writing (no delay).
-call neomake#configure#automake('rw', 1000)
-" full config: when writing or reading a buffer, and on changes in insert and
-" normal mode (after 1s; no delay when writing).
-call neomake#configure#automake('nrwi', 500)
-
-" rust config for neomake
-let g:neomake_rust_cargo_command = ['test', '--no-run']
-
 " < SIGNIFY >
 set updatetime=100
 
 " < FZF >
 let $FZF_DEFAULT_COMMAND = 'ag --hidden -l -g ""'
+let g:fzf_layout = { 'down': '25%' }
+
+" Ctrl+P command
+nnoremap <silent> <c-p> <cmd>Files<CR>
 
 " < NETRW >
 let g:netrw_banner=0        " disable annoying banner
@@ -267,6 +259,8 @@ let g:go_highlight_extra_types = 1
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_operators = 1
 let g:go_echo_go_info = 0
+let g:go_auto_type_info = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint', 'errcheck']
 
 " < CONJURE >
 let g:conjure_log_direction = "horizontal"
@@ -277,4 +271,3 @@ augroup rainbow_lisp
   autocmd!
   autocmd FileType lisp,clojure,scheme,racket RainbowParentheses
 augroup END
-
