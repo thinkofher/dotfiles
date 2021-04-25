@@ -19,9 +19,6 @@ Plug 'junegunn/fzf.vim'
 " Plugin for haskell syntax
 Plug 'neovimhaskell/haskell-vim'
 
-" Built-in lsp
-Plug 'neovim/nvim-lspconfig'
-
 " Plugin for elm syntax
 Plug 'ElmCast/elm-vim'
 
@@ -94,19 +91,6 @@ function TrimWhiteSpace()
 endfunction
 set list listchars=trail:.,extends:>
 
-" LANGUAGE SPECIFIC SETTINGS AND LSP
-" ----------------------------------
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> glf   <cmd>lua vim.lsp.buf.formatting()<CR>
-
 " < WEB DEV >
 autocmd FileType javascript,html,css set tabstop=2
 autocmd FileType javascript,html,css set softtabstop=2
@@ -114,8 +98,6 @@ autocmd FileType javascript,html,css set shiftwidth=2
 autocmd BufNewFile,BufRead *.tpl set filetype=html
 
 " < PYTHON >
-lua require'lspconfig'.pyls.setup{}
-autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
 let g:pyindent_open_paren = 'shiftwidth()'
 let g:pyindent_nested_paren = 'shiftwidth()'
 let g:pyindent_continue = 'shiftwidth() * 2'
@@ -130,20 +112,14 @@ autocmd FileType haskell set softtabstop=2
 autocmd FileType haskell set shiftwidth=2
 
 " < C, CPP >
-lua require'lspconfig'.clangd.setup{}
 autocmd FileType c,cpp set tabstop=2
 autocmd FileType c,cpp set softtabstop=2
 autocmd FileType c,cpp set shiftwidth=2
-autocmd FileType c,cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " < RUST >
-lua require'lspconfig'.rust_analyzer.setup{}
 autocmd FileType rust set list listchars=eol:¬
-autocmd Filetype rust setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " < GOLANG >
-lua require'lspconfig'.gopls.setup{}
-autocmd Filetype go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 function GoFmt()
     !gofmt -w %

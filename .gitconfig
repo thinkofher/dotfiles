@@ -9,6 +9,6 @@
 	merged-branches = "!git branch --merged $(git default-branch)"
 	sync = "!git fetch -p && git rebase origin/$(git default-branch)"
 [commit]
-	gpgsign = true
+	gpgsign = false
 [pull]
 	rebase = false

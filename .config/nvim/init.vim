@@ -4,9 +4,6 @@
 call plug#begin(stdpath('data') . '/plugged')
 " Make sure you use single quotes
 
-" Built-in lsp for neovim
-Plug 'neovim/nvim-lspconfig'
-
 " Vim code formatter plugin
 Plug 'sbdchd/neoformat'
 
@@ -114,16 +111,6 @@ function TrimWhiteSpace()
 endfunction
 set list listchars=trail:.,extends:>
 
-" LANGUAGE SPECIFIC SETTINGS AND LSP
-" ----------------------------------
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 
 " < HASKELL >
 autocmd FileType haskell set list listchars=eol:¬
@@ -133,21 +120,7 @@ autocmd FileType c,cpp,make set list listchars=eol:¬,tab:\|\
 autocmd FileType c,cpp,make set noexpandtab
 
 " < RUST >
-lua require'lspconfig'.rust_analyzer.setup{}
 autocmd FileType rust set list listchars=eol:¬
-autocmd Filetype rust setlocal omnifunc=v:lua.vim.lsp.omnifunc
-
-" < PYTHON >
-lua require'lspconfig'.pyls.setup{}
-autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
-
-" < ELIXIR >
-lua << EOF
-require'lspconfig'.elixirls.setup{
-    cmd = { "/home/beniamin/.local/bin/elixirlsp/language_server.sh" };
-}
-EOF
-autocmd Filetype elixir setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " < WEB DEV >
 autocmd FileType javascript,html,css set tabstop=2
@@ -158,10 +131,6 @@ autocmd FileType javascript,html,css set shiftwidth=2
 autocmd FileType proto set tabstop=2
 autocmd FileType proto set softtabstop=2
 autocmd FileType proto set shiftwidth=2
-
-" < GOLANG >
-" lua require'lspconfig'.gopls.setup{}
-" autocmd Filetype go setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 " autocmd BufNewFile,BufRead *.mod set list listchars=eol:¬,tab:\|\ 
 autocmd BufNewFile,BufRead *.mod set list listchars=tab:\|\ 
