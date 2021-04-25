@@ -136,6 +136,12 @@ autocmd FileType c,cpp set softtabstop=2
 autocmd FileType c,cpp set shiftwidth=2
 autocmd FileType c,cpp setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
+function CFmt()
+    !clang-format -i %
+    edit
+endfunction
+autocmd BufWritePost *.c silent call CFmt()
+
 " < RUST >
 lua require'lspconfig'.rust_analyzer.setup{}
 autocmd FileType rust set list listchars=eol:¬
