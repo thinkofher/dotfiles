@@ -21,10 +21,8 @@ alias gowtf "go clean -cache -modcache -i -r"
 alias commit-types "cat $HOME/.config/git/commit-types"
 alias ct "cat $HOME/.config/git/commit-types"
 
-source /opt/homebrew/opt/asdf/asdf.fish
-
-fish_add_path /opt/homebrew/bin
-
-if test -e ~/.iterm2_shell_integration.fish
-    source ~/.iterm2_shell_integration.fish
-end
+# pyenv
+# set PYENV_ROOT $HOME/.pyenv
+# set PATH $PYENV_ROOT/bin $PATH
+# status --is-interactive; and source (pyenv init -|psub)
+# status --is-interactive; and source (pyenv virtualenv-init -|psub)

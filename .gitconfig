@@ -9,8 +9,8 @@
 	merged-branches = "!git branch --merged $(git default-branch)"
 	sync = "!git fetch -p && git rebase origin/$(git default-branch)"
 [commit]
-	gpgsign = true
 	template = "~/.gitmessage"
+	gpgsign = false
 [pull]
 	rebase = false
 [init]
