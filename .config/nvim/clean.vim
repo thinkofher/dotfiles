@@ -116,6 +116,12 @@ autocmd FileType c,cpp set tabstop=2
 autocmd FileType c,cpp set softtabstop=2
 autocmd FileType c,cpp set shiftwidth=2
 
+function CFmt()
+    !clang-format -i %
+    edit
+endfunction
+autocmd BufWritePost *.c silent call CFmt()
+
 " < RUST >
 autocmd FileType rust set list listchars=eol:¬
 
