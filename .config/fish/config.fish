@@ -44,8 +44,8 @@ alias gowtf "go clean -cache -modcache -i -r"
 # pyenv
 # set PYENV_ROOT $HOME/.pyenv
 # set PATH $PYENV_ROOT/bin $PATH
-status --is-interactive; and source (pyenv init -|psub)
-status --is-interactive; and source (pyenv virtualenv-init -|psub)
+# status --is-interactive; and source (pyenv init -|psub)
+# status --is-interactive; and source (pyenv virtualenv-init -|psub)
 
 # fzf
 # set -Ua fish_user_paths $HOME/.fzf/bin
