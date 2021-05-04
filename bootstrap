@@ -44,13 +44,13 @@ install_dotfiles() {
 
         if [ ! -f "$target" ]; then
             mkdir -p $(dirname $target)
-            echo -n "linking "; ln --verbose --symbolic $src $target
+            echo -n "linking "; ln -v -s $src $target
         elif [ ! -L "$target" ]; then
             mkdir -p $(dirname $backup)
-            echo -n "backup "; cp --verbose $target $backup
+            echo -n "backup "; cp -v $target $backup
 
-            rm --verbose $target
-            echo -n "linking "; ln --verbose --symbolic $src $target
+            rm -v $target
+            echo -n "linking "; ln -v -s $src $target
         fi
 
     done
@@ -62,7 +62,7 @@ clean_dotfiles() {
         target=$HOME/${f:2}
 
         if [ -L "$target" ]; then
-            rm --verbose $target
+            rm -v $target
         fi
 
     done
@@ -74,11 +74,11 @@ restore_backup() {
     do
         target=$HOME/${f:8}
         if [ -L "$target" ]; then
-            rm --verbose $target
+            rm -v $target
         fi
 
         mkdir -p $(dirname $target)
-        echo -n "restoring "; cp --verbose $f $target
+        echo -n "restoring "; cp -v $f $target
     done
 }
 
