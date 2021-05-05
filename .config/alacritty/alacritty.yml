@@ -42,13 +42,13 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: "terminus"
+    family: "Terminus (TTF)"
 
     # The `style` can be specified to pick a specific face.
-    style: Regular
+    # style: Regular
 
   # Point size
-  siz: 10.5
+  size: 12
 
 # Any time the BEL code is received, Alacritty "rings" the visual bell. Once
 # rung, the terminal background will be set to white and transition back to the
@@ -107,7 +107,7 @@ live_config_reload: true
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
-  program: /bin/fish
+  program: /bin/zsh
   args:
     - --login
 mouse:
