@@ -1,3 +1,8 @@
+# .zshrc
+
+# autocompletion settings
+autoload -U compinit && compinit
+
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
@@ -27,3 +32,4 @@ if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
+
