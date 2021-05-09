@@ -100,9 +100,6 @@ set laststatus=2
 set completeopt-=preview
 set omnifunc=syntaxcomplete#Complete
 
-" column
-set colorcolumn=80
-
 " backup functionalities
 set undofile
 set undodir="~/.local/share/nvim/undodir"
