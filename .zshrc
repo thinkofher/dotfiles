@@ -7,6 +7,12 @@ zstyle ':completion:ls:*' menu yes select
 zstyle ':completion:*:default' list-colors \
     "di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
 
+# enable colorful output of ls
+export CLICOLOR=1
+
+# set language
+export LANG="en_GB.UTF-8"
+
 # homebrew zsh functions
 fpath+=/opt/homebrew/share/zsh/site-functions
 
