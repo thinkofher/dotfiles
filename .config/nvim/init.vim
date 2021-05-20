@@ -104,6 +104,9 @@ set omnifunc=syntaxcomplete#Complete
 set undofile
 set undodir="~/.local/share/nvim/undodir"
 
+" don't wrap lines
+set nowrap
+
 " removes trailing spaces
 function TrimWhiteSpace()
     %s/\s*$//
