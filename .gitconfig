@@ -1,6 +1,6 @@
 [user]
-	signingkey = 0B45C0C1B0426D47
-	email = piaskupiasku@gmail.com
+	signingkey = ED8BC4A9CB48772E
+	email = mail@bdudek.xyz
 	name = thinkofher
 [alias]
 	default-branch = "!git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d/"
