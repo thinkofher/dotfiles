@@ -60,7 +60,6 @@ set('omnifunc', 'syntaxcomplete#Complete')
 
 -- backup functionalities
 set('undofile', true)
-set('undodir', '~/.local/share/nvim/undodir')
 
 -- don't wrap lines
 vim.wo.wrap = false
@@ -71,24 +70,7 @@ cmd([[set list listchars=trail:.,extends:>]])
 -- ==================================
 
 -- lsp settings for every supported lang
-auto.cmd('FileType c,cpp,rust', function()
-    -- nmap is local helper function for silent nnoremap
-    local nmap = function(lhs, rhs)
-        vimp.nnoremap({'silent'}, lhs, rhs)
-    end
-
-    nmap('gd', lsp.buf.declaration)
-    nmap('<c-]>', lsp.buf.definition)
-    nmap('K', lsp.buf.hover)
-    nmap('gD', lsp.buf.implementation)
-    nmap('<c-k>', lsp.buf.implementation)
-    nmap('<c-k>', lsp.buf.signature_help)
-    nmap('1gD', lsp.buf.type_definition)
-    nmap('gr', lsp.buf.references)
-    nmap('g0', lsp.buf.document_symbol)
-    nmap('gW', lsp.buf.workspace_symbol)
-    nmap('glf', lsp.buf.formatting)
-end)
+auto.cmd('FileType c,cpp,rust', utils.setup_lsp)
 
 -- < WEB DEV >
 
@@ -173,7 +155,7 @@ vimp.tnoremap('<ESC>', [[<C-\><C-n>]])
 -- ================
 
 -- < SIGNIFY >
-vim.o.updatetime=100
+vim.o.updatetime = 100
 
 -- < FZF >
 vim.env.FZF_DEFAULT_COMMAND = 'ag --hidden -l -g ""'
