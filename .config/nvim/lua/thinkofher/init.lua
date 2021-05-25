@@ -1,18 +1,14 @@
 local cmd = vim.cmd
 local api = vim.api
 
-local auto = require('auto')
-local lsp = vim.lsp
+local vimp = require('vimp')
 local lspc = require('lspconfig')
+local lsp = vim.lsp
 local set = api.nvim_set_option
 
--- HELPERS
--- =======
-
--- silent runs given vim command silently
-function silent(command)
-    cmd('silent' .. ' ' .. command)
-end
+-- local lua plugins
+local auto = require('thinkofher.auto')
+local utils = require('thinkofher.utils')
 
 -- BASICS
 -- ======
@@ -39,21 +35,8 @@ vim.o.encoding = 'utf-8'
 -- required for operations modifying multiple buffers like rename
 vim.o.hidden = true
 
--- indentn sets tabstop, softtabstop and shiftwidth
--- to given number
-function indentn(number)
-    vim.o.tabstop = number -- number of visual spaces per TAB
-    vim.bo.tabstop = number
-
-    vim.o.softtabstop = number -- number of spaces in tab when editing
-    vim.bo.softtabstop = number
-
-    vim.o.shiftwidth = number -- number of spaces to use for autoindent
-    vim.bo.shiftwidth = number
-end
-
 -- spaces & Tabs
-indentn(4)
+utils.indentn(4)
 
 vim.o.expandtab = true -- tabs are spaces
 vim.bo.expandtab = true
@@ -88,7 +71,7 @@ cmd([[set list listchars=trail:.,extends:>]])
 -- ==================================
 
 -- lsp settings for every supported lang
-auto.cmd('FileType c,cpp,go,rust', function()
+auto.cmd('FileType c,cpp,rust', function()
     -- nmap is local helper function for silent nnoremap
     local nmap = function(lhs, rhs)
         vimp.nnoremap({'silent'}, lhs, rhs)
@@ -107,12 +90,11 @@ auto.cmd('FileType c,cpp,go,rust', function()
     nmap('glf', lsp.buf.formatting)
 end)
 
-
 -- < WEB DEV >
 
 -- web dev auto command
-auto.cmd("FileType javascript,html,css", function()
-    indentn(2)
+auto.cmd('FileType javascript,html,css', function()
+    utils.indentn(2)
 end)
 
 -- set tpl file type to html
@@ -124,50 +106,31 @@ end)
 lspc.clangd.setup({})
 
 -- c, cpp auto command
-auto.cmd("FileType c,cpp", function()
+auto.cmd('FileType c,cpp', function()
     -- clang-format after save
-    auto.cmd("BufWritePost *", function()
-        silent('!clang-format -i %')
-        silent('edit')
+    auto.cmd('BufWritePost *', function()
+        utils.silent('!clang-format -i %')
+        utils.silent('edit')
     end)
 
     cmd([[set list listchars=tab:\ \ ]])
     cmd([[setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
-    indentn(2)
-end)
-
--- < GOLANG >
-lspc.gopls.setup({})
-
--- golang auto command
-auto.cmd("FileType go", function()
-    cmd([[set list listchars=tab:\ \ ]])
-    cmd([[setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
-    vim.bo.expandtab = false
-    vim.o.expandtab = false
-    indentn(4)
-
-    -- go fmt after save
-    auto.cmd("BufWritePost *", function()
-        silent('!gofmt -w %')
-        silent('!goimports -w %')
-        silent('edit')
-    end)
+    utils.indentn(2)
 end)
 
 -- < RUST >
 lspc.rust_analyzer.setup({})
 
 -- rust auto command
-auto.cmd("FileType rust", function()
+auto.cmd('FileType rust', function()
     cmd([[setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
 end)
 
 -- < RACKET >
 
 -- lisp auto command
-auto.cmd("FileType lisp,racket,scheme", function()
-    indentn(2)
+auto.cmd('FileType lisp,racket,scheme', function()
+    utils.indentn(2)
     cmd('RainbowParentheses')
 end)
 
@@ -175,12 +138,57 @@ end)
 -- requirement: hasktags
 
 -- haskell auto command
-auto.cmd("FileType haskell", function()
+auto.cmd('FileType haskell', function()
     -- generate ctags after save
     auto.cmd('BufWritePost *', function()
-        silent('!hasktags --ctags.')
+        utils.silent('!hasktags --ctags.')
     end)
 
     cmd([[set list listchars=eol:¬]])
-    indentn(2)
+    utils.indentn(2)
 end)
+
+-- < PROTO >
+auto.cmd('FileType proto', function()
+    utils.indentn(2)
+end)
+
+-- MAPPINGS
+-- ========
+vim.g.mapleader = '>'
+
+-- mappings for moving lines
+vimp.nnoremap('<A-j>', [[:m .+1<CR>==]])
+vimp.nnoremap('<A-k>', [[:m .-2<CR>==]])
+vimp.inoremap('<A-j>', [[<Esc>:m .+1<CR>==gi]])
+vimp.inoremap('<A-k>', [[<Esc>:m .-2<CR>==gi]])
+vimp.vnoremap('<A-j>', [[:m '>+1<CR>gv=gv]])
+vimp.vnoremap('<A-k>', [[:m '<-2<CR>gv=gv]])
+
+-- terminal settings
+vimp.nnoremap('<leader>t', ':tabnew<CR>:terminal<CR>')
+vimp.tnoremap('<ESC>', [[<C-\><C-n>]])
+
+-- PLUGINS SETTINGS
+-- ================
+
+-- < SIGNIFY >
+vim.o.updatetime=100
+
+-- < FZF >
+vim.env.FZF_DEFAULT_COMMAND = 'ag --hidden -l -g ""'
+vim.g.fzf_layout = {
+    down = '25%'
+}
+
+-- Ctrl+P command
+vimp.nnoremap({'silent'}, '<c-p>', function()
+    utils.silent('Files')
+end)
+
+-- < NETRW >
+-- Tweaks for browsing
+vim.g.netrw_banner = 0  -- disable annoying banner
+vim.g.netrw_altv = 1  -- open splits to the right
+vim.g.netrw_liststyle = 3  -- tree view
+vim.g.netrw_list_hide = [[,\(^\|\s\s\)\zs\.\S\+]]
