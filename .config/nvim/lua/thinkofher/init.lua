@@ -24,7 +24,7 @@ set('wildmenu', true)
 -- THEMES
 -- ======
 cmd('syntax enable')
-cmd('colorscheme jellybeans')
+utils.colorscheme('jellybeans')
 
 -- OVERALL SETTINGS
 -- ================

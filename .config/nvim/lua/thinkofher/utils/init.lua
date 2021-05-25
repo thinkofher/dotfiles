@@ -42,4 +42,8 @@ function M.setup_lsp()
     nmap('glf', lsp.buf.formatting)
 end
 
+function M.colorscheme(cscheme)
+    return cmd(string.format('colorscheme %s', cscheme))
+end
+
 return M
