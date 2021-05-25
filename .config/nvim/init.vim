@@ -2,8 +2,9 @@
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin(stdpath('data') . '/plugged')
-" nvim lua utils
-Plug 'norcalli/nvim_utils'
+
+" Write your .vimrc in Lua!
+Plug 'svermeulen/vimpeccable'
 
 " A Git wrapper so awesome, it should be illegal
 Plug 'tpope/vim-fugitive'

@@ -2,7 +2,8 @@ local cmd = vim.cmd
 local api = vim.api
 
 local auto = require('auto')
-local lsp = require('lspconfig')
+local lsp = vim.lsp
+local lspc = require('lspconfig')
 local set = api.nvim_set_option
 
 -- HELPERS
@@ -38,15 +39,21 @@ vim.o.encoding = 'utf-8'
 -- required for operations modifying multiple buffers like rename
 vim.o.hidden = true
 
+-- indentn sets tabstop, softtabstop and shiftwidth
+-- to given number
+function indentn(number)
+    vim.o.tabstop = number -- number of visual spaces per TAB
+    vim.bo.tabstop = number
+
+    vim.o.softtabstop = number -- number of spaces in tab when editing
+    vim.bo.softtabstop = number
+
+    vim.o.shiftwidth = number -- number of spaces to use for autoindent
+    vim.bo.shiftwidth = number
+end
+
 -- spaces & Tabs
-vim.o.tabstop = 4 -- number of visual spaces per TAB
-vim.bo.tabstop = 4
-
-vim.o.softtabstop = 4 -- number of spaces in tab when editing
-vim.bo.softtabstop = 4
-
-vim.o.shiftwidth = 4 -- number of spaces to use for autoindent
-vim.bo.shiftwidth = 4
+indentn(4)
 
 vim.o.expandtab = true -- tabs are spaces
 vim.bo.expandtab = true
@@ -78,26 +85,102 @@ vim.wo.wrap = false
 cmd([[set list listchars=trail:.,extends:>]])
 
 -- LANGUAGE SPECIFIC SETTINGS AND LSP
--- =================================
+-- ==================================
+
+-- lsp settings for every supported lang
+auto.cmd('FileType c,cpp,go,rust', function()
+    -- nmap is local helper function for silent nnoremap
+    local nmap = function(lhs, rhs)
+        vimp.nnoremap({'silent'}, lhs, rhs)
+    end
+
+    nmap('gd', lsp.buf.declaration)
+    nmap('<c-]>', lsp.buf.definition)
+    nmap('K', lsp.buf.hover)
+    nmap('gD', lsp.buf.implementation)
+    nmap('<c-k>', lsp.buf.implementation)
+    nmap('<c-k>', lsp.buf.signature_help)
+    nmap('1gD', lsp.buf.type_definition)
+    nmap('gr', lsp.buf.references)
+    nmap('g0', lsp.buf.document_symbol)
+    nmap('gW', lsp.buf.workspace_symbol)
+    nmap('glf', lsp.buf.formatting)
+end)
+
+
+-- < WEB DEV >
+
+-- web dev auto command
+auto.cmd("FileType javascript,html,css", function()
+    indentn(2)
+end)
+
+-- set tpl file type to html
+auto.cmd('BufNewFile,BufRead *.tpl', function()
+    cmd('set filetype=html')
+end)
+
+-- < C, CPP >
+lspc.clangd.setup({})
+
+-- c, cpp auto command
+auto.cmd("FileType c,cpp", function()
+    -- clang-format after save
+    auto.cmd("BufWritePost *", function()
+        silent('!clang-format -i %')
+        silent('edit')
+    end)
+
+    cmd([[set list listchars=tab:\ \ ]])
+    cmd([[setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
+    indentn(2)
+end)
 
 -- < GOLANG >
-lsp.gopls.setup({})
+lspc.gopls.setup({})
 
 -- golang auto command
 auto.cmd("FileType go", function()
-        cmd([[set list listchars=tab:\ \ ]])
-        cmd([[setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
-        vim.bo.expandtab = false
-        vim.o.expandtab = false
-        vim.bo.tabstop = 4
-        vim.o.tabstop = 4
-        vim.bo.softtabstop = 4
-        vim.o.softtabstop = 4
-end)
+    cmd([[set list listchars=tab:\ \ ]])
+    cmd([[setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
+    vim.bo.expandtab = false
+    vim.o.expandtab = false
+    indentn(4)
 
--- go fmt after save
-auto.cmd("BufWritePost *.go", function()
+    -- go fmt after save
+    auto.cmd("BufWritePost *", function()
         silent('!gofmt -w %')
         silent('!goimports -w %')
         silent('edit')
+    end)
+end)
+
+-- < RUST >
+lspc.rust_analyzer.setup({})
+
+-- rust auto command
+auto.cmd("FileType rust", function()
+    cmd([[setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
+end)
+
+-- < RACKET >
+
+-- lisp auto command
+auto.cmd("FileType lisp,racket,scheme", function()
+    indentn(2)
+    cmd('RainbowParentheses')
+end)
+
+-- < HASKELL >
+-- requirement: hasktags
+
+-- haskell auto command
+auto.cmd("FileType haskell", function()
+    -- generate ctags after save
+    auto.cmd('BufWritePost *', function()
+        silent('!hasktags --ctags.')
+    end)
+
+    cmd([[set list listchars=eol:¬]])
+    indentn(2)
 end)
