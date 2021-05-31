@@ -89,15 +89,16 @@ lspc.clangd.setup({})
 
 -- c, cpp auto command
 auto.cmd('FileType c,cpp', function()
-    -- clang-format after save
-    auto.cmd('BufWritePost *', function()
-        utils.silent('!clang-format -i %')
-        utils.silent('edit')
-    end)
 
     cmd([[set list listchars=tab:\ \ ]])
     cmd([[setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
     utils.indentn(2)
+end)
+
+-- clang-format after save
+auto.cmd('BufWritePost *.c,*.cpp,*.h,*.hpp', function()
+    utils.silent('!clang-format -i %')
+    utils.silent('edit')
 end)
 
 -- < RUST >

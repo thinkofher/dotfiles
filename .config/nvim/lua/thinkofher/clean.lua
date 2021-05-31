@@ -25,13 +25,13 @@ auto.cmd('FileType go', function()
     vim.bo.expandtab = false
     vim.o.expandtab = false
     utils.indentn(4)
+end)
 
-    -- go fmt after save
-    auto.cmd('BufWritePost *', function()
-        utils.silent('!gofmt -w %')
-        utils.silent('!goimports -w %')
-        utils.silent('edit')
-    end)
+-- go fmt after save
+auto.cmd('BufWritePost *.go', function()
+    utils.silent('!gofmt -w %')
+    utils.silent('!goimports -w %')
+    utils.silent('edit')
 end)
 
 auto.cmd('BufNewFile,BufRead *.mod', function()
