@@ -1,5 +1,8 @@
 # .zshrc
 
+# PS1
+export PS1='%(?.%(!.#.;).%F{6}%B;%b%f) '
+
 # autocompletion settings
 autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
@@ -38,11 +41,10 @@ export EDITOR=$CLEAN_VIM
 export MANPAGER="nvim -c 'set ft=man' -"
 
 # fzf
-[ -f ~/.fzf.bash ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # pyenv
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
-
