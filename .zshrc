@@ -1,5 +1,14 @@
 # .zshrc
 
+# key mappings
+bindkey -e
+
+bindkey ";3C" forward-word
+bindkey ";3D" backward-word
+
+bindkey ";9D" beginning-of-line
+bindkey ";9C" end-of-line
+
 # PS1
 export PS1='%(?.%(!.#.;).%F{6}%B;%b%f) '
 
