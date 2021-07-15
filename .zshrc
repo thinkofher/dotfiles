@@ -49,6 +49,16 @@ alias vi=nvim
 alias vim=nvim
 alias mmosh="mosn main -- tmux a"
 
+# ls aliases
+alias ll="ls -lh"
+alias la="ls -alh"
+
+# mosh
+alias lcmosh="LC_ALL=en_GB.UTF-8 mosh"
+
+# notes
+alias notes="vim $HOME/Documents/notes.md"
+
 export EDITOR=$CLEAN_VIM
 export MANPAGER="nvim -c 'set ft=man' -"
 
