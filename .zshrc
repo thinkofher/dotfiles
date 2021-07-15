@@ -28,6 +28,9 @@ export LANG="en_GB.UTF-8"
 # homebrew zsh functions
 fpath+=/opt/homebrew/share/zsh/site-functions
 
+# user specific zsh functions
+fpath+=$HOME/.local/share/zsh/site-functions
+
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
