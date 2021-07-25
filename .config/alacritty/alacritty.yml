@@ -32,6 +32,10 @@ window:
 
   title: haha terminal go ^C^C^C^C^C^C^C^C
 
+  padding:
+    x: 5
+    y: 5
+
 # Font configuration
 font:
   # Normal (roman) font face
@@ -107,7 +111,7 @@ live_config_reload: true
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
 shell:
-  program: /bin/fish
+  program: /bin/zsh
   args:
     - --login
 mouse:
