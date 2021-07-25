@@ -27,8 +27,7 @@ set $menu $bemenu
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-# output * bg /usr/share/backgrounds/f31/default/normalish/f31.png fill
-output * bg /home/beniamin/Pictures/wallpapers/laputa.jpg fill
+output * bg /home/beniamin/.background fill
 #
 # Example configuration:
 #
@@ -217,7 +216,7 @@ bar {
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     # status_command while date +'%Y-%m-%d %H:%M:%S'; do sleep 1; done
-    status_command while echo "v: $(amixer sget 'Master' | grep -Po -m 1 \"(100|[0-9][0-9]|[1-9]|0)%\")" "\|" "b: $(light | grep -Po -m 1 \"^(100|[1-9][0-9]|[0-9])\")%" "\|" "acpi: $(acpi | grep -Po \"([0-9][0-9]|100)%\")" "\|" "$(date +'%A %d %b %Y %H:%M:%S')" "\|" "[~$(whoami)@$(hostname)]"; do sleep 1; done
+    status_command while echo "v: $(amixer sget 'Master' | grep -Po -m 1 \"(100|[0-9][0-9]|[1-9]|0)%\")" "\|" "b: $(light | grep -Po -m 1 \"^(100|[1-9][0-9]|[0-9])\")%" "\|" "acpi: $(acpi | grep -Po \"([0-9][0-9]|100)%\")" "\|" "$(date +'%A %d %b %Y %H:%M:%S')" "\|" "[~$(whoami)@$(cat /etc/hostname)]"; do sleep 1; done
 
     colors {
         statusline #ffffff
