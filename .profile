@@ -2,9 +2,14 @@
 export PATH=$HOME/.cargo/bin:$PATH
 
 # GOLANG
+
+# Uncomment below lines if you're not using
+# go compiler from your systems repositories.
+
+# export GOROOT=/usr/local/go
+# export PATH=$GOROOT/bin:$PATH
+
 export GOPATH=$HOME/go
-export GOROOT=/usr/local/go
-export PATH=$GOROOT/bin:$PATH
 export PATH=$GOPATH/bin:$PATH
 
 # PYENV
