@@ -21,6 +21,7 @@ export CLEAN_VIM="nvim -u $HOME/.config/nvim/clean.vim"
 alias v=$CLEAN_VIM
 alias vi=nvim
 alias vim=nvim
+alias vu="nvim -u NONE"
 alias mmosh="mosn main -- tmux a"
 
 export EDITOR=$CLEAN_VIM
@@ -33,4 +34,10 @@ export MANPAGER="nvim -c 'set ft=man' -"
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
+fi
+
+# exec sway
+if [ $(command -v sway) ] && [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+    eval $(ssh-agent)
+    exec sway
 fi
