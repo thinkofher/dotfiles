@@ -1,14 +1,8 @@
 # .zshrc
 
 # key mappings
-bindkey -e
-
-# key bindings for alacritty
-bindkey ";3C" forward-word
-bindkey ";3D" backward-word
-
-bindkey ";5D" beginning-of-line
-bindkey ";5C" end-of-line
+bindkey -v
+export KEYTIMEOUT=1
 
 # PS1
 export PS1='%(?.%(!.#.;).%F{6}%B;%b%f) '
@@ -59,3 +53,6 @@ export MANPAGER="nvim -c 'set ft=man' -"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# zsh prompt
+[ -f ~/.zshrc.prompt ] && source ~/.zshrc.prompt
