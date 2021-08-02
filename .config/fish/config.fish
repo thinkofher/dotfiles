@@ -49,3 +49,5 @@ alias gowtf "go clean -cache -modcache -i -r"
 
 # fzf
 # set -Ua fish_user_paths $HOME/.fzf/bin
+
+source /opt/homebrew/opt/asdf/asdf.fish
