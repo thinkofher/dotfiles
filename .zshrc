@@ -2,6 +2,7 @@
 
 # key mappings
 bindkey -v
+export KEYTIMEOUT=1
 
 # PS1
 export PS1='%(?.%(!.#.;).%F{6}%B;%b%f) '
@@ -62,6 +63,9 @@ export MANPAGER="nvim -c 'set ft=man' -"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# zsh prompt
+[ -f ~/.zshrc.prompt ] && source ~/.zshrc.prompt
 
 # asdf
 . /opt/homebrew/opt/asdf/asdf.sh
