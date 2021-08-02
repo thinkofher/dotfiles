@@ -1,23 +1,10 @@
 # .zshrc
 
 # key mappings
-bindkey -e
-
-bindkey ";3C" forward-word
-bindkey ";3D" backward-word
-
-bindkey ";9D" beginning-of-line
-bindkey ";9C" end-of-line
+bindkey -v
 
 # PS1
 export PS1='%(?.%(!.#.;).%F{6}%B;%b%f) '
-
-# autocompletion settings
-autoload -Uz compinit && compinit
-zstyle ':completion:*' menu select
-zstyle ':completion:ls:*' menu yes select
-zstyle ':completion:*:default' list-colors \
-    "di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
 
 # enable colorful output of ls
 export CLICOLOR=1
@@ -26,7 +13,18 @@ export CLICOLOR=1
 export LANG="en_GB.UTF-8"
 
 # homebrew zsh functions
-fpath+=/opt/homebrew/share/zsh/site-functions
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
+# autocompletion settings
+zstyle ':completion:*' menu select
+zstyle ':completion:ls:*' menu yes select
+zstyle ':completion:*:default' list-colors \
+    "di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+
+autoload -Uz compinit
+compinit
 
 # user specific zsh functions
 fpath+=$HOME/.local/share/zsh/site-functions
@@ -40,10 +38,9 @@ export PATH
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
-
 export CLEAN_VIM="nvim -u $HOME/.config/nvim/clean.vim"
 
-# User specific aliases and functions
+# user specific aliases and functions
 alias v=$CLEAN_VIM
 alias vi=nvim
 alias vim=nvim
@@ -59,14 +56,12 @@ alias lcmosh="LC_ALL=en_GB.UTF-8 mosh"
 # notes
 alias notes="vim $HOME/Documents/notes.md"
 
+# editor & manpager
 export EDITOR=$CLEAN_VIM
 export MANPAGER="nvim -c 'set ft=man' -"
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# pyenv
-if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-fi
+# asdf
+. /opt/homebrew/opt/asdf/asdf.sh
