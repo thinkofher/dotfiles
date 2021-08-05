@@ -4,6 +4,9 @@
 bindkey -v
 export KEYTIMEOUT=1
 
+# allow comments in interactive mode
+setopt interactivecomments
+
 # PS1
 export PS1='%(?.%(!.#.;).%F{6}%B;%b%f) '
 
