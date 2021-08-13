@@ -27,6 +27,10 @@ then
 fi
 export PATH
 
+# Enable history
+export HISTFILE=$HOME/.zsh_history
+export SAVEHIST=2000
+
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
