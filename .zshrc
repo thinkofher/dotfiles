@@ -48,14 +48,14 @@ export CLEAN_VIM="nvim -u $HOME/.config/nvim/clean.vim"
 alias v=$CLEAN_VIM
 alias vi=nvim
 alias vim=nvim
-alias mmosh="mosn main -- tmux a"
 
 # ls aliases
 alias ll="ls -lh"
 alias la="ls -alh"
 
 # mosh
-alias lcmosh="LC_ALL=en_GB.UTF-8 mosh"
+alias mosh="LC_ALL=en_GB.UTF-8 mosh"
+alias mmosh="mosn main -- tmux a"
 
 # notes
 alias notes="vim $HOME/Documents/notes.md"
