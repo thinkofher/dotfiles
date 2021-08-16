@@ -41,6 +41,9 @@ Plug 'jamessan/vim-gnupg'
 " Janet programming language support
 Plug 'bakpakin/janet.vim'
 
+" Elixir programming language support
+Plug 'elixir-editors/vim-elixir'
+
 call plug#end()
 
 " Load init lua file
