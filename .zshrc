@@ -60,6 +60,10 @@ alias mmosh="mosn main -- tmux a"
 # notes
 alias notes="vim $HOME/Documents/notes.md"
 
+# age
+alias agei="age -i $HOME/.config/age/keys.age"
+alias agep="age -R $HOME/.config/age/keys.pub"
+
 # editor & manpager
 export EDITOR=$CLEAN_VIM
 export MANPAGER="nvim -c 'set ft=man' -"
