@@ -24,3 +24,5 @@ alias mmosh "mosh main -- tmux a"
 alias gowtf "go clean -cache -modcache -i -r"
 
 source /opt/homebrew/opt/asdf/asdf.fish
+
+fish_add_path /opt/homebrew/bin
