@@ -76,3 +76,7 @@ export MANPAGER="nvim -c 'set ft=man' -"
 
 # asdf
 . /opt/homebrew/opt/asdf/asdf.sh
+
+function cheat() { # display cheatsheat for given topic
+    curl -sL cheat.sh/$1 | less -r
+}
