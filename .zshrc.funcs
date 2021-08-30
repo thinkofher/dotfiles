@@ -1,0 +1,6 @@
+#!/bin/zsh
+# .zshrc.functions
+
+function cheat() { # display cheat sheet for given topic
+    curl -sL cheat.sh/$1 | less -r
+}

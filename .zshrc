@@ -40,29 +40,8 @@ then
 fi
 export PATH
 
-# Uncomment the following line if you don't like systemctl's auto-paging feature:
-# export SYSTEMD_PAGER=
-export CLEAN_VIM="nvim -u $HOME/.config/nvim/clean.vim"
-
-# user specific aliases and functions
-alias v=$CLEAN_VIM
-alias vi=nvim
-alias vim=nvim
-
-# ls aliases
-alias ll="ls -lh"
-alias la="ls -alh"
-
-# mosh
-alias mosh="LC_ALL=en_GB.UTF-8 mosh"
-alias mmosh="mosn main -- tmux a"
-
-# notes
-alias notes="vim $HOME/Documents/notes.md"
-
-# age
-alias agei="age -i $HOME/.config/age/keys.age"
-alias agep="age -R $HOME/.config/age/keys.pub"
+# aliases
+[ -f ~/.zshrc.aliases ] && source ~/.zshrc.aliases
 
 # editor & manpager
 export EDITOR=$CLEAN_VIM
@@ -75,8 +54,7 @@ export MANPAGER="nvim -c 'set ft=man' -"
 [ -f ~/.zshrc.prompt ] && source ~/.zshrc.prompt
 
 # asdf
-. /opt/homebrew/opt/asdf/asdf.sh
+[ -f /opt/homebrew/opt/asdf/asdf.sh ] && source /opt/homebrew/opt/asdf/asdf.sh
 
-function cheat() { # display cheat sheet for given topic
-    curl -sL cheat.sh/$1 | less -r
-}
+# additional zsh functions
+[ -f ~/.zshrc.funcs ] && source ~/.zshrc.funcs
