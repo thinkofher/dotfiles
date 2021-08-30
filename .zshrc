@@ -40,21 +40,22 @@ then
 fi
 export PATH
 
-# aliases
-[ -f ~/.zshrc.aliases ] && source ~/.zshrc.aliases
-
 # editor & manpager
 export EDITOR=$CLEAN_VIM
 export MANPAGER="nvim -c 'set ft=man' -"
 
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# aliases
+[ -f ~/.zshrc.aliases ] && source ~/.zshrc.aliases
 
 # zsh prompt
 [ -f ~/.zshrc.prompt ] && source ~/.zshrc.prompt
 
+# additional zsh shell functions
+[ -f ~/.zshrc.funcs ] && source ~/.zshrc.funcs
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # asdf
 [ -f /opt/homebrew/opt/asdf/asdf.sh ] && source /opt/homebrew/opt/asdf/asdf.sh
 
-# additional zsh functions
-[ -f ~/.zshrc.funcs ] && source ~/.zshrc.funcs
