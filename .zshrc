@@ -40,10 +40,6 @@ then
 fi
 export PATH
 
-# editor & manpager
-export EDITOR=$CLEAN_VIM
-export MANPAGER="nvim -c 'set ft=man' -"
-
 # aliases
 [ -f ~/.zshrc.aliases ] && source ~/.zshrc.aliases
 
@@ -59,3 +55,6 @@ export MANPAGER="nvim -c 'set ft=man' -"
 # asdf
 [ -f /opt/homebrew/opt/asdf/asdf.sh ] && source /opt/homebrew/opt/asdf/asdf.sh
 
+# editor & manpager
+export EDITOR=$CLEAN_VIM
+export MANPAGER="nvim -c 'set ft=man' -"
