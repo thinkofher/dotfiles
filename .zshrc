@@ -58,3 +58,5 @@ export PATH
 # editor & manpager
 export EDITOR=$CLEAN_VIM
 export MANPAGER="nvim -c 'set ft=man' -"
+
+pfetch
