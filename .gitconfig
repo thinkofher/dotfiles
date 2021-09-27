@@ -10,6 +10,7 @@
 	sync = "!git fetch -p && git rebase origin/$(git default-branch)"
 [commit]
 	gpgsign = true
+	template = "~/.gitmessage"
 [pull]
 	rebase = false
 [init]
