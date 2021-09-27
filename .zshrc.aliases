@@ -20,3 +20,7 @@ alias notes="vim $HOME/Documents/notes.md"
 # age
 alias agei="age -i $HOME/.config/age/keys.age"
 alias agep="age -R $HOME/.config/age/keys.pub"
+
+# git utilities
+alias commit-types="cat $HOME/.config/git/commit-types"
+alias ct="cat $HOME/.config/git/commit-types"
