@@ -70,7 +70,7 @@ function M.mount(use)
     use 'mhinz/vim-signify'
 
     -- Colorschemes
-    use 'nanotech/jellybeans.vim'
+    use 'folke/tokyonight.nvim'
 
     -- fzf stands for “fuzzy finder” and works similarly to the Goto
     -- use { '~/.fzf', run = function() vim.fn['fzf#install']() end }
