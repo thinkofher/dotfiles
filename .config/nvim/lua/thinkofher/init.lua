@@ -72,6 +72,27 @@ cmd([[set list listchars=trail:.,extends:>]])
 -- lsp settings for every supported lang
 auto.cmd('FileType c,cpp,rust', utils.setup_lsp)
 
+-- < GOLANG >
+
+-- golang auto command
+auto.cmd('FileType go', function()
+    cmd([[set list listchars=tab:\ \ ]])
+
+    vim.bo.expandtab = false
+    vim.o.expandtab = false
+
+    utils.indentn(4)
+end)
+
+auto.cmd('BufNewFile,BufRead *.mod', function()
+    cmd([[set list listchars=tab:\ \ ]])
+
+    vim.bo.expandtab = false
+    vim.o.expandtab = false
+
+    utils.indentn(4)
+end)
+
 -- < WEB DEV >
 
 -- web dev auto command
@@ -136,6 +157,11 @@ auto.cmd('FileType proto', function()
     utils.indentn(2)
 end)
 
+-- < YAML >
+auto.cmd('FileType yaml', function()
+    utils.indentn(2)
+end)
+
 -- MAPPINGS
 -- ========
 vim.g.mapleader = '>'
@@ -175,3 +201,22 @@ vim.g.netrw_banner = 0  -- disable annoying banner
 vim.g.netrw_altv = 1  -- open splits to the right
 vim.g.netrw_liststyle = 3  -- tree view
 vim.g.netrw_list_hide = [[,\(^\|\s\s\)\zs\.\S\+]]
+
+-- < VIM-GO >
+vim.g.go_fmt_command = "goimports"
+vim.g.go_fmt_autosave = 1
+vim.g.go_fmt_fail_silently = 1
+vim.g.go_asmfmt_autosave = 1
+vim.g.go_autodetect_gopath = 1
+vim.g.go_list_type = "quickfix"
+
+vim.g.go_highlight_types = 1
+vim.g.go_highlight_fields = 1
+vim.g.go_highlight_functions = 1
+vim.g.go_highlight_function_calls = 1
+vim.g.go_highlight_extra_types = 1
+vim.g.go_highlight_generate_tags = 1
+vim.g.go_highlight_operators = 1
+vim.g.go_echo_go_info = 0
+vim.g.go_auto_type_info = 1
+vim.g.go_metalinter_autosave_enabled = {'vet', 'golint', 'errcheck'}

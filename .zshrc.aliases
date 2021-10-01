@@ -1,5 +1,5 @@
 # .zshrc.aliases
-export CLEAN_VIM="nvim -u $HOME/.config/nvim/clean.vim"
+export CLEAN_VIM="nvim -u NONE"
 
 # user specific aliases and functions
 alias v=$CLEAN_VIM
