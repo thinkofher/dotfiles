@@ -46,13 +46,13 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: "Menlo"
+    family: "Cascadia Code"
 
     # The `style` can be specified to pick a specific face.
-    # style: Regular
+    style: Light
 
   # Point size
-  size: 12
+  size: 11
 
   use_thin_strokes: true
 
@@ -84,7 +84,6 @@ bell:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.95
 
 cursor:
   # Cursor style
@@ -112,10 +111,15 @@ live_config_reload: true
 #   - (macOS) /bin/bash --login
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
+# shell:
+#   program: /bin/zsh
+#   args:
+#     - --login
 shell:
-  program: /bin/zsh
+  program: /usr/bin/login
   args:
-    - --login
+    - -pf
+    - bdudek
 mouse:
   # If this is `true`, the cursor is temporarily hidden when typing.
   hide_when_typing: true
@@ -204,6 +208,39 @@ schemes:
         background: '#f6f6f6'
 
 
+    # TokyoNight Alacritty Colors
+    tokyonight: &tokyonight
+      # Default colors
+      primary:
+        background: '0x1a1b26'
+        foreground: '0xc0caf5'
+
+      # Normal colors
+      normal:
+        black:   '0x15161E'
+        red:     '0xf7768e'
+        green:   '0x9ece6a'
+        yellow:  '0xe0af68'
+        blue:    '0x7aa2f7'
+        magenta: '0xbb9af7'
+        cyan:    '0x7dcfff'
+        white:   '0xa9b1d6'
+
+      # Bright colors
+      bright:
+        black:   '0x414868'
+        red:     '0xf7768e'
+        green:   '0x9ece6a'
+        yellow:  '0xe0af68'
+        blue:    '0x7aa2f7'
+        magenta: '0xbb9af7'
+        cyan:    '0x7dcfff'
+        white:   '0xc0caf5'
+
+      indexed_colors:
+        - { index: 16, color: '0xff9e64' }
+        - { index: 17, color: '0xdb4b4b' }
+
     # Colors (iTerm 2 default theme)
     items: &iterm
       # Default colors
@@ -232,7 +269,7 @@ schemes:
         magenta: '0xa47de9'
         cyan:    '0x99faf2'
         white:   '0xffffff'
-colors: *ocean
+colors: *tokyonight
 
 key_bindings:
     - { key: F11, action: ToggleFullscreen }
