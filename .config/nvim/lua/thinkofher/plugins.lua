@@ -60,6 +60,9 @@ function M.mount(use)
     -- A Git wrapper so awesome, it should be illegal
     use 'tpope/vim-fugitive'
 
+    -- Enhanced version vcscommand.vim, with full support for fossil.
+    use 'hdrz/vcscommand.vim'
+
     -- The Plugin provides mappings to easily delete, change and add such surroundings in pairs
     use 'tpope/vim-surround'
 
