@@ -55,6 +55,9 @@ export PATH
 # asdf
 [ -f /opt/homebrew/opt/asdf/asdf.sh ] && source /opt/homebrew/opt/asdf/asdf.sh
 
+# cargo
+[ -f ~/.cargo/env ] && source ~/.cargo/env
+
 # editor & manpager
 export EDITOR=$CLEAN_VIM
 
