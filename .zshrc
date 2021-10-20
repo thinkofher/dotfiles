@@ -60,3 +60,5 @@ export EDITOR=$CLEAN_VIM
 export MANPAGER="nvim -c 'set ft=man' -"
 
 pfetch
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
