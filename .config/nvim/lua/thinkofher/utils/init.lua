@@ -24,6 +24,19 @@ function M.setup_lsp()
     local vimp = require('vimp')
     local lsp = vim.lsp
 
+    cmd("command! LspDef lua vim.lsp.buf.definition()")
+    cmd("command! LspFormatting lua vim.lsp.buf.formatting()")
+    cmd("command! LspCodeAction lua vim.lsp.buf.code_action()")
+    cmd("command! LspHover lua vim.lsp.buf.hover()")
+    cmd("command! LspRename lua vim.lsp.buf.rename()")
+    cmd("command! LspRefs lua vim.lsp.buf.references()")
+    cmd("command! LspTypeDef lua vim.lsp.buf.type_definition()")
+    cmd("command! LspImplementation lua vim.lsp.buf.implementation()")
+    cmd("command! LspDiagPrev lua vim.lsp.diagnostic.goto_prev()")
+    cmd("command! LspDiagNext lua vim.lsp.diagnostic.goto_next()")
+    cmd("command! LspDiagLine lua vim.lsp.diagnostic.show_line_diagnostics()")
+    cmd("command! LspSignatureHelp lua vim.lsp.buf.signature_help()")
+
     -- nmap is local helper function for silent nnoremap
     local nmap = function(lhs, rhs)
         vimp.nnoremap({'silent'}, lhs, rhs)
