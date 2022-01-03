@@ -41,3 +41,6 @@
 (set! :wrap false)
 
 (set! :listchars {:trail "." :extends ">"})
+
+;; enable mouse support
+(set! :mouse :a)
