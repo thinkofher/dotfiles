@@ -4,9 +4,6 @@
    :opt-local-set setl!
    : def-autocmd-fn} :zest.macros)
 
-(let [lsp-config (require :lspconfig)]
-  (lsp-config.clangd.setup []))
-
 ;; C, Cpp auto command
 (def-autocmd-fn :FileType [:c :cpp]
   (setl! :omnifunc "v:lua.vim.lsp.omnifunc")
