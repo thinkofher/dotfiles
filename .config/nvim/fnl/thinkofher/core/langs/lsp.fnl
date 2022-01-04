@@ -38,12 +38,14 @@
 
 (fn lsp-on-attach [client bufnr]
   "Attaches key mappings and commands for language server protocol." 
+  ;; Setup all lsp keymaps for current buffer.
   (let [buf-set-keymap vim.api.nvim_buf_set_keymap
         set-keymap (fn [lhs callback]
                      (buf-set-keymap bufnr :n lhs "" {:silent true
                                                       :callback callback}))]
     (each [map callback (pairs lsp-keymaps)]
       (set-keymap map callback)))
+  ;; Setup all lsp commands once, when attaching keymaps for buffer.
   (once (let [add-command vim.api.nvim_add_user_command]
           (each [cmd-name callback (pairs lsp-commands)]
             (add-command cmd-name callback {})))))
