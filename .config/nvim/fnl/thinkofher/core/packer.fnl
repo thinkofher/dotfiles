@@ -1,13 +1,5 @@
 (local packer (require :packer))
 
-;; Mounts lua general purpose lua libraries.
-(fn libs [use]
-  ;; Write your .vimrc in Lua!
-  (use "svermeulen/vimpeccable")
-
-  ;; Built-in lsp
-  (use "neovim/nvim-lspconfig"))
-
 ;; Mounts tools for configuring neovim with fennel language.
 (fn fennel-env [use]
   ;; Hotpot lets you use fennel in Neovim anywhere you would use lua.
@@ -23,6 +15,9 @@
 
 ;; Mounts plugins for programming languages better support.
 (fn programming-langs [use]
+  ;; Built-in lsp
+  (use "neovim/nvim-lspconfig")
+
   ;; Fully featured Golang IDE for vim
   (use "fatih/vim-go")
 
@@ -56,9 +51,6 @@
 (packer.startup (fn [use]
                   ;; Manage packer with packer
                   (use "wbthomason/packer.nvim")
-
-                  ;; Mount libraries
-                  (libs use)
 
                   ;; Mount fennel environment
                   (fennel-env use)
