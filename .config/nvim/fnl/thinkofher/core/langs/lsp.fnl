@@ -1,4 +1,5 @@
 ;; lsp and langauge specific settings
+(import-macros {:opt-local-set setl!} :zest.macros)
 
 (local lsp-config (require :lspconfig))
 
@@ -49,6 +50,8 @@
 
 (fn lsp-on-attach [client bufnr]
   "Attaches key mappings and commands for language server protocol." 
+  ;; Configure omnifunc for lsp.
+  (setl! :omnifunc :v:lua.vim.lsp.omnifunc)
   ;; Configure vim diagnostics.
   (vim.diagnostic.config {:virtual_text false})
   ;; Setup all lsp keymaps for current buffer.

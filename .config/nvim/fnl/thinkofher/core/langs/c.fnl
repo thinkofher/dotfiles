@@ -6,7 +6,6 @@
 
 ;; C, Cpp auto command
 (def-autocmd-fn :FileType [:c :cpp]
-  (setl! :omnifunc "v:lua.vim.lsp.omnifunc")
   (set! :tabstop 2)
   (set! :softtabstop 2)
   (set! :shiftwidth 2))
