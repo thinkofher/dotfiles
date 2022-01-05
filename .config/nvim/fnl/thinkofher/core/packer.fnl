@@ -8,10 +8,7 @@
   ;; An opinionated library of macros that aims to streamline
   ;; the process of configuring neovim with fennel, a lisp that
   ;; compiles to lua.
-  (use "tsbohc/zest.nvim")
-
-  ;; Vim highlighting for Fennel.
-  (use "bakpakin/fennel.vim"))
+  (use "tsbohc/zest.nvim"))
 
 ;; Mounts plugins for programming languages better support.
 (fn programming-langs [use]
@@ -24,28 +21,17 @@
          ["nvim-treesitter/nvim-treesitter"]
          {:run ":TSUpdate"}))
 
-  ;; Plugin that provides Rust file detection, syntax highlighting,
-  ;; formatting, etc.
-  (use "rust-lang/rust.vim")
-
   ;; Emmet Plugin
   (use "mattn/emmet-vim")
 
   ;; Plugin for elm syntax
   (use "ElmCast/elm-vim")
 
-  ;; Plugin for haskell syntax
-  (use "neovimhaskell/haskell-vim")
-
-  ;; Elixir programming language support
-  (use "elixir-editors/vim-elixir")
-
   ;; Janet programming language support
   (use "bakpakin/janet.vim")
 
   ;; For racket development
-  (use "wlangstroth/vim-racket")
-  (use "junegunn/rainbow_parentheses.vim"))
+  (use "wlangstroth/vim-racket"))
 
 (fn packer-bootstraped? []
   (. _G :packer_bootstrap))
