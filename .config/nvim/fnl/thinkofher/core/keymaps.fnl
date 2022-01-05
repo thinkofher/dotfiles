@@ -1,7 +1,7 @@
 (import-macros {: def-keymap} :zest.macros)
 
 ;; setup map leader
-(tset vim.g :mapleader ">")
+(tset vim.g :mapleader " ")
 
 ;; mappings for moving lines
 (def-keymap [n]
