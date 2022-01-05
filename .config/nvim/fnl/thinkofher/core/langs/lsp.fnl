@@ -65,7 +65,8 @@
 
 ;; LSP servers that I'm currently using.
 (local servers [:clangd
-                :rust_analyzer])
+                :rust_analyzer
+                :gopls])
 
 ;; Setup built-in LSP for each lsp server from above list.
 (each [_ server (ipairs servers)]

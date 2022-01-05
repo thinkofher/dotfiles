@@ -18,8 +18,6 @@
   ;; Built-in lsp
   (use "neovim/nvim-lspconfig")
 
-  ;; Fully featured Golang IDE for vim
-  (use "fatih/vim-go")
 
   ;; Plugin that provides Rust file detection, syntax highlighting,
   ;; formatting, etc.
