@@ -18,6 +18,11 @@
   ;; Built-in lsp
   (use "neovim/nvim-lspconfig")
 
+  ;; Treesitter support for neovim.
+  (use (vim.tbl_extend
+         :force
+         ["nvim-treesitter/nvim-treesitter"]
+         {:run ":TSUpdate"}))
 
   ;; Plugin that provides Rust file detection, syntax highlighting,
   ;; formatting, etc.
