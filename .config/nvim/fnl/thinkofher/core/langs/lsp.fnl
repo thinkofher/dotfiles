@@ -14,13 +14,24 @@
 (local lsp-keymaps {:gd vim.lsp.buf.declaration
                     "<c-]>" vim.lsp.buf.definition
                     :K vim.lsp.buf.hover
-                    :gD vim.lsp.buf.implementation
+                    :gi vim.lsp.buf.implementation
                     :<c-k> vim.lsp.buf.signature_help
-                    :1gD vim.lsp.buf.type_definition
+                    :<leader>wa vim.lsp.buf.add_workspace_folder
+                    :<leader>wr vim.lsp.buf.remove_workspace_folder
+                    :<leader>wl (fn [...]
+                                  (print (vim.inspect
+                                           (vim.lsp.buf.list_workspace_folders))))
                     :gr vim.lsp.buf.references
                     :g0 vim.lsp.buf.document_symbol
                     :gW vim.lsp.buf.workspace_symbol
-                    :glf vim.lsp.buf.formatting})
+                    :<leader>D vim.lsp.buf.type_definition
+                    :<leader>rn vim.lsp.buf.rename
+                    :<leader>ca vim.lsp.buf.code_action
+                    :<leader>e vim.diagnostic.open_float
+                    "[d" vim.diagnostic.goto_prev
+                    "]d" vim.diagnostic.goto_next
+                    :<leader>q vim.diagnostic.setloclist
+                    :<leader>f vim.lsp.buf.formatting})
 
 ;; Table with command names and their callbacks.
 (local lsp-commands {:LspDef  vim.lsp.buf.definition
@@ -31,13 +42,15 @@
                      :LspRefs  vim.lsp.buf.references
                      :LspTypeDef  vim.lsp.buf.type_definition
                      :LspImplementation  vim.lsp.buf.implementation
-                     :LspDiagPrev  vim.lsp.diagnostic.goto_prev
-                     :LspDiagNext  vim.lsp.diagnostic.goto_next
-                     :LspDiagLine  vim.lsp.diagnostic.show_line_diagnostics
+                     :LspDiagPrev  vim.diagnostic.goto_prev
+                     :LspDiagNext  vim.diagnostic.goto_next
+                     :LspDiagLine  vim.diagnostic.open_float
                      :LspSignatureHelp  vim.lsp.buf.signature_help})
 
 (fn lsp-on-attach [client bufnr]
   "Attaches key mappings and commands for language server protocol." 
+  ;; Configure vim diagnostics.
+  (vim.diagnostic.config {:virtual_text false})
   ;; Setup all lsp keymaps for current buffer.
   (let [buf-set-keymap vim.api.nvim_buf_set_keymap
         set-keymap (fn [lhs callback]
