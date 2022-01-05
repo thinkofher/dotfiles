@@ -13,5 +13,4 @@
 
 ;; run clang-format after every buffer write
 (def-autocmd-fn :BufWritePost [:*c :*cpp :*h :*hpp]
-  (vim.cmd "silent !clang-format -i %")
-  (vim.cmd "silent edit"))
+  (vim.lsp.buf.formatting))
