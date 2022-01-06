@@ -8,7 +8,10 @@
   ;; An opinionated library of macros that aims to streamline
   ;; the process of configuring neovim with fennel, a lisp that
   ;; compiles to lua.
-  (use "tsbohc/zest.nvim"))
+  (use "tsbohc/zest.nvim")
+
+  ;; Syntax highlighting for Fennel.
+  (use "bakpakin/fennel.vim"))
 
 ;; Mounts plugins for programming languages better support.
 (fn programming-langs [use]
@@ -20,6 +23,9 @@
          :force
          ["nvim-treesitter/nvim-treesitter"]
          {:run ":TSUpdate"}))
+
+  ;; Rainbow parentheses for treesitter.
+  (use "p00f/nvim-ts-rainbow")
 
   ;; Emmet Plugin
   (use "mattn/emmet-vim")
