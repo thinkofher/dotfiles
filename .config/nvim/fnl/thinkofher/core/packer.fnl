@@ -33,6 +33,9 @@
   ;; Plugin for elm syntax
   (use "ElmCast/elm-vim")
 
+  ;; Plugin for elixir syntax
+  (use "elixir-editors/vim-elixir")
+
   ;; Janet programming language support
   (use "bakpakin/janet.vim")
 

@@ -3,7 +3,10 @@
 
 (let [enabled-list [:fennel :commonlisp]
       parsers (require :nvim-treesitter.parsers)
-      configs (require :nvim-treesitter.configs)]
+      configs (require :nvim-treesitter.configs)
+      ;; TreeSitter for elixir is extremly slow, so I choosed
+      ;; to use regular regex-based highlighting.
+      disabled [:elixir]]
   (configs.setup {:ensure_installed "maintained"
                   :sync_install false
                   :indent {:enable false}
@@ -13,4 +16,5 @@
                                        #(not (contains enabled-list $1))
                                        (parsers.available_parsers))}
                   :highlight {:enable true
-                              :additional_vim_regex_highlighting false}}))
+                              :disable disabled
+                              :additional_vim_regex_highlighting disabled}}))
