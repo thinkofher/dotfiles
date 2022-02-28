@@ -73,3 +73,6 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 pfetch
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
