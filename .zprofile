@@ -14,3 +14,6 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 
 # Ruby
 export PATH="$HOME/.asdf/shims:$PATH"
+
+# Deta dev tools
+export PATH="/Users/bdudek/.deta/bin:$PATH"
