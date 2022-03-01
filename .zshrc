@@ -16,9 +16,11 @@ export CLICOLOR=1
 # set language
 export LANG="en_GB.UTF-8"
 
+BREW_PREFIX=$(brew --prefix)
+
 # homebrew zsh functions
 if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+  FPATH=$BREW_PREFIX/share/zsh/site-functions:$FPATH
 fi
 
 # autocompletion settings
@@ -53,7 +55,7 @@ export PATH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # asdf
-[ -f /opt/homebrew/opt/asdf/asdf.sh ] && source /opt/homebrew/opt/asdf/asdf.sh
+[ -f $BREW_PREFIX/opt/asdf/asdf.sh ] && source $BREW_PREFIX/opt/asdf/asdf.sh
 
 # cargo
 [ -f ~/.cargo/env ] && source ~/.cargo/env
@@ -75,4 +77,4 @@ pfetch
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /opt/homebrew/bin/terraform terraform
+complete -o nospace -C $BREW_PREFIX/bin/terraform terraform
