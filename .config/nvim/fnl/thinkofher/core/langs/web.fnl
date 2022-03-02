@@ -2,6 +2,11 @@
 (import-macros {:opt-set set!} :zest.macros)
 (import-macros {: **>} :thinkofher.macros)
 
+(fn web-tabs [...]
+  (set! :tabstop 2)
+  (set! :softtabstop 2)
+  (set! :shiftwidth 2))
+
 (**> create-augroup :Web {})
 
 (**> create-autocmd :FileType {:group :Web
@@ -9,10 +14,7 @@
                                :pattern [:javascript :html :css]
                                :nested false
                                :once false
-                               :callback (fn [...]
-                                           (set! :tabstop 2)
-                                           (set! :softtabstop 2)
-                                           (set! :shiftwidth 2))})
+                               :callback web-tabs})
 
 (**> create-autocmd [:BufNewFile :BufRead] {:group :Web
                                             :desc "Setup proper filetype for template fiels."
