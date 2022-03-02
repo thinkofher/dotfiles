@@ -1,3 +1,6 @@
+(import-macros {: *>
+                : use-with-config} :thinkofher.macros)
+
 (local packer (require :packer))
 
 ;; Mounts tools for configuring neovim with fennel language.
@@ -19,10 +22,7 @@
   (use "neovim/nvim-lspconfig")
 
   ;; Treesitter support for neovim.
-  (use (vim.tbl_extend
-         :force
-         ["nvim-treesitter/nvim-treesitter"]
-         {:run ":TSUpdate"}))
+  (use-with-config "nvim-treesitter/nvim-treesitter" {:run ":TSUpdate"})
 
   ;; Rainbow parentheses for treesitter.
   (use "p00f/nvim-ts-rainbow")
@@ -72,9 +72,10 @@
                   (use "folke/tokyonight.nvim")
 
                   ;; fzf stands for “fuzzy finder” and works similarly to the Goto
-                  (use {1 "junegunn/fzf"
-                        :run (fn [] (let [fzf-install (. vim.fn "fzf#install")]
-                                      (fzf-install)))})
+                  (use-with-config
+                    "junegunn/fzf"
+                    {:run (fn [] (let [fzf-install (. vim.fn "fzf#install")]
+                                   (fzf-install)))})
                   (use "junegunn/fzf.vim")
 
                   ;; Editing gpg files
