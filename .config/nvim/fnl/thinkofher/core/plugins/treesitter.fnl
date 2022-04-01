@@ -6,7 +6,7 @@
       configs (require :nvim-treesitter.configs)
       ;; TreeSitter for elixir is extremly slow, so I choosed
       ;; to use regular regex-based highlighting.
-      disabled [:elixir]]
+      disabled [:elixir :html]]
   (configs.setup {:ensure_installed "maintained"
                   :sync_install false
                   :indent {:enable false}
