@@ -18,9 +18,9 @@
                                   :callback (fn [...]
                                               (*> vim.lsp.buf.formatting-sync))})
 
-(**> create-autocmd :FileType {:group :Go
+(**> create-autocmd :BufEnter {:group :Go
                                :desc "Setup size of tabs for golang files."
-                               :pattern :go
+                               :pattern [:*.go :go.mod :go.sum]
                                :nested false
                                :once false
                                :callback go-tabs})
