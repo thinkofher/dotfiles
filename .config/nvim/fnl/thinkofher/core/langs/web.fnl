@@ -3,15 +3,16 @@
 (import-macros {: **>} :thinkofher.macros)
 
 (fn web-tabs [...]
+  (set! :expandtab true)
   (set! :tabstop 2)
   (set! :softtabstop 2)
   (set! :shiftwidth 2))
 
 (**> create-augroup :Web {})
 
-(**> create-autocmd :FileType {:group :Web
+(**> create-autocmd :BufEnter {:group :Web
                                :desc "Setup size of tabs for web dev files."
-                               :pattern [:javascript :html :css]
+                               :pattern [:*.js :*.html :*.htm :*.css :*.tpl]
                                :nested false
                                :once false
                                :callback web-tabs})
