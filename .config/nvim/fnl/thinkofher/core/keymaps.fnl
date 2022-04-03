@@ -1,16 +1,14 @@
-(import-macros {: def-keymap} :zest.macros)
-
 ;; setup map leader
 (tset vim.g :mapleader " ")
 
 ;; mappings for moving lines
-(def-keymap [n]
-  {"∆" ":m .+1<cr>=="
-   "Ż" ":m .-2<cr>=="})
-(def-keymap [v]
-  { "∆" ":m '>+1<cr>gv=gv"
-    "Ż" ":m '<-2<cr>gv=gv"})
+(let [move-lines-maps [[:n :∆ ":m .+1<cr>=="]
+                       [:n :Ż ":m .-2<cr>=="]
+                       [:v :∆ ":m '>+1<cr>gv=gv"]
+                       [:v :Ż ":m '<-2<cr>gv=gv"]]]
+  (each [_ [mode lhs rhs] (pairs move-lines-maps)]
+    (vim.keymap.set mode lhs rhs)))
 
 ;; terminal settings
-(def-keymap "<leader>t" [n] ":tabnew<cr>:terminal<cr>")
-(def-keymap "<esc>" [t] "<c-\\><c-n>")
+(vim.keymap.set :t :<esc> "<c-\\><c-n>")
+(vim.keymap.set :n :<leader>t ":tabnew<cr>:terminal<cr>")
