@@ -51,20 +51,20 @@
                   ;; Mount fennel environment
                   (fennel-env use)
 
+                  (use-with-config "echasnovski/mini.nvim" {:branch :stable})
+
                   ;; Sneak is a powerful, reliable, yet minimal motion plugin for Vim.
                   (use "justinmk/vim-sneak")
 
                   ;; A Git wrapper so awesome, it should be illegal
                   (use "tpope/vim-fugitive")
 
-                  ;; Enhanced version vcscommand.vim, with full support for fossil.
-                  (use "hdrz/vcscommand.vim")
-
-                  ;; The Plugin provides mappings to easily delete, change and add such surroundings in pairs
+                  ;; The Plugin provides mappings to easily delete, change
+                  ;; and add such surroundings in pairs
                   (use "tpope/vim-surround")
 
-                  ;; Vim comments Plugin
-                  (use "tpope/vim-commentary")
+                  ;; Enhanced version vcscommand.vim, with full support for fossil.
+                  (use "hdrz/vcscommand.vim")
 
                   ;; Shows which lines have been added, modified, or removed
                   (use "mhinz/vim-signify")
@@ -81,9 +81,6 @@
 
                   ;; Editing gpg files
                   (use "jamessan/vim-gnupg")
-
-                  ;; Insert or delete brackets, parens, quotes in pair
-                  (use "jiangmiao/auto-pairs")
 
                   ;; Mount programming langauges
                   (programming-langs use)
