@@ -7,11 +7,13 @@
   (set! softtabstop 2)
   (set! shiftwidth 2))
 
+(local lisp-patterns [:*.fnl :*.scm :*.rkt])
+
 (**> create-augroup :Lisps {})
 
-(**> create-autocmd :FileType {:group :Lisps
+(**> create-autocmd :BufEnter {:group :Lisps
                                :desc "Setup size of tabs for lisp family languages."
-                               :pattern [:lisp :racket :scheme :fennel]
+                               :pattern lisp-patterns
                                :nested false
                                :once false
                                :callback lisps-tabs})
