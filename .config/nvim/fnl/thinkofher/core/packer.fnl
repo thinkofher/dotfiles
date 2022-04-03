@@ -51,6 +51,9 @@
                   ;; Mount fennel environment
                   (fennel-env use)
 
+                  ;; Sneak is a powerful, reliable, yet minimal motion plugin for Vim.
+                  (use "justinmk/vim-sneak")
+
                   ;; A Git wrapper so awesome, it should be illegal
                   (use "tpope/vim-fugitive")
 
