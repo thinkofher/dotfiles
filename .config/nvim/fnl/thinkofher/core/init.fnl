@@ -1,8 +1,8 @@
 (require :thinkofher.core.packer)
 
-;; setup zest macros
-(let [zest (require :zest)]
-  (zest.setup))
+;; setup hibiscus macros
+(let [hibiscus (require :hibiscus)]
+  (hibiscus.setup))
 
 (require :thinkofher.core.basics)
 (require :thinkofher.core.theme)

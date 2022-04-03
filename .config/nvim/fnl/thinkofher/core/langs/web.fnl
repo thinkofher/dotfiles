@@ -1,12 +1,12 @@
 ;; settings for web development languages
-(import-macros {:opt-set set!} :zest.macros)
+(import-macros {: set!} :hibiscus.vim)
 (import-macros {: **>} :thinkofher.macros)
 
 (fn web-tabs [...]
-  (set! :expandtab true)
-  (set! :tabstop 2)
-  (set! :softtabstop 2)
-  (set! :shiftwidth 2))
+  (set! expandtab)
+  (set! tabstop 2)
+  (set! softtabstop 2)
+  (set! shiftwidth 2))
 
 (**> create-augroup :Web {})
 

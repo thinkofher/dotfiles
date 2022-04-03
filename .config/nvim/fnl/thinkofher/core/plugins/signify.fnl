@@ -1,3 +1,3 @@
-(import-macros {:opt-set set!} :zest.macros)
+(import-macros {: set!} :hibiscus.vim)
 
-(set! :updatetime 100)
+(set! updatetime 100)

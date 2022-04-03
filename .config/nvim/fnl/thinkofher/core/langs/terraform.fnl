@@ -1,10 +1,10 @@
-(import-macros {:opt-set set!} :zest.macros)
+(import-macros {: set!} :hibiscus.vim)
 (import-macros {: **>} :thinkofher.macros)
 
 (fn terraform-tabs [...]
-  (set! :tabstop 2)
-  (set! :softtabstop 2)
-  (set! :shiftwidth 2))
+  (set! tabstop 2)
+  (set! softtabstop 2)
+  (set! shiftwidth 2))
 
 ;; Terraform auto command group.
 (**> create-augroup :Terraform {})

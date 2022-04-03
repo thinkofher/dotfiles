@@ -1,13 +1,13 @@
 ;; settings for data formats
-(import-macros {:opt-set set!} :zest.macros)
+(import-macros {: set!} :hibiscus.vim)
 (import-macros {: **>} :thinkofher.macros)
 
 (macro space-tabs-size [size]
   `(fn [...]
-     (set! :expandtab true)
-     (set! :tabstop 2)
-     (set! :softtabstop 2)
-     (set! :shiftwidth 2)))
+     (set! expandtab)
+     (set! tabstop 2)
+     (set! softtabstop 2)
+     (set! shiftwidth 2)))
 
 ;; Auto command group for data files.
 (**> create-augroup :Data {})

@@ -1,13 +1,11 @@
-(import-macros
-  {:opt-append set+
-   :opt-set set!} :zest.macros)
-(import-macros {: **>} :thinkofher.macros)
+(import-macros {: set+
+                : set!} :hibiscus.vim)
 
 ;; legacy stuff
-(**> set-option "compatible" false)
+(set! nocompatible)
 (vim.cmd "filetype plugin on")
 (vim.cmd "filetype plugin indent on")
 
 ;; finding files
-(set+ :path "**")
-(set! :wildmenu true)
+(set+ path "**")
+(set! wildmenu)

@@ -1,46 +1,45 @@
 ;; overall settings
-
 (import-macros
-  {:opt-remove set-
-   :opt-set set!} :zest.macros)
+  {: rem!
+   : set!} :hibiscus.vim)
 
 ;; encoding
-(set! :encoding "utf-8")
+(set! encoding "utf-8")
 
 ;; required for operations modifying multiple buffers like rename
-(set! :hidden true)
+(set! hidden)
 
 ;; spaces & tabs
-(set! :tabstop 4)
-(set! :softtabstop 4)
-(set! :shiftwidth 4)
+(set! tabstop 4)
+(set! softtabstop 4)
+(set! shiftwidth 4)
 
 ;; tabs are spaces
-(set! :expandtab true)
+(set! expandtab)
 
-(set! :autoindent true)
+(set! autoindent)
 
 ;; copy indent from the previous line
-(set! :copyindent true)
+(set! copyindent)
 
 ;; searching files
-(set! :incsearch  true)
-(set! :ignorecase true)
+(set! incsearch)
+(set! ignorecase)
 
 ;; always show statusline
-(set! :laststatus  2)
+(set! laststatus  2)
 
 ;; autocompletion
-(set- :completeopt "preview")
-(set! :omnifunc "syntaxcomplete#Complete")
+(rem! completeopt "preview")
+(set! omnifunc "syntaxcomplete#Complete")
 
 ;; backup functionalities
-(set! :undofile true)
+(set! undofile)
 
 ;; don't wrap lines
-(set! :wrap false)
+(set! wrap)
 
-(set! :listchars {:trail "." :extends ">"})
+(set! listchars {:trail "." :extends ">"})
 
 ;; enable mouse support
-(set! :mouse :a)
+(set! mouse :a)

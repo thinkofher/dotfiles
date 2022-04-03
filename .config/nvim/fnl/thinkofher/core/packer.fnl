@@ -8,10 +8,8 @@
   ;; Hotpot lets you use fennel in Neovim anywhere you would use lua.
   (use "rktjmp/hotpot.nvim")
 
-  ;; An opinionated library of macros that aims to streamline
-  ;; the process of configuring neovim with fennel, a lisp that
-  ;; compiles to lua.
-  (use "tsbohc/zest.nvim")
+  ;; Highly opinionated macros to elegantly write your neovim config.
+  (use "udayvir-singh/hibiscus.nvim")
 
   ;; Syntax highlighting for Fennel.
   (use "bakpakin/fennel.vim"))

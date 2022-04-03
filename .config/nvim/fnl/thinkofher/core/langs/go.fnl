@@ -1,12 +1,12 @@
-(import-macros {:opt-set set!} :zest.macros)
+(import-macros {: set!} :hibiscus.vim)
 (import-macros {: *>
                 : **>} :thinkofher.macros)
 
 (fn go-tabs [...]
-  (set! :expandtab false)
-  (set! :tabstop 4)
-  (set! :softtabstop 4)
-  (set! :shiftwidth 4))
+  (set! noexpandtab)
+  (set! tabstop 4)
+  (set! softtabstop 4)
+  (set! shiftwidth 4))
 
 (**> create-augroup :Go {})
 
