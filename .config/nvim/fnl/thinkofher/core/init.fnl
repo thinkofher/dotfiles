@@ -1,9 +1,4 @@
 (require :thinkofher.core.packer)
-
-;; setup hibiscus macros
-(let [hibiscus (require :hibiscus)]
-  (hibiscus.setup))
-
 (require :thinkofher.core.basics)
 (require :thinkofher.core.theme)
 (require :thinkofher.core.settings)
