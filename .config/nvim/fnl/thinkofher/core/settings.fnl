@@ -37,7 +37,7 @@
 (set! undofile)
 
 ;; don't wrap lines
-(set! wrap)
+(set! nowrap)
 
 (set! listchars {:trail "." :extends ">"})
 
