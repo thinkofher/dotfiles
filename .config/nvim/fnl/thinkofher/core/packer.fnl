@@ -69,9 +69,6 @@
                   ;; Shows which lines have been added, modified, or removed
                   (use "mhinz/vim-signify")
 
-                  ;; Colorschemes
-                  (use "folke/tokyonight.nvim")
-
                   ;; fzf stands for “fuzzy finder” and works similarly to the Goto
                   (use-with-config
                     "junegunn/fzf"
