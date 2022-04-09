@@ -6,39 +6,39 @@
 ;; Mounts tools for configuring neovim with fennel language.
 (fn fennel-env [use]
   ;; Hotpot lets you use fennel in Neovim anywhere you would use lua.
-  (use "rktjmp/hotpot.nvim")
+  (use :rktjmp/hotpot.nvim)
 
   ;; Highly opinionated macros to elegantly write your neovim config.
-  (use "udayvir-singh/hibiscus.nvim")
+  (use :udayvir-singh/hibiscus.nvim)
 
   ;; Syntax highlighting for Fennel.
-  (use "bakpakin/fennel.vim"))
+  (use :bakpakin/fennel.vim))
 
 ;; Mounts plugins for programming languages better support.
 (fn programming-langs [use]
   ;; Built-in lsp
-  (use "neovim/nvim-lspconfig")
+  (use :neovim/nvim-lspconfig)
 
   ;; Treesitter support for neovim.
-  (use-with-config "nvim-treesitter/nvim-treesitter" {:run ":TSUpdate"})
+  (use-with-config :nvim-treesitter/nvim-treesitter {:run ":TSUpdate"})
 
   ;; Rainbow parentheses for treesitter.
-  (use "p00f/nvim-ts-rainbow")
+  (use :p00f/nvim-ts-rainbow)
 
   ;; Emmet Plugin
-  (use "mattn/emmet-vim")
+  (use :mattn/emmet-vim)
 
   ;; Plugin for elm syntax
-  (use "ElmCast/elm-vim")
+  (use :ElmCast/elm-vim)
 
   ;; Plugin for elixir syntax
-  (use "elixir-editors/vim-elixir")
+  (use :elixir-editors/vim-elixir)
 
   ;; Janet programming language support
-  (use "bakpakin/janet.vim")
+  (use :bakpakin/janet.vim)
 
   ;; For racket development
-  (use "wlangstroth/vim-racket"))
+  (use :wlangstroth/vim-racket))
 
 (fn packer-bootstraped? []
   (. _G :packer_bootstrap))
@@ -46,38 +46,38 @@
 ;; Install and mount all plugins with packer plugin manager.
 (packer.startup (fn [...]
                   ;; Manage packer with packer
-                  (use "wbthomason/packer.nvim")
+                  (use :wbthomason/packer.nvim)
 
                   ;; Mount fennel environment
                   (fennel-env use)
 
-                  (use-with-config "echasnovski/mini.nvim" {:branch :stable})
+                  (use-with-config :echasnovski/mini.nvim {:branch :stable})
 
                   ;; Lightspeed is a cutting-edge motion plugin for Neovim.
-                  (use "ggandor/lightspeed.nvim")
+                  (use :ggandor/lightspeed.nvim)
 
                   ;; A Git wrapper so awesome, it should be illegal
-                  (use "tpope/vim-fugitive")
+                  (use :tpope/vim-fugitive)
 
                   ;; The Plugin provides mappings to easily delete, change
                   ;; and add such surroundings in pairs
-                  (use "tpope/vim-surround")
+                  (use :tpope/vim-surround)
 
                   ;; Enhanced version vcscommand.vim, with full support for fossil.
-                  (use "hdrz/vcscommand.vim")
+                  (use :hdrz/vcscommand.vim)
 
                   ;; Shows which lines have been added, modified, or removed
-                  (use "mhinz/vim-signify")
+                  (use :mhinz/vim-signify)
 
                   ;; fzf stands for “fuzzy finder” and works similarly to the Goto
                   (use-with-config
-                    "junegunn/fzf"
+                    :junegunn/fzf
                     {:run (fn [] (let [fzf-install (. vim.fn "fzf#install")]
                                    (fzf-install)))})
-                  (use "junegunn/fzf.vim")
+                  (use :junegunn/fzf.vim)
 
                   ;; Editing gpg files
-                  (use "jamessan/vim-gnupg")
+                  (use :jamessan/vim-gnupg)
 
                   ;; Mount programming langauges
                   (programming-langs use)
