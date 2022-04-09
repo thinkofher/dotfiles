@@ -18,9 +18,6 @@
   ;; Built-in lsp
   (use :neovim/nvim-lspconfig)
 
-  ;; Rainbow parentheses for treesitter.
-  (use :p00f/nvim-ts-rainbow)
-
   ;; Emmet Plugin
   (use :mattn/emmet-vim)
 
