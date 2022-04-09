@@ -18,9 +18,6 @@
   ;; Built-in lsp
   (use :neovim/nvim-lspconfig)
 
-  ;; Treesitter support for neovim.
-  (use-with-config :nvim-treesitter/nvim-treesitter {:run ":TSUpdate"})
-
   ;; Rainbow parentheses for treesitter.
   (use :p00f/nvim-ts-rainbow)
 
