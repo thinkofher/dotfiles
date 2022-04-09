@@ -1,19 +1,27 @@
-(let [misc (require :mini.misc)
-      cmp (require :mini.completion)
-      starter (require :mini.starter)
-      sessions (require :mini.sessions)
-      mpairs (require :mini.pairs)
-      tabline (require :mini.tabline)
-      cursorword (require :mini.cursorword)
-      comm (require :mini.comment)
-      bufremove (require :mini.bufremove)]
-  (misc.setup)
-  (cmp.setup)
-  (starter.setup)
-  (sessions.setup)
-  (mpairs.setup)
-  (tabline.setup {:show_icons false
-                  :set_vim_settings true})
-  (cursorword.setup)
-  (comm.setup)
-  (bufremove.setup))
+(import-macros {: *>} :thinkofher.macros)
+
+(local theme (require :mini.base16))
+
+(fn just-call [sf ...]
+  (sf))
+
+(fn call-with-config [sf config]
+  (sf config))
+
+(let [mini-plugins [[:misc just-call {}]
+                    [:completion just-call {}]
+                    [:starter just-call {}]
+                    [:sessions just-call {}]
+                    [:pairs just-call {}]
+                    [:tabline call-with-config {:show_icons false
+                                                :set_vim_settings true}]
+                    [:cursorword just-call {}]
+                    [:comment just-call {}]
+                    [:bufremove just-call {}]
+                    [:base16 call-with-config {:palette (*> theme.mini-palette :#112641 :#e2e98f 75)
+                                               :use_cterm true
+                                               :name :minischeme}]]]
+  (each [_ [sub-pkg config-func config-args] (ipairs mini-plugins)]
+    (let [pkg-name (.. :mini. sub-pkg)
+          pkg (require pkg-name)]
+      (config-func pkg.setup config-args))))
