@@ -17,10 +17,7 @@
                                                 :set_vim_settings true}]
                     [:cursorword just-call {}]
                     [:comment just-call {}]
-                    [:bufremove just-call {}]
-                    [:base16 call-with-config {:palette (*> theme.mini-palette :#112641 :#e2e98f 75)
-                                               :use_cterm true
-                                               :name :minischeme}]]]
+                    [:bufremove just-call {}]]]
   (each [_ [sub-pkg config-func config-args] (ipairs mini-plugins)]
     (let [pkg-name (.. :mini. sub-pkg)
           pkg (require pkg-name)]

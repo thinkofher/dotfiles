@@ -4,8 +4,8 @@
 (vim.cmd "syntax enable")
 
 ;; Enable support for true colors
-(set! termguicolors)
+(set! notermguicolors)
 
 ;; Load the colorscheme
-(vim.cmd "colorscheme minischeme")
-(vim.cmd "highlight VertSplit guibg=None")
+(vim.cmd "colorscheme default")
+(vim.cmd "highlight VertSplit cterm=None")
