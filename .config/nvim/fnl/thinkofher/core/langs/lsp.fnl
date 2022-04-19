@@ -39,7 +39,7 @@
                      :LspFormatting  vim.lsp.buf.formatting
                      :LspCodeAction  vim.lsp.buf.code_action
                      :LspHover  vim.lsp.buf.hover
-                     :LspRename  vim.lsp.buf.rename
+                     :LspRename  (fn [...] (vim.lsp.buf.rename))
                      :LspRefs  vim.lsp.buf.references
                      :LspTypeDef  vim.lsp.buf.type_definition
                      :LspImplementation  vim.lsp.buf.implementation
