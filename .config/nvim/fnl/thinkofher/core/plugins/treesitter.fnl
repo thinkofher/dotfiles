@@ -18,4 +18,9 @@
                                        (parsers.available_parsers))}
                   :highlight {:enable true
                               :disable disabled
-                              :additional_vim_regex_highlighting disabled}}))
+                              :additional_vim_regex_highlighting disabled}
+                  :incremental_selection {:enable true
+                                          :keymaps {:init_selection :gnn
+                                                    :node_incremental :grn
+                                                    :scope_incremental :grc
+                                                    :node_decremental :grm}}}))
