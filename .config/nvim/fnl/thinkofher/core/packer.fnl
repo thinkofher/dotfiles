@@ -76,6 +76,9 @@
                                    (fzf-install)))})
                   (use :junegunn/fzf.vim)
 
+                  ;; Collection of base16-based colorschemes for Vim.
+                  (use :chriskempson/base16-vim)
+
                   ;; Editing gpg files
                   (use :jamessan/vim-gnupg)
 
