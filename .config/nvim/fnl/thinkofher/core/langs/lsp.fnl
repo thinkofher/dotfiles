@@ -62,7 +62,7 @@
     (each [map callback (pairs lsp-keymaps)]
       (set-keymap map callback)))
   ;; Setup all lsp commands once, when attaching keymaps for buffer.
-  (once (let [add-command vim.api.nvim_add_user_command]
+  (once (let [add-command vim.api.nvim_create_user_command]
           (each [cmd-name callback (pairs lsp-commands)]
             (add-command cmd-name callback {})))))
 
