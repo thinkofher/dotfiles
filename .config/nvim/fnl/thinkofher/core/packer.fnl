@@ -69,12 +69,15 @@
                   ;; Shows which lines have been added, modified, or removed
                   (use :mhinz/vim-signify)
 
-                  ;; fzf stands for “fuzzy finder” and works similarly to the Goto
+                  ;; telescope.nvim is a highly extendable fuzzy finder over lists.
                   (use-with-config
-                    :junegunn/fzf
-                    {:run (fn [] (let [fzf-install (. vim.fn "fzf#install")]
-                                   (fzf-install)))})
-                  (use :junegunn/fzf.vim)
+                    :nvim-telescope/telescope.nvim
+                    {:requires [:nvim-lua/plenary.nvim]})
+
+                  ;; fzf-native is a c port of fzf
+                  (use-with-config
+                    :nvim-telescope/telescope-fzf-native.nvim
+                    {:run :make})
 
                   ;; Collection of base16-based colorschemes for Vim.
                   (use :chriskempson/base16-vim)
