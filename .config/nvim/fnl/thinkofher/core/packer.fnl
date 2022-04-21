@@ -1,5 +1,4 @@
-(import-macros {: *>
-                : use-with-config} :thinkofher.macros)
+(import-macros {: use-with-config} :thinkofher.macros)
 
 (local packer (require :packer))
 
