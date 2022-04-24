@@ -16,6 +16,9 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+# JUNEST
+export PATH=$HOME/.local/share/junest/bin:$PATH
+
 # RUST
 # export PATH=$HOME/.cargo/bin:$PATH
 
