@@ -16,10 +16,8 @@
 
 (let [builtin (require :telescope.builtin)
       themes (require :telescope.themes)
-      custom-themes (require :thinkofher.core.plugins.telescope.themes)
-      ivy (custom-themes.get-ivy)
-      dropdown (themes.get_dropdown)]
+      custom-themes (require :thinkofher.core.plugins.telescope.themes)]
   (do
-    (vim.keymap.set :n :<C-p> #(builtin.find_files dropdown))
-    (vim.keymap.set :n :<leader>fg #(builtin.live_grep ivy))
-    (vim.keymap.set :n :<leader>fb #(builtin.buffers ivy))))
+    (vim.keymap.set :n :<C-p> #(builtin.find_files (themes.get_dropdown)))
+    (vim.keymap.set :n :<leader>fg #(builtin.live_grep (custom-themes.get-ivy)))
+    (vim.keymap.set :n :<leader>fb #(builtin.buffers (custom-themes.get-ivy)))))
