@@ -43,3 +43,7 @@
 
 ;; enable mouse support
 (set! mouse :a)
+
+;; gui settings for neovide
+(when vim.g.neovide
+  (set! guifont "Source Code Pro:h12"))
