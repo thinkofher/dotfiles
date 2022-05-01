@@ -29,17 +29,25 @@
 (let [bfr (require :mini.bufremove)
       commands {:Delete (. bfr :delete)
                 :Wipeout (. bfr :wipeout)}
+      to-bufnr (fn [buf-name]
+                 (vim.fn.bufnr buf-name))
       all-buffers (fn [func bang]
-                    (fn [bufnr]
-                      (func (tonumber bufnr) bang)))
+                    (fn [buf-name]
+                      (func (to-bufnr buf-name) bang)))
       callback (fn [func]
                  (fn [opts]
                    (match opts
+                     ;; rest is empty so there is single command's argument
                      (where {:fargs [first & rest] :bang bang} (= (length rest) 0))
-                     (func (tonumber first) bang)
+                       (func (to-bufnr first) bang)
+                     ;; command execution with multiple arguments
                      (where {:fargs fargs :bang bang} (> (length fargs) 0))
-                     (*> vim.tbl-map (all-buffers func bang) fargs)
+                       ;; apply function to all buffer names
+                       (*> vim.tbl-map (all-buffers func bang) fargs)
+                     ;; apply function to current buffer
                      {:bang bang} (func nil bang))))]
   (each [cmd func (pairs commands)]
+    ;; register command
     (**> create-user-command (.. :MBR cmd) (callback func) {:bang true
-                                                            :nargs :*})))
+                                                            :nargs :*
+                                                            :complete #(vim.fn.getcompletion :* :buffer)})))
