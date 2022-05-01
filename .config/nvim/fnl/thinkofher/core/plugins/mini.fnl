@@ -1,5 +1,6 @@
 (import-macros {: **>
-                : *>} :thinkofher.macros)
+                : *>
+                : last} :thinkofher.macros)
 
 (local theme (require :mini.base16))
 
@@ -51,3 +52,72 @@
     (**> create-user-command (.. :MBR cmd) (callback func) {:bang true
                                                             :nargs :*
                                                             :complete #(vim.fn.getcompletion :* :buffer)})))
+
+;; Setup user commands for sessions manipulation.
+
+(fn list-sessions [...]
+  "Returns list with all saved sessions."
+  (let [sessions (require :mini.sessions)]
+    (*> vim.tbl-keys sessions.detected)))
+
+(fn list-other-sessions [...]
+  "Returns list of all sessions except the current one."
+  (let [all-sessions (list-sessions)
+        this-session (**> get-vvar :this_session)
+        session-name (last (vim.split this-session :/ {:trimempty true}))]
+    (*> vim.tbl-filter #(not (= session-name $1)) all-sessions)))
+
+(fn read-session [opts]
+  "Callback for 'MiniSessionsRead' custom user command."
+  (let [sessions (require :mini.sessions)]
+    (sessions.read (. opts :args))))
+
+(fn write-session [opts]
+  "Callback for 'MiniSessionsWrite' custom user command."
+  (let [sessions (require :mini.sessions)]
+    (match opts
+      ;; there isn't any argument
+      {:args "" :bang force} (sessions.write nil {:force force})
+      ;; write to session with given name
+      {:args args :bang force} (sessions.write args {:force force}))))
+
+(fn delete-session [opts]
+  "Callback for 'MiniSessionsDelete' custom user command."
+  (let [sessions (require :mini.sessions)]
+    (match opts
+      ;; there isn't any argument
+      {:args "" :bang force} (sessions.delete nil {:force force})
+      ;; delete session with given name
+      {:args args :bang force} (sessions.delete args {:force force}))))
+
+(fn switch-session [opts]
+  "Callback for 'MiniSessionsSwitch' custom user command. switch-session
+  saves current session and loads sessionw with given name."
+  (let [sessions (require :mini.sessions)
+        session-name (. opts :args)]
+    (sessions.write nil {:force true})
+    (sessions.read session-name)))
+
+(**> create-user-command :MiniSessionsRead read-session {:bang false
+                                                         :nargs 1
+                                                         :complete list-sessions})
+
+(**> create-user-command :MiniSessionsWrite write-session {:bang true
+                                                           :nargs :?
+                                                           :complete list-sessions})
+
+(**> create-user-command :MiniSessionsDelete delete-session {:bang true
+                                                             :nargs :?
+                                                             :complete list-sessions})
+
+(**> create-user-command :MiniSessionsSwitch switch-session {:bang false
+                                                             :nargs 1
+                                                             :complete list-other-sessions})
+
+;; Setup user commands for starter window.
+
+(**> create-user-command :MiniStarter (fn [...]
+                                        (let [starter (require :mini.starter)]
+                                          (starter.open)))
+     {:bang false
+      :nargs 0})
