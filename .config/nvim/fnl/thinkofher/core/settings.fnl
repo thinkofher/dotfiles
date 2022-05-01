@@ -26,8 +26,8 @@
 (set! incsearch)
 (set! ignorecase)
 
-;; always show statusline
-(set! laststatus  2)
+;; always show one statusline
+(set! laststatus  3)
 
 ;; autocompletion
 (rem! completeopt "preview")
