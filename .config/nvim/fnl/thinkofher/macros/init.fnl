@@ -26,7 +26,12 @@
        ,body
        (tset _G once-var# true))))
 
+(fn last [table]
+  "Returns last element from table."
+  `(. ,table (length ,table)))
+
 {: *>
  : **>
  : use-with-config
- : once}
+ : once
+ : last}
