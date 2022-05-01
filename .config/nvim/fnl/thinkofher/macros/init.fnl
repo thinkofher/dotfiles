@@ -18,7 +18,15 @@
                        out)]
     `(use ,merged-table)))
 
+(fn once [body]
+  "Evaluate given code only once during runtime."
+  `(let [once-var# ,(tostring {}) ;; generates random table address at compile time
+         run?# (. _G once-var#)]
+     (when (not run?#)
+       ,body
+       (tset _G once-var# true))))
 
 {: *>
  : **>
- : use-with-config}
+ : use-with-config
+ : once}
