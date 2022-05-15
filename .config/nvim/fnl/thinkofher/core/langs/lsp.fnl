@@ -20,10 +20,6 @@
   "implementations show telescope window with LSP implementations."
   (builtin.lsp_implementations (themes.get-ivy)))
 
-(fn code-action [...]
-  "code-action shows telescope window with LSP code actions."
-  (builtin.lsp_code_actions (themes.get-ivy)))
-
 (fn workspace-symbols [...]
   "workspace-symbols prompts user for a query string and runs
   telescope window for lsp workspace symbols with the given query."
@@ -51,7 +47,7 @@
                  [:LspWorkspaceSymbols      :gW         workspace-symbols]
                  [:LspTypeDefinition        :<leader>D  vim.lsp.buf.type_definition]
                  [:LspRename                :<leader>rn vim.lsp.buf.rename]
-                 [:LspCodeAction            :<leader>ca code-action]
+                 [:LspCodeAction            :<leader>ca vim.lsp.buf.code_action]
                  [:LspDiagLine              :<leader>e  vim.diagnostic.open_float]
                  [:LspDiagPrev              "[d"        vim.diagnostic.goto_prev]
                  [:LspDiagNext              "]d"        vim.diagnostic.goto_next]

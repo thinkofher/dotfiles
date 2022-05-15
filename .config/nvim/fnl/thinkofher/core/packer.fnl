@@ -78,6 +78,9 @@
                     :nvim-telescope/telescope-fzf-native.nvim
                     {:run :make})
 
+                  ;; telescope interface for vim.ui.select.
+                  (use :nvim-telescope/telescope-ui-select.nvim)
+
                   ;; Collection of base16-based colorschemes for Vim.
                   (use :chriskempson/base16-vim)
 
