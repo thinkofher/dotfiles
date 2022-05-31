@@ -17,3 +17,6 @@ export PATH="$HOME/.asdf/shims:$PATH"
 
 # Deta dev tools
 export PATH="/Users/bdudek/.deta/bin:$PATH"
+
+# Rancher Desktop
+export PATH="$HOME/.rd/bin:$PATH"
