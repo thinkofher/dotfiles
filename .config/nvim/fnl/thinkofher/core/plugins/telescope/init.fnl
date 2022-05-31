@@ -20,9 +20,8 @@
     (each [_ extension (ipairs extensions)]
       (*> telescope.load-extension extension))))
 
-(let [builtin (require :telescope.builtin)
-      themes (require :telescope.themes)]
+(let [builtin (require :telescope.builtin)]
   (do
-    (vim.keymap.set :n :<C-p> #(builtin.find_files (themes.get_dropdown)))
+    (vim.keymap.set :n :<C-p> #(builtin.find_files (custom-themes.get-ivy)))
     (vim.keymap.set :n :<leader>fg #(builtin.live_grep (custom-themes.get-ivy)))
     (vim.keymap.set :n :<leader>fb #(builtin.buffers (custom-themes.get-ivy)))))
