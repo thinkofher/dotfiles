@@ -46,7 +46,7 @@
                   #(builtin.lsp_document_symbols (themes.get-ivy))]
                  [:LspWorkspaceSymbols      :gW         workspace-symbols]
                  [:LspTypeDefinition        :<leader>D  vim.lsp.buf.type_definition]
-                 [:LspRename                :<leader>rn vim.lsp.buf.rename]
+                 [:LspRename                :<leader>rn #(vim.lsp.buf.rename)]
                  [:LspCodeAction            :<leader>ca vim.lsp.buf.code_action]
                  [:LspDiagLine              :<leader>e  vim.diagnostic.open_float]
                  [:LspDiagPrev              "[d"        vim.diagnostic.goto_prev]
