@@ -10,7 +10,18 @@ function fcd() { # alternative for cd+ls
 
     while true; do
         # exit with ^D
-        dir="$(ls -a1p | grep '/$' | grep -v '^./$' | tac | fzf --height 40% --reverse --no-multi --preview 'pwd' --preview-window=up,1,border-none --no-info)"
+        dir="$(ls -a1p \
+               | grep '/$' \
+               | grep -v '^./$' \
+               | tac \
+               | sed 's/\///g' \
+               | fzf --height 40% \
+                     --no-multi \
+                     --reverse \
+                     --preview 'pwd' \
+                     --preview-window=up,1,border-none \
+                     --no-info \
+              )"
         if [[ -z "${dir}" ]]; then
             break
         else
