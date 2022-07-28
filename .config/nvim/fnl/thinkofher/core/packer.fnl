@@ -43,7 +43,7 @@
   (. _G :packer_bootstrap))
 
 ;; Install and mount all plugins with packer plugin manager.
-(packer.startup (fn [...]
+(packer.startup (fn [use]
                   ;; Manage packer with packer
                   (use :wbthomason/packer.nvim)
 
