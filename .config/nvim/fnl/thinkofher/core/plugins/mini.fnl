@@ -11,7 +11,6 @@
   (sf config))
 
 (let [mini-plugins [[:misc just-call {}]
-                    [:completion just-call {}]
                     [:starter just-call {}]
                     [:sessions just-call {}]
                     [:pairs just-call {}]
