@@ -1,0 +1,31 @@
+#!/bin/zsh
+# .zshrc.functions
+
+function cheat() { # display cheat sheet for given topic
+    curl -sL cheat.sh/$1 | less -r
+}
+
+function fcd() { # alternative for cd+ls
+    local dir;
+
+    while true; do
+        # exit with ^D
+        dir="$(ls -a1p \
+               | grep '/$' \
+               | grep -v '^./$' \
+               | tac \
+               | sed 's/\///g' \
+               | fzf --height 40% \
+                     --no-multi \
+                     --reverse \
+                     --preview 'pwd' \
+                     --preview-window=up,1,border-none \
+                     --no-info \
+              )"
+        if [[ -z "${dir}" ]]; then
+            break
+        else
+            cd "${dir}"
+        fi
+    done
+}

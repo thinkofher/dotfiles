@@ -1,30 +1,25 @@
 # RUST
-export PATH=$HOME/.cargo/bin:$PATH
+# export PATH=$HOME/.cargo/bin:$PATH
 
 # GOLANG
-
-# Uncomment below lines if you're not using
-# go compiler from your systems repositories.
-
+# export GOPATH=$HOME/go
 # export GOROOT=/usr/local/go
 # export PATH=$GOROOT/bin:$PATH
-
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$PATH
+# export PATH=$GOPATH/bin:$PATH
 
 # PYENV
-export PYENV_ROOT=$HOME/.pyenv
-export PATH=$PYENV_ROOT/bin:$PATH
+# export PYENV_ROOT=$HOME/.pyenv
+# export PATH=$PYENV_ROOT/bin:$PATH
 
 # NPM
-export PATH=$HOME/.local/node_modules/bin:$PATH
+# export PATH=$HOME/.local/node_modules/bin:$PATH
 
 # CABAL
-export PATH=$HOME/.cabal/bin:$PATH
+# export PATH=$HOME/.cabal/bin:$PATH
 
 # DOTNET
-export PATH=$HOME/.dotnet/tools:$PATH
+# export PATH=$HOME/.dotnet/tools:$PATH
 
 # DENO
-export DENO_INSTALL="/home/beniamin/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
+# export DENO_INSTALL="/home/beniamin/.deno"
+# export PATH="$DENO_INSTALL/bin:$PATH"
