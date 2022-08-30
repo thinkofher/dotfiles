@@ -12,6 +12,7 @@ export PS1='%(?.%(!.#.;).%F{6}%B;%b%f) '
 
 # enable colorful output of ls
 export CLICOLOR=1
+alias ls="ls --color=auto"
 
 # autocompletion settings
 zstyle ':completion:*' menu select
