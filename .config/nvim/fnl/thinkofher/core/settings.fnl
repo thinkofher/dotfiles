@@ -39,8 +39,6 @@
 ;; don't wrap lines
 (set! nowrap)
 
-(set! listchars {:trail "." :extends ">"})
-
 ;; enable mouse support
 (set! mouse :a)
 
