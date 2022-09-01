@@ -1,7 +1,7 @@
 [user]
-	signingkey = 24E5AFD6C7988768
 	email = mail@bdudek.xyz
 	name = thinkofher
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILre8y48U+yPtocnGTCqoDO2dl4XvH+9uLWq+Vu+JO/M
 [alias]
 	default-branch = "!git symbolic-ref refs/remotes/origin/HEAD | cut -f4 -d/"
 	diff = diff $(git default-branch)
@@ -20,3 +20,7 @@
 	rebase = false
 [init]
 	defaultBranch = main
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = "~/.ssh/allowed_signers"
