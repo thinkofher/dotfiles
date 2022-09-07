@@ -25,19 +25,7 @@
   (use :p00f/nvim-ts-rainbow)
 
   ;; Emmet Plugin
-  (use :mattn/emmet-vim)
-
-  ;; Plugin for elm syntax
-  (use :ElmCast/elm-vim)
-
-  ;; Plugin for elixir syntax
-  (use :elixir-editors/vim-elixir)
-
-  ;; Janet programming language support
-  (use :bakpakin/janet.vim)
-
-  ;; For racket development
-  (use :wlangstroth/vim-racket))
+  (use :mattn/emmet-vim))
 
 (fn packer-bootstraped? []
   (. _G :packer_bootstrap))
@@ -62,9 +50,6 @@
                   ;; and add such surroundings in pairs
                   (use :tpope/vim-surround)
 
-                  ;; Enhanced version vcscommand.vim, with full support for fossil.
-                  (use :hdrz/vcscommand.vim)
-
                   ;; Shows which lines have been added, modified, or removed
                   (use :mhinz/vim-signify)
 
@@ -83,9 +68,6 @@
 
                   ;; Collection of base16-based colorschemes for Vim.
                   (use :chriskempson/base16-vim)
-
-                  ;; Editing gpg files
-                  (use :jamessan/vim-gnupg)
 
                   ;; Mount programming langauges
                   (programming-langs use)
