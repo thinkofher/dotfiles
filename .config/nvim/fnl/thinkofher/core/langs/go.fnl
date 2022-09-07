@@ -32,3 +32,16 @@
                                             :nested false
                                             :once false
                                             :callback go-tabs})
+
+(fn go-lint [opts]
+  "Lint Golang code with golanci-lint. It is required
+  for the user to have golangci-lint installed on its
+  machine."
+  (let [old (. vim.o :makeprg)
+        new "golangci-lint run --print-issued-lines=0"]
+    (do
+      (set! makeprg new)
+      (vim.cmd "make")
+      (set! makeprg old))))
+
+(**> create-user-command :GoLint go-lint {:bang false})
