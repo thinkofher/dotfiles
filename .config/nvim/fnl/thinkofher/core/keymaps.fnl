@@ -3,6 +3,9 @@
 ;; setup map leader
 (tset vim.g :mapleader " ")
 
+;; autocompletion with omnifunc
+(vim.keymap.set :i :<c-j> :<c-x><c-o>)
+
 ;; mappings for moving lines
 (let [move-lines-maps [[:n :∆ ":m .+1<cr>=="]
                        [:n :Ż ":m .-2<cr>=="]
