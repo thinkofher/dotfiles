@@ -18,6 +18,8 @@
   ;; Built-in lsp
   (use :neovim/nvim-lspconfig)
 
+  ;; Support for .editorconfig file.
+  (use :editorconfig/editorconfig-vim)
 
   ;; Emmet Plugin
   (use :mattn/emmet-vim))
