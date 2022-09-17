@@ -30,8 +30,19 @@
   "Returns last element from table."
   `(. ,table (length ,table)))
 
+(fn lazy-hotpot [...]
+  `(let [setup?# (= (. _G :lazy_hotpot) nil)]
+     (when setup?#
+       (let [hotpot# (require :hotpot)]
+         (hotpot#.setup {:provide_require_fennel true
+                         :compiler {:macros {:env :_COMPILER
+                                             :compilerEnv _G
+                                             :allowedGlobals false}}}))
+       (tset _G :lazy_hotpot :ready))))
+
 {: *>
  : **>
  : use-with-config
  : once
- : last}
+ : last
+ : lazy-hotpot}

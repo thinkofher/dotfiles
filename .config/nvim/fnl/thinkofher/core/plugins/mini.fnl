@@ -11,7 +11,6 @@
   (sf config))
 
 (let [mini-plugins [[:misc just-call {}]
-                    [:starter just-call {}]
                     [:sessions just-call {}]
                     [:pairs just-call {}]
                     [:tabline call-with-config {:show_icons false
