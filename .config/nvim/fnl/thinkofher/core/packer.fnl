@@ -89,5 +89,4 @@
                   (programming-langs use)
 
                   (when (packer-bootstraped?)
-                    (let [packer (require :packer)]
-                      (packer.sync)))))
+                    (packer.sync))))
