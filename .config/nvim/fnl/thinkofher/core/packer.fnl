@@ -81,7 +81,9 @@
 
 
                   ;; Collection of base16-based colorschemes for Vim.
-                  (use :chriskempson/base16-vim)
+                  (use-with-config :chriskempson/base16-vim
+                                   {:setup #(lazy-hotpot)
+                                    :config #(require :thinkofher.core.theme)})
 
                   ;; Mount programming langauges
                   (programming-langs use)
