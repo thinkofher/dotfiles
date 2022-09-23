@@ -42,6 +42,10 @@
 ;; enable mouse support
 (set! mouse :a)
 
+(when (vim.fn.executable :rg)
+  (set! grepprg "rg --vimgrep --smart-case --hidden")
+  (set! grepformat :%f:%l:%c:%m))
+
 ;; gui settings for neovide
 (when vim.g.neovide
   (set! guifont "Source Code Pro:h12"))
