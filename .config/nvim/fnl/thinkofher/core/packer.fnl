@@ -1,4 +1,5 @@
-(import-macros {: use-with-config
+(import-macros {: use^
+                : kmp^
                 : lazy-hotpot} :thinkofher.macros)
 (import-macros {: set!} :hibiscus.vim)
 
@@ -13,22 +14,22 @@
   (use :udayvir-singh/hibiscus.nvim)
 
   ;; Syntax highlighting for Fennel.
-  (use-with-config :bakpakin/fennel.vim {:ft :fennel}))
+  (use^ :bakpakin/fennel.vim {:ft :fennel}))
 
 ;; Mounts plugins for programming languages better support.
 (fn programming-langs [use]
   ;; Built-in lsp
-  (use-with-config :neovim/nvim-lspconfig
-                   {:after :telescope
-                    :ft [:c :cpp :rust: :go]
-                    :setup #(lazy-hotpot)
-                    :config #(require :thinkofher.core.langs.lsp)})
+  (use^ :neovim/nvim-lspconfig
+        {:after :telescope
+         :ft [:c :cpp :rust: :go]
+         :setup #(lazy-hotpot)
+         :config #(require :thinkofher.core.langs.lsp)})
 
   ;; Support for .editorconfig file.
   (use :editorconfig/editorconfig-vim)
 
   ;; Emmet Plugin
-  (use-with-config :mattn/emmet-vim {:ft :html}))
+  (use^ :mattn/emmet-vim {:ft :html}))
 
 (fn packer-bootstraped? []
   (. _G :packer_bootstrap))
@@ -41,10 +42,10 @@
                   ;; Mount fennel environment
                   (fennel-env use)
 
-                  (use-with-config :echasnovski/mini.nvim
-                                   {:branch :stable
-                                    :setup #(lazy-hotpot)
-                                    :config #(require :thinkofher.core.plugins.mini)})
+                  (use^ :echasnovski/mini.nvim
+                        {:branch :stable
+                         :setup #(lazy-hotpot)
+                         :config #(require :thinkofher.core.plugins.mini)})
 
                   ;; Lightspeed is a cutting-edge motion plugin for Neovim.
                   (use :ggandor/lightspeed.nvim)
@@ -57,11 +58,11 @@
                   (use :tpope/vim-surround)
 
                   ;; Shows which lines have been added, modified, or removed
-                  (use-with-config :mhinz/vim-signify
-                                   {:config #(set! updatetime 100)})
+                  (use^ :mhinz/vim-signify
+                        {:config #(set! updatetime 100)})
 
                   ;; telescope.nvim is a highly extendable fuzzy finder over lists.
-                  (use-with-config
+                  (use^
                     :nvim-telescope/telescope.nvim
                     {:requires [:nvim-lua/plenary.nvim]
                      :after [:fzf-native :ui-select]
@@ -70,20 +71,31 @@
                      :as :telescope})
 
                   ;; fzf-native is a c port of fzf
-                  (use-with-config
+                  (use^
                     :nvim-telescope/telescope-fzf-native.nvim
                     {:run :make
                      :as :fzf-native})
 
                   ;; telescope interface for vim.ui.select.
-                  (use-with-config :nvim-telescope/telescope-ui-select.nvim
-                                   {:as :ui-select})
+                  (use^ :nvim-telescope/telescope-ui-select.nvim
+                        {:as :ui-select})
 
 
                   ;; Collection of base16-based colorschemes for Vim.
-                  (use-with-config :chriskempson/base16-vim
-                                   {:setup #(lazy-hotpot)
-                                    :config #(require :thinkofher.core.theme)})
+                  (use^ :chriskempson/base16-vim
+                        {:setup #(lazy-hotpot)
+                         :config #(require :thinkofher.core.theme)})
+
+                  (use^ :folke/which-key.nvim
+                        {:after :telescope
+                         :config #(let [wk (require :which-key)]
+                                    (do
+                                      (wk.register {:f {:name :find}
+                                                    :w {:name :workspace}
+                                                    :c {:name :code}
+                                                    :r {:name :rename}}
+                                                   {:prefix :<leader>})
+                                      (wk.setup {})))})
 
                   ;; Mount programming langauges
                   (programming-langs use)

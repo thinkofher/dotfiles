@@ -22,6 +22,17 @@
 
 (let [builtin (require :telescope.builtin)]
   (do
-    (vim.keymap.set :n :<C-p> #(builtin.find_files (custom-themes.get-ivy)))
-    (vim.keymap.set :n :<leader>fg #(builtin.live_grep (custom-themes.get-ivy)))
-    (vim.keymap.set :n :<leader>fb #(builtin.buffers (custom-themes.get-ivy)))))
+    (let [find-files-mappings [:<C-p> :<leader>ff]]
+      (each [_ mapping (ipairs find-files-mappings)]
+        (vim.keymap.set :n
+                        mapping
+                        #(builtin.find_files (custom-themes.get-ivy))
+                        {:desc "Find file"})))
+    (vim.keymap.set :n
+                    :<leader>fg
+                    #(builtin.live_grep (custom-themes.get-ivy))
+                    {:desc "Live grep"})
+    (vim.keymap.set :n
+                    :<leader>fb
+                    #(builtin.buffers (custom-themes.get-ivy))
+                    {:desc "Find buffer"})))

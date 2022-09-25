@@ -7,9 +7,8 @@
         nvim-api-name (.. "vim.api.nvim_" new-f-name)]
     (list (sym nvim-api-name) ...)))
 
-;; use-with-config macro allows to fetch package
-;; with custom config table.
-(fn use-with-config [package config]
+(fn use^ [package config]
+  "use^ macro allows to fetch package with custom config table."
   (let [merged-table (do
                        (local out {})
                        (table.insert out package)
@@ -40,9 +39,16 @@
                                              :allowedGlobals false}}}))
        (tset _G :lazy_hotpot :ready))))
 
+(fn kmp^ [cmd label opts]
+  "kmp^ returns keymap table for which-key plugin config."
+  (let [res (vim.tbl_extend :force [cmd label] (or opts {}))]
+    res))
+
 {: *>
  : **>
- : use-with-config
+ : use^
+ : kmp^
  : once
  : last
- : lazy-hotpot}
+ : lazy-hotpot
+ : kmp^}
