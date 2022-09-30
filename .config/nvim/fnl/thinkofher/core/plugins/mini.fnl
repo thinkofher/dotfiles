@@ -12,7 +12,6 @@
 
 (let [mini-plugins [[:misc just-call {}]
                     [:sessions just-call {}]
-                    [:pairs just-call {}]
                     [:tabline call-with-config {:show_icons false
                                                 :set_vim_settings true}]
                     [:cursorword just-call {}]
