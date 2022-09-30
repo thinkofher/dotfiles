@@ -1,7 +1,21 @@
 ;; overall settings
 (import-macros
   {: rem!
-   : set!} :hibiscus.vim)
+   : set!
+   : set+} :hibiscus.vim)
+
+;; Basics ;;
+
+;; legacy stuff
+(set! nocompatible)
+(vim.cmd "filetype plugin on")
+(vim.cmd "filetype plugin indent on")
+
+;; finding files
+(set+ path "**")
+(set! wildmenu)
+
+;; General Settings ;;
 
 ;; encoding
 (set! encoding "utf-8")
@@ -42,10 +56,13 @@
 ;; enable mouse support
 (set! mouse :a)
 
+;; setup grep program if ripgrep is available
 (when (vim.fn.executable :rg)
   (set! grepprg "rg --vimgrep --smart-case --hidden")
   (set! grepformat :%f:%l:%c:%m))
 
+;; GUI ;;
+
 ;; gui settings for neovide
 (when vim.g.neovide
-  (set! guifont "Source Code Pro:h12"))
+  (set! guifont "Inconsolata:h15"))
