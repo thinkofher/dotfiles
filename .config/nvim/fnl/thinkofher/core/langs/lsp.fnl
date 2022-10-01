@@ -66,7 +66,7 @@
                                          (vim.lsp.buf.list_workspace_folders)))
                   :description "List workspace folders"}
                  {:command     :LspRefs
-                    :keymap      [:gr :<leader>lr]
+                  :keymap      [:gr :<leader>lr]
                   :callback    references
                   :description "References"}
                  {:command     :LspDocumentSymbols
@@ -110,61 +110,6 @@
                   :callback    vim.lsp.buf.formatting
                   :description "Format file"}])
 
-(var omnifunc-cache {})
-
-(fn _G.omnifunc_sync [findstart base]
-  "Implements 'omnifunc' compatible sync LSP completion."
-  (let [pos (**> win-get-cursor 0)
-        line (**> get-current-line)]
-    (if (= findstart 1)
-      (do
-        ;; Cache state of cursor line and position due to the fact that it will
-        ;; change at the second call to this function (with `findstart = 0`). See:
-        ;; https://github.com/vim/vim/issues/8510.
-        ;;
-        ;; This is needed because request to LSP server is made on second call.
-        ;; If not done, server's completion mechanics will operate on different
-        ;; document and position.
-        (set omnifunc-cache {:pos pos
-                             :line line})
-
-        ;; On first call return column of completion start
-        (let [line-to-cursor (line:sub 1 (. pos 2))]
-          (vim.fn.match line-to-cursor :\k*$)))
-      (do
-
-        ;; Restore cursor line and position to the state of first call
-        (**> set-current-line omnifunc-cache.line)
-        (**> win-set-cursor 0 omnifunc-cache.pos)
-
-        ;; Make request
-        (let [bufnr (**> get-current-buf)
-              params (*> vim.lsp.util.make-position-params)
-              result (*> vim.lsp.buf-request-sync
-                         bufnr
-                         :textDocument/completion
-                         params
-                         2000)]
-          (if (not result)
-            {}
-
-            ;; Transform request answer to list of completion matches
-            (let [items {}]
-              (each [_ item (pairs result)]
-                (when (not item.err)
-                  (let [matches (*>
-                                  vim.lsp.util.text-document-completion-list-to-complete-items
-                                  item.result
-                                  base)]
-                    (*> vim.list-extend items matches))))
-
-              ;; Restore back cursor line and position to the state of this call's start
-              ;; (avoids outcomes of Vim's internal line postprocessing)
-              (**> set-current-line line)
-              (**> win-set-cursor 0 pos)
-
-              items)))))))
-
 (fn lsp-on-attach [client bufnr]
   "Attaches key mappings and commands for language server protocol." 
   ;; Configure vim diagnostics.
@@ -189,7 +134,7 @@
                                   (vim.inspect lhs)
                                   (type lhs)))))]
     (each [_ opts (ipairs lsp-maps)]
-      (**> buf-set-option bufnr :omnifunc "v:lua.omnifunc_sync")
+      (**> buf-set-option bufnr :omnifunc "v:lua.vim.lsp.omnifunc")
       (set-keymap opts.keymap opts.callback opts.description)
       (add-command opts.command opts.callback opts.description))))
 
