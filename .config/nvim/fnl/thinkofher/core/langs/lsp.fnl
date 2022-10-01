@@ -107,7 +107,7 @@
                   :description "All diagnostics"}
                  {:command     :LspFormatting
                   :keymap      [:<leader>wf :<leader>lf]
-                  :callback    vim.lsp.buf.formatting
+                  :callback    #(vim.lsp.buf.format)
                   :description "Format file"}])
 
 (fn lsp-on-attach [client bufnr]

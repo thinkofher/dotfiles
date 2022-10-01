@@ -20,7 +20,7 @@
                                   :pattern c-cpp-patterns
                                   :nested false
                                   :once false
-                                  :callback (fn [...] (*> vim.lsp.buf.formatting-sync))})
+                                  :callback #(vim.lsp.buf.format)})
 
 (**> create-autocmd :BufEnter {:group :CFamily
                                :desc "Setup size of tabs for c/cpp files."
