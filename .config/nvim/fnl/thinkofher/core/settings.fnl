@@ -61,6 +61,17 @@
   (set! grepprg "rg --vimgrep --smart-case --hidden")
   (set! grepformat :%f:%l:%c:%m))
 
+;; helper functions
+
+;; P prints arguments in a pretty and user friendly way.
+;;
+;; Example usage with fennel:
+;;   :Fnl (P 1 2 3 4)
+;;
+;; Example usage with lua:
+;;   :lua P(1, 2, 3, 4)
+(tset _G :P vim.pretty_print)
+
 ;; GUI ;;
 
 ;; gui settings for neovide
