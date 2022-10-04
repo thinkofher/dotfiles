@@ -31,6 +31,8 @@ print_help() {
     echo "    restore   restores files from .backup directory."
     echo
     echo "    print     prints all files that will be installed."
+    echo
+    echo "    fmt       format config files."
 }
 
 install_dotfiles() {
@@ -82,6 +84,10 @@ restore_backup() {
     done
 }
 
+fmt() {
+    find . -iname "*.fnl" -exec fnlfmt --fix {} \;
+}
+
 case $1 in
     "install")
         install_dotfiles
@@ -97,6 +103,9 @@ case $1 in
         ;;
     "print")
         print_files
+        ;;
+    "fmt")
+        fmt
         ;;
     *) echo "Doesn't recognize \"$1\". Use help command for more info."
         ;;

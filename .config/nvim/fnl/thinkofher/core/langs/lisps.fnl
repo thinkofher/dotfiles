@@ -11,9 +11,10 @@
 
 (**> create-augroup :Lisps {})
 
-(**> create-autocmd :BufEnter {:group :Lisps
-                               :desc "Setup size of tabs for lisp family languages."
-                               :pattern lisp-patterns
-                               :nested false
-                               :once false
-                               :callback lisps-tabs})
+(**> create-autocmd :BufEnter
+     {:group :Lisps
+      :desc "Setup size of tabs for lisp family languages."
+      :pattern lisp-patterns
+      :nested false
+      :once false
+      :callback lisps-tabs})

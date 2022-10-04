@@ -23,15 +23,18 @@ if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
     vim.cmd [[packadd packer.nvim]]
 end
 
-require("hotpot").setup({
-    provide_require_fennel = true,
-    compiler = {
-        macros = {
-            env = "_COMPILER",
-            compilerEnv = _G,
-            allowedGlobals = false,
+if _G.lazy_hotpot == nil then
+    require("hotpot").setup({
+        provide_require_fennel = true,
+        compiler = {
+            macros = {
+                env = "_COMPILER",
+                compilerEnv = _G,
+                allowedGlobals = false,
+            },
         },
-    },
-})
+    })
+end
 
 require('thinkofher.core')
+vim.cmd [[silent! edit!]]

@@ -4,12 +4,11 @@
 
 (fn **> [f ...]
   (let [new-f-name (string.gsub (. f 1) "-" "_")
-        nvim-api-name (.. "vim.api.nvim_" new-f-name)]
+        nvim-api-name (.. :vim.api.nvim_ new-f-name)]
     (list (sym nvim-api-name) ...)))
 
-;; use-with-config macro allows to fetch package
-;; with custom config table.
-(fn use-with-config [package config]
+(fn use^ [package config]
+  "use^ macro allows to fetch package with custom config table."
   (let [merged-table (do
                        (local out {})
                        (table.insert out package)
@@ -20,7 +19,8 @@
 
 (fn once [body]
   "Evaluate given code only once during runtime."
-  `(let [once-var# ,(tostring {}) ;; generates random table address at compile time
+  `(let [once-var# ,(tostring {})
+         ;; generates random table address at compile time
          run?# (. _G once-var#)]
      (when (not run?#)
        ,body
@@ -30,8 +30,19 @@
   "Returns last element from table."
   `(. ,table (length ,table)))
 
-{: *>
- : **>
- : use-with-config
- : once
- : last}
+(fn lazy-hotpot [...]
+  `(let [setup?# (= (. _G :lazy_hotpot) nil)]
+     (when setup?#
+       (let [hotpot# (require :hotpot)]
+         (hotpot#.setup {:provide_require_fennel true
+                         :compiler {:macros {:env :_COMPILER
+                                             :compilerEnv _G
+                                             :allowedGlobals false}}}))
+       (tset _G :lazy_hotpot :ready))))
+
+(fn kmp^ [cmd label opts]
+  "kmp^ returns keymap table for which-key plugin config."
+  (let [res (vim.tbl_extend :force [cmd label] (or opts {}))]
+    res))
+
+{: *> : **> : use^ : kmp^ : once : last : lazy-hotpot : kmp^}
