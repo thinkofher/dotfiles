@@ -93,7 +93,6 @@
                                       (wk.register {:f {:name :find}
                                                     :w {:name :workspace}
                                                     :c {:name :code}
-                                                    :r {:name :rename}
                                                     :l {:name :lsp}}
                                                    {:prefix :<leader>})
                                       (wk.setup {})))})
