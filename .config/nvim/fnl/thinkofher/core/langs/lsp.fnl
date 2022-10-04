@@ -115,7 +115,9 @@
   ;; Configure vim diagnostics.
   (vim.diagnostic.config {:virtual_text false})
   ;; Setup all lsp keymaps for current buffer.
-  (let [buf-set-keymap vim.api.nvim_buf_set_keymap
+  (let [options {:omnifunc "v:lua.vim.lsp.omnifunc"
+                 :formatexpr "v:lua.vim.lsp.formatexpr(#{timeout_ms:250})"}
+        buf-set-keymap vim.api.nvim_buf_set_keymap
         buf-add-command vim.api.nvim_buf_create_user_command
         add-command (fn [cmd-name callback desc]
                       (buf-add-command bufnr cmd-name callback {:desc desc}))
@@ -133,8 +135,9 @@
                                   "%s is not table nor string, but %s"
                                   (vim.inspect lhs)
                                   (type lhs)))))]
+    (each [key value (pairs options)]
+      (**> buf-set-option bufnr key value))
     (each [_ opts (ipairs lsp-maps)]
-      (**> buf-set-option bufnr :omnifunc "v:lua.vim.lsp.omnifunc")
       (set-keymap opts.keymap opts.callback opts.description)
       (add-command opts.command opts.callback opts.description))))
 
