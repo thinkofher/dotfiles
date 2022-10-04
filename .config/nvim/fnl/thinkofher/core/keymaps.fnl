@@ -14,6 +14,13 @@
   (each [_ [mode lhs rhs] (pairs move-lines-maps)]
     (vim.keymap.set mode lhs rhs)))
 
+;; toggle grammar spelling
+(vim.keymap.set :n
+                :<leader>cs
+                #(tset vim.opt :spell (not (vim.opt.spell:get)))
+                {:silent true
+                 :desc "Toggle spell"})
+
 ;; terminal settings
 (vim.keymap.set :t :<c-v><esc> "<c-\\><c-n>")
 (vim.keymap.set :n :<leader>t ":tabnew<cr>:terminal<cr>")
