@@ -1,10 +1,13 @@
+(import-macros {: g!} :hibiscus.vim)
 (import-macros {: **>} :thinkofher.macros)
 
+(local <k> vim.keymap.set)
+
 ;; setup map leader
-(tset vim.g :mapleader " ")
+(g! mapleader " ")
 
 ;; autocompletion with omnifunc
-(vim.keymap.set :i :<c-j> :<c-x><c-o>)
+(<k> :i :<c-j> :<c-x><c-o>)
 
 ;; mappings for moving lines
 (let [move-lines-maps [[:n :∆ ":m .+1<cr>=="]
@@ -12,18 +15,29 @@
                        [:v :∆ ":m '>+1<cr>gv=gv"]
                        [:v :Ż ":m '<-2<cr>gv=gv"]]]
   (each [_ [mode lhs rhs] (pairs move-lines-maps)]
-    (vim.keymap.set mode lhs rhs)))
+    (<k> mode lhs rhs)))
 
 ;; toggle grammar spelling
-(vim.keymap.set :n
-                :<leader>cs
-                #(tset vim.opt :spell (not (vim.opt.spell:get)))
-                {:silent true
-                 :desc "Toggle spell"})
+(<k> :n
+      :<leader>cs
+      #(tset vim.opt :spell (not (vim.opt.spell:get)))
+      {:silent true
+       :desc "Toggle spell"})
 
 ;; terminal settings
-(vim.keymap.set :t :<c-v><esc> "<c-\\><c-n>")
-(vim.keymap.set :n :<leader>t ":tabnew<cr>:terminal<cr>")
+(<k> :t :<c-v><esc> "<c-\\><c-n>")
+(<k> :n :<leader>t ":tabnew<cr>:terminal<cr>")
+
+(fn lazy-packer-exec [func-name]
+  "lazy-packer-exec returns function which calls function with
+  given name."
+  #(let [packer (require :packer)
+         func (. packer func-name)]
+     (func)))
+
+;; plugins management
+(<k> :n :<leader>ps (lazy-packer-exec :sync) {:desc "Update plugins"})
+(<k> :n :<leader>pc (lazy-packer-exec :compile) {:desc "Compile plugins"})
 
 (**> create-augroup :Terminal {})
 

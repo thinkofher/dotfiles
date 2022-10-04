@@ -91,6 +91,7 @@
                          :config #(let [wk (require :which-key)]
                                     (do
                                       (wk.register {:f {:name :find}
+                                                    :p {:name :packer}
                                                     :w {:name :workspace}
                                                     :c {:name :code}
                                                     :l {:name :lsp}}
