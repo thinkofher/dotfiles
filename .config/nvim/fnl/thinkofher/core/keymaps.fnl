@@ -28,6 +28,12 @@
 (<k> :t :<c-v><esc> "<c-\\><c-n>")
 (<k> :n :<leader>t ":tabnew<cr>:terminal<cr>")
 
+;; clipboard copy and paste
+(<k> [:n :v] :<leader>by "\"*y" {:desc "Clipboard yank"})
+(<k> [:n :v] :<leader>bY "\"*Y" {:desc "Clipboard yank"})
+(<k> [:n :v] :<leader>bp "\"*p" {:desc "Clipboard paste"})
+(<k> [:n :v] :<leader>bP "\"*P" {:desc "Clipboard paste"})
+
 (fn lazy-packer-exec [func-name]
   "lazy-packer-exec returns function which calls function with
   given name."

@@ -92,6 +92,7 @@
                                     (do
                                       (wk.register {:f {:name :find}
                                                     :p {:name :packer}
+                                                    :b {:name :buffer}
                                                     :w {:name :workspace}
                                                     :c {:name :code}
                                                     :l {:name :lsp}}
