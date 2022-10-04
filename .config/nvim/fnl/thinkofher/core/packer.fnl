@@ -35,6 +35,7 @@
                   (use :wbthomason/packer.nvim)
                   ;; Mount fennel environment
                   (fennel-env use)
+                  ;; Library of independent Lua modules.
                   (use^ :echasnovski/mini.nvim
                         {:branch :stable
                          :setup #(lazy-hotpot)
@@ -65,6 +66,8 @@
                   (use^ :chriskempson/base16-vim
                         {:setup #(lazy-hotpot)
                          :config #(require :thinkofher.core.theme)})
+                  ;; It displays a popup with possible key bindings of the command
+                  ;; you started typing.
                   (use^ :folke/which-key.nvim
                         {:after :telescope
                          :config #(let [wk (require :which-key)]
@@ -77,7 +80,8 @@
                                                     :l {:name :lsp}}
                                                    {:prefix :<leader>})
                                       (wk.setup {})))})
-                  ;; Mount programming langauges
+                  ;; Mount programming langauges.
                   (programming-langs use)
+                  ;; Bootstrap packer if necessary.
                   (when (packer-bootstraped?)
                     (packer.sync))))
