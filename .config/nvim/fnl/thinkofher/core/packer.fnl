@@ -48,8 +48,7 @@
                          :config #(require :thinkofher.core.plugins.mini)})
 
                   ;; Lightspeed is a cutting-edge motion plugin for Neovim.
-                  (use^ :ggandor/lightspeed.nvim
-                        {:keys [:s :S :f :F :t :T]})
+                  (use :ggandor/lightspeed.nvim)
 
                   ;; A Git wrapper so awesome, it should be illegal
                   (use^ :tpope/vim-fugitive {:cmd :G})
