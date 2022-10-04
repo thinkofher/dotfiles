@@ -38,7 +38,7 @@
 
 ;; fnlfmt: skip
 (packer.startup (fn [use]
-                  "Installs and mount all plugins with packer plugin manager."
+                  "Installs and mounts all plugins with packer plugin manager."
 
                   ;; Manage packer with packer
                   (use :wbthomason/packer.nvim)
