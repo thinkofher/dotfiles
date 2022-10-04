@@ -11,9 +11,10 @@
 ;; Terraform auto command group.
 (**> create-augroup :Terraform {})
 
-(**> create-autocmd :BufEnter {:group :Terraform
-                               :desc "Setup szie fo tabs for terraform files."
-                               :pattern terraform-patterns
-                               :nested false
-                               :once false
-                               :callback terraform-tabs})
+(**> create-autocmd :BufEnter
+     {:group :Terraform
+      :desc "Setup szie fo tabs for terraform files."
+      :pattern terraform-patterns
+      :nested false
+      :once false
+      :callback terraform-tabs})

@@ -4,7 +4,7 @@
 
 (fn **> [f ...]
   (let [new-f-name (string.gsub (. f 1) "-" "_")
-        nvim-api-name (.. "vim.api.nvim_" new-f-name)]
+        nvim-api-name (.. :vim.api.nvim_ new-f-name)]
     (list (sym nvim-api-name) ...)))
 
 (fn use^ [package config]
@@ -19,7 +19,8 @@
 
 (fn once [body]
   "Evaluate given code only once during runtime."
-  `(let [once-var# ,(tostring {}) ;; generates random table address at compile time
+  `(let [once-var# ,(tostring {})
+         ;; generates random table address at compile time
          run?# (. _G once-var#)]
      (when (not run?#)
        ,body
@@ -44,11 +45,4 @@
   (let [res (vim.tbl_extend :force [cmd label] (or opts {}))]
     res))
 
-{: *>
- : **>
- : use^
- : kmp^
- : once
- : last
- : lazy-hotpot
- : kmp^}
+{: *> : **> : use^ : kmp^ : once : last : lazy-hotpot : kmp^}

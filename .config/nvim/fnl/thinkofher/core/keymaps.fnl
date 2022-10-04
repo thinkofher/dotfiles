@@ -10,19 +10,16 @@
 (<k> :i :<c-j> :<c-x><c-o>)
 
 ;; mappings for moving lines
-(let [move-lines-maps [[:n :∆ ":m .+1<cr>=="]
-                       [:n :Ż ":m .-2<cr>=="]
-                       [:v :∆ ":m '>+1<cr>gv=gv"]
-                       [:v :Ż ":m '<-2<cr>gv=gv"]]]
+(let [move-lines-maps [[:n "∆" ":m .+1<cr>=="]
+                       [:n "Ż" ":m .-2<cr>=="]
+                       [:v "∆" ":m '>+1<cr>gv=gv"]
+                       [:v "Ż" ":m '<-2<cr>gv=gv"]]]
   (each [_ [mode lhs rhs] (pairs move-lines-maps)]
     (<k> mode lhs rhs)))
 
 ;; toggle grammar spelling
-(<k> :n
-      :<leader>cs
-      #(tset vim.opt :spell (not (vim.opt.spell:get)))
-      {:silent true
-       :desc "Toggle spell"})
+(<k> :n :<leader>cs #(tset vim.opt :spell (not (vim.opt.spell:get)))
+     {:silent true :desc "Toggle spell"})
 
 ;; terminal settings
 (<k> :t :<c-v><esc> "<c-\\><c-n>")
@@ -47,16 +44,18 @@
 
 (**> create-augroup :Terminal {})
 
-(**> create-autocmd :TermOpen {:group :Terminal
-                               :desc "Setup no spelling for terminal buffers."
-                               :pattern :*
-                               :nested false
-                               :once false
-                               :callback #(tset vim.wo :spell false)})
+(**> create-autocmd :TermOpen
+     {:group :Terminal
+      :desc "Setup no spelling for terminal buffers."
+      :pattern "*"
+      :nested false
+      :once false
+      :callback #(tset vim.wo :spell false)})
 
-(**> create-autocmd [:TermOpen :BufEnter] {:group :Terminal
-                                           :desc "Start text insert when entering term."
-                                           :pattern "term://*"
-                                           :nested false
-                                           :once false
-                                           :callback #(vim.cmd :startinsert)})
+(**> create-autocmd [:TermOpen :BufEnter]
+     {:group :Terminal
+      :desc "Start text insert when entering term."
+      :pattern "term://*"
+      :nested false
+      :once false
+      :callback #(vim.cmd :startinsert)})

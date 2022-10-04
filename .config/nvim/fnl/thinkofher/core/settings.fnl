@@ -1,8 +1,5 @@
 ;; overall settings
-(import-macros
-  {: rem!
-   : set!
-   : set+} :hibiscus.vim)
+(import-macros {: rem! : set! : set+} :hibiscus.vim)
 
 ;; Basics ;;
 
@@ -18,7 +15,7 @@
 ;; General Settings ;;
 
 ;; encoding
-(set! encoding "utf-8")
+(set! encoding :utf-8)
 
 ;; required for operations modifying multiple buffers like rename
 (set! hidden)
@@ -41,10 +38,10 @@
 (set! ignorecase)
 
 ;; always show one statusline
-(set! laststatus  3)
+(set! laststatus 3)
 
 ;; autocompletion
-(rem! completeopt "preview")
+(rem! completeopt :preview)
 (set! omnifunc "syntaxcomplete#Complete")
 
 ;; backup functionalities
@@ -59,7 +56,7 @@
 ;; setup grep program if ripgrep is available
 (when (vim.fn.executable :rg)
   (set! grepprg "rg --vimgrep --smart-case --hidden")
-  (set! grepformat :%f:%l:%c:%m))
+  (set! grepformat "%f:%l:%c:%m"))
 
 ;; helper functions
 

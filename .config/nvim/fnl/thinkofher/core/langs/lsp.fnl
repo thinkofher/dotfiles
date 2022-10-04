@@ -1,5 +1,4 @@
-(import-macros {: *>
-                : **>} :thinkofher.macros)
+(import-macros {: *> : **>} :thinkofher.macros)
 
 ;; lsp and langauge specific settings
 (local lsp-config (require :lspconfig))
@@ -8,10 +7,7 @@
 (local themes (require :thinkofher.core.plugins.telescope.themes))
 
 ;; LSP servers that I'm currently using.
-(local servers [:clangd
-                :rust_analyzer
-                :gopls])
-
+(local servers [:clangd :rust_analyzer :gopls])
 
 (fn references [...]
   "references shows telescope window with LSP references."
@@ -24,14 +20,17 @@
 (fn workspace-symbols [...]
   "workspace-symbols prompts user for a query string and runs
   telescope window for lsp workspace symbols with the given query."
-  (let [res (pcall #(vim.ui.input {:prompt "Query: "
-                                   :default ""}
-                                  #(builtin.lsp_workspace_symbols
-                                     (*> vim.tbl-deep-extend :force (themes.get-ivy) {:query $1}))))]
+  (let [res (pcall #(vim.ui.input {:prompt "Query: " :default ""}
+                                  #(builtin.lsp_workspace_symbols (*> vim.tbl-deep-extend
+                                                                      :force
+                                                                      (themes.get-ivy)
+                                                                      {:query $1}))))]
     (match res
       (false _) (print "Failed to run workspace/symbols callback." res))))
 
 ;; Table with key bindings and callbacks for them.
+
+;; fnlfmt: skip
 (local lsp-maps [{:command     :LspDeclaration
                   :keymap      [:gd :<leader>ld]
                   :callback    vim.lsp.buf.declaration
@@ -111,7 +110,7 @@
                   :description "Format file"}])
 
 (fn lsp-on-attach [client bufnr]
-  "Attaches key mappings and commands for language server protocol." 
+  "Attaches key mappings and commands for language server protocol."
   ;; Configure vim diagnostics.
   (vim.diagnostic.config {:virtual_text false})
   ;; Setup all lsp keymaps for current buffer.
@@ -120,21 +119,23 @@
         buf-set-keymap vim.api.nvim_buf_set_keymap
         buf-add-command vim.api.nvim_buf_create_user_command
         add-command (fn [cmd-name callback desc]
-                      (buf-add-command bufnr cmd-name callback {:desc desc}))
+                      (buf-add-command bufnr cmd-name callback {: desc}))
         set-keymap-single (fn [lhs callback desc]
-                            (buf-set-keymap bufnr :n lhs "" {:silent true
-                                                             :callback callback
-                                                             :desc desc}))
+                            (buf-set-keymap bufnr :n lhs ""
+                                            {:silent true : callback : desc}))
         set-keymap-for-all (fn [lhs callback desc]
-                             (vim.tbl_map #(set-keymap-single $1 callback desc) lhs))
+                             (vim.tbl_map #(set-keymap-single $1 callback desc)
+                                          lhs))
         set-keymap (fn [lhs callback desc]
                      (match lhs
-                       (where s (= (type s) :string)) (set-keymap-single s callback desc)
-                       (where l (= (type l) :table)) (set-keymap-for-all l callback desc)
-                       _ (error (string.format
-                                  "%s is not table nor string, but %s"
-                                  (vim.inspect lhs)
-                                  (type lhs)))))]
+                       (where s (= (type s) :string)) (set-keymap-single s
+                                                                         callback
+                                                                         desc)
+                       (where l (= (type l) :table)) (set-keymap-for-all l
+                                                                         callback
+                                                                         desc)
+                       _ (error (string.format "%s is not table nor string, but %s"
+                                               (vim.inspect lhs) (type lhs)))))]
     (each [key value (pairs options)]
       (**> buf-set-option bufnr key value))
     (each [_ opts (ipairs lsp-maps)]

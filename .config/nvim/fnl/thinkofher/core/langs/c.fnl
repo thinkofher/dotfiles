@@ -1,7 +1,6 @@
 ;; C, Cpp settings
 (import-macros {: set!} :hibiscus.vim)
-(import-macros {: **>
-                : *>} :thinkofher.macros)
+(import-macros {: **> : *>} :thinkofher.macros)
 
 (fn c-tabs [...]
   (set! tabstop 2)
@@ -15,12 +14,13 @@
 (**> create-augroup :CFamily {})
 
 ;; run clang-format before every buffer write
-(**> create-autocmd :BufWritePre {:group :CFamily
-                                  :desc "Autoformat c/cpp files on save."
-                                  :pattern c-cpp-patterns
-                                  :nested false
-                                  :once false
-                                  :callback #(vim.lsp.buf.format)})
+(**> create-autocmd :BufWritePre
+     {:group :CFamily
+      :desc "Autoformat c/cpp files on save."
+      :pattern c-cpp-patterns
+      :nested false
+      :once false
+      :callback #(vim.lsp.buf.format)})
 
 (**> create-autocmd :BufEnter {:group :CFamily
                                :desc "Setup size of tabs for c/cpp files."
