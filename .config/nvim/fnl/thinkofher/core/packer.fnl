@@ -23,7 +23,7 @@
   ;; Built-in lsp
   (use^ :neovim/nvim-lspconfig
         {:after :telescope
-         :ft [:c :cpp "rust:" :go]
+         :ft [:c :cpp :rust :go]
          :setup #(lazy-hotpot)
          :config #(require :thinkofher.core.langs.lsp)})
 
