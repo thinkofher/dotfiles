@@ -39,7 +39,10 @@
                  :callback (lang-settings :lisps)}
                 {:name     :Data
                  :pattern  [:yaml :proto]
-                 :callback (lang-settings :data)}])
+                 :callback (lang-settings :data)}
+                {:name     :Lua
+                 :pattern  :lua
+                 :callback (lang-settings :lua)}])
 
 (each [_ config (ipairs configs)]
   (auto-lang-with-config config))
