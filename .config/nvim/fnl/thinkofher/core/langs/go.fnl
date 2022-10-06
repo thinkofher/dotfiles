@@ -1,12 +1,5 @@
 (import-macros {: set!} :hibiscus.vim)
-(import-macros {: *> : **>} :thinkofher.macros)
-
-(fn go-tabs [...]
-  (set! noexpandtab)
-  (set! tabstop 4)
-  (set! softtabstop 4)
-  (set! shiftwidth 4)
-  (set! makeprg "go build ./..."))
+(import-macros {: **> : when-no-editorconfig} :thinkofher.macros)
 
 (**> create-augroup :Go {})
 
@@ -18,20 +11,33 @@
       :once false
       :callback #(vim.lsp.buf.format)})
 
-(**> create-autocmd :BufEnter {:group :Go
-                               :desc "Setup size of tabs for golang files."
-                               :pattern [:*.go :go.mod :go.sum]
-                               :nested false
-                               :once false
-                               :callback go-tabs})
-
-(**> create-autocmd [:BufNewFile :BufRead]
+(**> create-autocmd :BufEnter
      {:group :Go
-      :desc "Setup size of tabs for go mod files."
-      :pattern :*mod
+      :desc "Setup makeprg command for Go files"
+      :pattern :*.go
       :nested false
       :once false
-      :callback go-tabs})
+      :callback #(set! makeprg "go build ./...")})
+
+(when-no-editorconfig (let [go-tabs (fn [...]
+                                      (set! noexpandtab)
+                                      (set! tabstop 4)
+                                      (set! softtabstop 4)
+                                      (set! shiftwidth 4))]
+                        (**> create-autocmd :BufEnter
+                             {:group :Go
+                              :desc "Setup size of tabs for golang files."
+                              :pattern [:*.go :go.mod :go.sum]
+                              :nested false
+                              :once false
+                              :callback go-tabs})
+                        (**> create-autocmd [:BufNewFile :BufRead]
+                             {:group :Go
+                              :desc "Setup size of tabs for go mod files."
+                              :pattern :*mod
+                              :nested false
+                              :once false
+                              :callback go-tabs})))
 
 (fn go-lint [opts]
   "Lint Golang code with golanci-lint. It is required
