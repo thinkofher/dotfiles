@@ -41,21 +41,3 @@
 ;; plugins management
 (<k> :n :<leader>ps (lazy-packer-exec :sync) {:desc "Update plugins"})
 (<k> :n :<leader>pc (lazy-packer-exec :compile) {:desc "Compile plugins"})
-
-(**> create-augroup :Terminal {})
-
-(**> create-autocmd :TermOpen
-     {:group :Terminal
-      :desc "Setup no spelling for terminal buffers."
-      :pattern "*"
-      :nested false
-      :once false
-      :callback #(tset vim.wo :spell false)})
-
-(**> create-autocmd [:TermOpen :BufEnter]
-     {:group :Terminal
-      :desc "Start text insert when entering term."
-      :pattern "term://*"
-      :nested false
-      :once false
-      :callback #(vim.cmd :startinsert)})

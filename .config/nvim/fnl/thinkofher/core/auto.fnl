@@ -1,5 +1,7 @@
 (import-macros {: **>} :thinkofher.macros)
 
+;; Programming Languages ;;
+
 (**> create-augroup :Langs {})
 
 (fn auto-lang [name pattern callback]
@@ -46,3 +48,26 @@
 
 (each [_ config (ipairs configs)]
   (auto-lang-with-config config))
+
+;; Terminal ;;
+
+(**> create-augroup :Terminal {})
+
+(**> create-autocmd :TermOpen
+     {:group :Terminal
+      :desc "Setup no spelling for terminal buffers."
+      :pattern "*"
+      :nested false
+      :once false
+      :callback #(tset vim.wo :spell false)})
+
+(**> create-autocmd [:TermOpen :BufEnter]
+     {:group :Terminal
+      :desc "Start text insert when entering term."
+      :pattern "term://*"
+      :nested false
+      :once false
+      :callback #(vim.cmd :startinsert)})
+
+(**> create-user-command :T "top sp | term <args>"
+     {:nargs "*" :desc "Open Terminal at the top." :complete :shellcmd})
