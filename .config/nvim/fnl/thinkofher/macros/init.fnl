@@ -26,6 +26,16 @@
        ,body
        (tset _G once-var# true))))
 
+(fn when-file-not-exist [filename ...]
+  "Evaluate given body when given filename does not exist."
+  (let [body (if ... `[(do
+                         ,...)] `[])]
+    `(when (> (vim.fn.empty (vim.fn.glob ,filename)) 0)
+       ,(unpack body))))
+
+(fn when-no-editorconfig [...]
+  (when-file-not-exist :.editorconfig ...))
+
 (fn last [table]
   "Returns last element from table."
   `(. ,table (length ,table)))
@@ -45,4 +55,13 @@
   (let [res (vim.tbl_extend :force [cmd label] (or opts {}))]
     res))
 
-{: *> : **> : use^ : kmp^ : once : last : lazy-hotpot : kmp^}
+{: *>
+ : **>
+ : use^
+ : kmp^
+ : once
+ : last
+ : lazy-hotpot
+ : kmp^
+ : when-file-not-exist
+ : when-no-editorconfig}
