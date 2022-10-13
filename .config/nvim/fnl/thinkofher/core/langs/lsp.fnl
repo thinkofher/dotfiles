@@ -2,31 +2,9 @@
 
 ;; lsp and langauge specific settings
 (local lsp-config (require :lspconfig))
-(local builtin (require :telescope.builtin))
-
-(local themes (require :thinkofher.core.plugins.telescope.themes))
 
 ;; LSP servers that I'm currently using.
 (local servers [:clangd :rust_analyzer :gopls])
-
-(fn references [...]
-  "references shows telescope window with LSP references."
-  (builtin.lsp_references (themes.get-ivy)))
-
-(fn implementations [...]
-  "implementations show telescope window with LSP implementations."
-  (builtin.lsp_implementations (themes.get-ivy)))
-
-(fn workspace-symbols [...]
-  "workspace-symbols prompts user for a query string and runs
-  telescope window for lsp workspace symbols with the given query."
-  (let [res (pcall #(vim.ui.input {:prompt "Query: " :default ""}
-                                  #(builtin.lsp_workspace_symbols (*> vim.tbl-deep-extend
-                                                                      :force
-                                                                      (themes.get-ivy)
-                                                                      {:query $1}))))]
-    (match res
-      (false _) (print "Failed to run workspace/symbols callback." res))))
 
 ;; Table with key bindings and callbacks for them.
 
@@ -45,7 +23,7 @@
                   :description "Hover"}
                  {:command     :LspImplementation
                   :keymap      [:gi :<leader>lI]
-                  :callback    implementations
+                  :callback    vim.lsp.buf.implementation
                   :description "Implementations"}
                  {:command     :LspSignatureHelp
                   :keymap      :<c-k>
@@ -66,15 +44,15 @@
                   :description "List workspace folders"}
                  {:command     :LspRefs
                   :keymap      [:gr :<leader>lr]
-                  :callback    references
+                  :callback    vim.lsp.buf.references
                   :description "References"}
                  {:command     :LspDocumentSymbols
                   :keymap      [:g0 :<leader>ls]
-                  :callback     #(builtin.lsp_document_symbols (themes.get-ivy))
+                  :callback     #(vim.lsp.buf.document_symbol)
                   :description "Document symbols"}
                  {:command     :LspWorkspaceSymbols
                   :keymap      [:gW :<leader>lw]
-                  :callback    workspace-symbols
+                  :callback    vim.lsp.buf.workspace_symbol
                   :description "Workspace symbols"}
                  {:command     :LspTypeDefinition
                   :keymap      [:<leader>D :<leader>lD]
@@ -102,7 +80,7 @@
                   :description "Go to prev diagnostic"}
                  {:command     :LspDiagAll
                   :keymap      [:<leader>q :<leader>lA]
-                  :callback    #(builtin.diagnostics (themes.get-ivy))
+                  :callback    #(vim.diagnostic.setqflist)
                   :description "All diagnostics"}
                  {:command     :LspFormatting
                   :keymap      [:<leader>wf :<leader>lf]
