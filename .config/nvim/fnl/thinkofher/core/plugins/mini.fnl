@@ -115,10 +115,3 @@
 
 (**> create-user-command :MiniSessionsSwitch switch-session
      {:bang false :nargs 1 :complete list-other-sessions})
-
-;; Setup user commands for starter window.
-
-(**> create-user-command :MiniStarter
-     (fn [...]
-       (let [starter (require :mini.starter)]
-         (starter.open))) {:bang false :nargs 0})
