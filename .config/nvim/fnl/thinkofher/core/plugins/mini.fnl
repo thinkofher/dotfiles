@@ -4,7 +4,6 @@
 (let [data-path (vim.fn.stdpath :data)
       sessions-path (.. data-path :/session)]
   (when (= 0 (vim.fn.isdirectory sessions-path))
-    (tset _G :dupa sessions-path)
     (vim.fn.mkdir sessions-path)))
 
 (local theme (require :mini.base16))
