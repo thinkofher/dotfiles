@@ -2,10 +2,7 @@
 
 (let [find-files-mappings [:<C-p> :<leader>ff]]
   (each [_ mapping (ipairs find-files-mappings)]
-    (vim.keymap.set :n mapping ":Files<CR>" {:desc "Find file"})))
-
-(vim.keymap.set :n :<leader>fg ":Rg<CR>" {:desc "Live grep"})
-(vim.keymap.set :n :<leader>fb ":Buffers<CR>" {:desc "Find buffer"})
+    (vim.keymap.set :n mapping ":FzfFiles<CR>" {:desc "Find file"})))
 
 (tset vim.env :FZF_DEFAULT_COMMAND
       "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git")
@@ -17,3 +14,6 @@
                          :border :sharp}})
 
 (g! fzf_preview_window ["hidden,right,50%,<70(up,40%)" :ctrl-/])
+
+(vim.keymap.set :n :<leader>fg ":FzfRg<CR>" {:desc "Live grep"})
+(vim.keymap.set :n :<leader>fb ":FzfBuffers<CR>" {:desc "Find buffer"})

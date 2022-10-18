@@ -1,6 +1,6 @@
 (import-macros {: use^ : kmp^ : lazy-hotpot} :thinkofher.macros)
 
-(import-macros {: set!} :hibiscus.vim)
+(import-macros {: set! : g!} :hibiscus.vim)
 
 (local packer (require :packer))
 
@@ -68,7 +68,9 @@
                   (use^ :mhinz/vim-signify {:config #(set! updatetime 100)})
 
                   (use^ :junegunn/fzf.vim {:requires :junegunn/fzf
-                                           :setup #(lazy-hotpot)
+                                           :setup #(do
+                                                     (g! fzf_command_prefix :Fzf)
+                                                     (lazy-hotpot))
                                            :config #(require :thinkofher.core.plugins.fzf)})
 
                   ;; Distraction-free writing in Vim.
