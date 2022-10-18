@@ -97,13 +97,15 @@
         buf-set-keymap vim.api.nvim_buf_set_keymap
         buf-add-command vim.api.nvim_buf_create_user_command
         cmd-callback (fn [opts]
-                       (let [filtered (vim.tbl_filter #(= (. $1 :sub) opts.args) lsp-maps)
+                       (let [filtered (vim.tbl_filter #(= (. $1 :sub) opts.args)
+                                                      lsp-maps)
                              first (. filtered 1)]
                          (first.callback)))
         cmd-complete #(vim.tbl_map #(. $1 :sub) lsp-maps)
-        add-sub #(buf-add-command bufnr :Lsp cmd-callback {:nargs 1
-                                                           :desc "Lsp command."
-                                                           :complete cmd-complete})
+        add-sub #(buf-add-command bufnr :Lsp cmd-callback
+                                  {:nargs 1
+                                   :desc "Lsp command."
+                                   :complete cmd-complete})
         set-keymap-single (fn [lhs callback desc]
                             (buf-set-keymap bufnr :n lhs ""
                                             {:silent true : callback : desc}))
