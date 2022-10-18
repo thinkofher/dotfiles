@@ -71,6 +71,9 @@
                                            :setup #(lazy-hotpot)
                                            :config #(require :thinkofher.core.plugins.fzf)})
 
+                  ;; Distraction-free writing in Vim.
+                  (use^ :junegunn/goyo.vim {:cmd :Goyo})
+
                   ;; Collection of base16-based colorschemes for Vim.
                   (use^ :chriskempson/base16-vim
                         {:setup #(lazy-hotpot)
