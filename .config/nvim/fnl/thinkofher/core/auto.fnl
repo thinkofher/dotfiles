@@ -2,6 +2,10 @@
 
 ;; Programming Languages ;;
 
+(**> create-user-command :LspStopAll
+     #(vim.lsp.stop_client (vim.lsp.get_active_clients))
+     {:desc "Stop all lsp active clients."})
+
 (**> create-augroup :Langs {})
 
 (fn auto-lang [name pattern callback]
