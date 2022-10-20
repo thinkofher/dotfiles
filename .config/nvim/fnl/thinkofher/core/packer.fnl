@@ -23,8 +23,11 @@
   ;; Built-in lsp
   (use^ :neovim/nvim-lspconfig
         {:ft [:c :cpp :rust :go]
+         :requires :ojroques/nvim-lspfuzzy
          :setup #(lazy-hotpot)
-         :config #(require :thinkofher.core.langs.lsp)})
+         :config #(let [lspfuzzy (require :lspfuzzy)]
+                    (lspfuzzy.setup {})
+                    (require :thinkofher.core.langs.lsp))})
 
   ;; Support for .editorconfig file.
   (use :editorconfig/editorconfig-vim)
