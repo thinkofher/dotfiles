@@ -4,7 +4,6 @@
 (let [data-path (vim.fn.stdpath :data)
       sessions-path (.. data-path :/session)]
   (when (= 0 (vim.fn.isdirectory sessions-path))
-    (tset _G :dupa sessions-path)
     (vim.fn.mkdir sessions-path)))
 
 (local theme (require :mini.base16))
@@ -115,10 +114,3 @@
 
 (**> create-user-command :MiniSessionsSwitch switch-session
      {:bang false :nargs 1 :complete list-other-sessions})
-
-;; Setup user commands for starter window.
-
-(**> create-user-command :MiniStarter
-     (fn [...]
-       (let [starter (require :mini.starter)]
-         (starter.open))) {:bang false :nargs 0})

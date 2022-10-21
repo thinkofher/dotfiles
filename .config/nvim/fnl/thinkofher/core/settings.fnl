@@ -54,6 +54,20 @@
 (set! mouse :a)
 
 ;; setup grep program if ripgrep is available
+;;
+;; search for the exact word foo (not foobar):
+;;
+;:  :grep -w foo (equivalent to :grep '\bfoo\b').
+;;
+;; search for foo in JavaScript files: 
+;;
+;;  :grep foo -t js
+;;
+;; search for foo in files matching a glob:
+;;
+;;  :grep foo -g '*.js'
+;;
+;; refs: https://phelipetls.github.io/posts/extending-vim-with-ripgrep/
 (when (vim.fn.executable :rg)
   (set! grepprg "rg --vimgrep --smart-case --hidden")
   (set! grepformat "%f:%l:%c:%m"))

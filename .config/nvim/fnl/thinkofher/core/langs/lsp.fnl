@@ -2,109 +2,87 @@
 
 ;; lsp and langauge specific settings
 (local lsp-config (require :lspconfig))
-(local builtin (require :telescope.builtin))
-
-(local themes (require :thinkofher.core.plugins.telescope.themes))
 
 ;; LSP servers that I'm currently using.
 (local servers [:clangd :rust_analyzer :gopls])
 
-(fn references [...]
-  "references shows telescope window with LSP references."
-  (builtin.lsp_references (themes.get-ivy)))
-
-(fn implementations [...]
-  "implementations show telescope window with LSP implementations."
-  (builtin.lsp_implementations (themes.get-ivy)))
-
-(fn workspace-symbols [...]
-  "workspace-symbols prompts user for a query string and runs
-  telescope window for lsp workspace symbols with the given query."
-  (let [res (pcall #(vim.ui.input {:prompt "Query: " :default ""}
-                                  #(builtin.lsp_workspace_symbols (*> vim.tbl-deep-extend
-                                                                      :force
-                                                                      (themes.get-ivy)
-                                                                      {:query $1}))))]
-    (match res
-      (false _) (print "Failed to run workspace/symbols callback." res))))
-
 ;; Table with key bindings and callbacks for them.
 
 ;; fnlfmt: skip
-(local lsp-maps [{:command     :LspDeclaration
+(local lsp-maps [{:sub         :declaration
                   :keymap      [:gd :<leader>ld]
                   :callback    vim.lsp.buf.declaration
                   :description "Declaration"}
-                 {:command     :LspDefinition
+                 {:sub         :definition
                   :keymap      ["<c-]>" "<leader>l]"]
                   :callback    vim.lsp.buf.definition
                   :description "Definition"}
-                 {:command     :LspHover
+                 {:sub         :hover
                   :keymap      [:K :<leader>lh]
                   :callback    vim.lsp.buf.hover
                   :description "Hover"}
-                 {:command     :LspImplementation
+                 {:sub         :implementation
                   :keymap      [:gi :<leader>lI]
-                  :callback    implementations
+                  :callback    vim.lsp.buf.implementation
                   :description "Implementations"}
-                 {:command     :LspSignatureHelp
+                 {:sub         :signature_help
                   :keymap      :<c-k>
                   :callback    vim.lsp.buf.signature_help
                   :description "Signature help"}
-                 {:command     :LspsWorkspaceFolder
+                 {:sub         :workspace_folder
                   :keymap      :<leader>wa
                   :callback    vim.lsp.buf.add_workspace_folder
                   :description "Addw workspace folder"}
-                 {:command     :LspRemoveWorkspaceFolder
+                 {:sub         :remove_workspace_folder
                   :keymap      :<leader>wr
                   :callback    vim.lsp.buf.remove_workspace_folder
                   :description "Remove workspace folder"}
-                 {:command     :LspListWorkspaceFolders
+                 {:sub         :list_workspace_folders
                   :keymap      :<leader>wl
                   :callback    #(print (vim.inspect
                                          (vim.lsp.buf.list_workspace_folders)))
                   :description "List workspace folders"}
-                 {:command     :LspRefs
+                 {:sub         :refs
                   :keymap      [:gr :<leader>lr]
-                  :callback    references
+                  :callback    vim.lsp.buf.references
                   :description "References"}
-                 {:command     :LspDocumentSymbols
+                 {:sub         :document_symbols
                   :keymap      [:g0 :<leader>ls]
-                  :callback     #(builtin.lsp_document_symbols (themes.get-ivy))
+                  :callback     #(vim.lsp.buf.document_symbol)
                   :description "Document symbols"}
-                 {:command     :LspWorkspaceSymbols
+                 {:sub         :workspace_symbols
                   :keymap      [:gW :<leader>lw]
-                  :callback    workspace-symbols
+                  :callback    vim.lsp.buf.workspace_symbol
                   :description "Workspace symbols"}
-                 {:command     :LspTypeDefinition
+                 {:sub         :type_definition
                   :keymap      [:<leader>D :<leader>lD]
                   :callback    vim.lsp.buf.type_definition
                   :description "Type definition"}
-                 {:command     :LspRename
+                 {:sub         :rename
                   :keymap      [:<leader>rn :<leader>ln]
                   :callback    #(vim.lsp.buf.rename)
                   :description "Rename symbol"}
-                 {:command     :LspCodeAction
+                 {:sub         :code_action
                   :keymap      [:<leader>ca :<leader>la]
                   :callback    vim.lsp.buf.code_action
                   :description "Code action"}
-                 {:command     :LspDiagLine
+                 {:sub         :diag_line
                   :keymap      [:<leader>e :<leader>le]
                   :callback    vim.diagnostic.open_float
                   :description "Show diagnostic"}
-                 {:command     :LspDiagPrev
+                 {:sub         :diag_prev
                   :keymap      ["[d" :<leader>li]
                   :callback    vim.diagnostic.goto_prev
                   :description "Go to next diagnostic"}
-                 {:command     :LspDiagNext
+                 {:sub         :diag_next
                   :keymap      ["]d" :<leader>lo]
                   :callback    vim.diagnostic.goto_next
                   :description "Go to prev diagnostic"}
-                 {:command     :LspDiagAll
+                 {:sub         :diag_all
                   :keymap      [:<leader>q :<leader>lA]
-                  :callback    #(builtin.diagnostics (themes.get-ivy))
+                  :callback    #(vim.diagnostic.setqflist)
                   :description "All diagnostics"}
-                 {:command     :LspFormatting
+                 {:sub         :formatting
                   :keymap      [:<leader>wf :<leader>lf]
                   :callback    #(vim.lsp.buf.format)
                   :description "Format file"}])
@@ -118,8 +96,16 @@
                  :formatexpr "v:lua.vim.lsp.formatexpr(#{timeout_ms:250})"}
         buf-set-keymap vim.api.nvim_buf_set_keymap
         buf-add-command vim.api.nvim_buf_create_user_command
-        add-command (fn [cmd-name callback desc]
-                      (buf-add-command bufnr cmd-name callback {: desc}))
+        cmd-callback (fn [opts]
+                       (let [filtered (vim.tbl_filter #(= (. $1 :sub) opts.args)
+                                                      lsp-maps)
+                             first (. filtered 1)]
+                         (first.callback)))
+        cmd-complete #(vim.tbl_map #(. $1 :sub) lsp-maps)
+        add-sub #(buf-add-command bufnr :Lsp cmd-callback
+                                  {:nargs 1
+                                   :desc "Lsp command."
+                                   :complete cmd-complete})
         set-keymap-single (fn [lhs callback desc]
                             (buf-set-keymap bufnr :n lhs ""
                                             {:silent true : callback : desc}))
@@ -136,11 +122,11 @@
                                                                          desc)
                        _ (error (string.format "%s is not table nor string, but %s"
                                                (vim.inspect lhs) (type lhs)))))]
+    (add-sub)
     (each [key value (pairs options)]
       (**> buf-set-option bufnr key value))
     (each [_ opts (ipairs lsp-maps)]
-      (set-keymap opts.keymap opts.callback opts.description)
-      (add-command opts.command opts.callback opts.description))))
+      (set-keymap opts.keymap opts.callback opts.description))))
 
 ;; Setup built-in LSP for each lsp server from above list.
 (each [_ server (ipairs servers)]

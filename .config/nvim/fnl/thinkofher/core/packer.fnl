@@ -1,6 +1,6 @@
 (import-macros {: use^ : kmp^ : lazy-hotpot} :thinkofher.macros)
 
-(import-macros {: set!} :hibiscus.vim)
+(import-macros {: set! : g!} :hibiscus.vim)
 
 (local packer (require :packer))
 
@@ -22,10 +22,12 @@
 
   ;; Built-in lsp
   (use^ :neovim/nvim-lspconfig
-        {:after :telescope
-         :ft [:c :cpp :rust :go]
+        {:ft [:c :cpp :rust :go]
+         :requires :ojroques/nvim-lspfuzzy
          :setup #(lazy-hotpot)
-         :config #(require :thinkofher.core.langs.lsp)})
+         :config #(let [lspfuzzy (require :lspfuzzy)]
+                    (lspfuzzy.setup {})
+                    (require :thinkofher.core.langs.lsp))})
 
   ;; Support for .editorconfig file.
   (use :editorconfig/editorconfig-vim)
@@ -52,8 +54,11 @@
                          :setup #(lazy-hotpot)
                          :config #(require :thinkofher.core.plugins.mini)})
 
-                  ;; Lightspeed is a cutting-edge motion plugin for Neovim.
-                  (use :ggandor/lightspeed.nvim)
+                  ;; Leap is a general-purpose motion plugin for Neovim.
+                  (use^ :ggandor/leap.nvim
+                        {:config #(let [leap (require :leap)]
+                                   (leap.add_default_mappings))
+                         :requires :tpope/vim-repeat})
 
                   ;; A Git wrapper so awesome, it should be illegal
                   (use^ :tpope/vim-fugitive {:cmd :G})
@@ -65,21 +70,11 @@
                   ;; Shows which lines have been added, modified, or removed
                   (use^ :mhinz/vim-signify {:config #(set! updatetime 100)})
 
-                  ;; telescope.nvim is a highly extendable fuzzy finder over lists.
-                  (use^ :nvim-telescope/telescope.nvim
-                        {:requires [:nvim-lua/plenary.nvim]
-                         :after [:fzf-native :ui-select]
-                         :setup #(lazy-hotpot)
-                         :config #(require :thinkofher.core.plugins.telescope)
-                         :as :telescope})
-
-                  ;; fzf-native is a c port of fzf
-                  (use^ :nvim-telescope/telescope-fzf-native.nvim
-                        {:run :make :as :fzf-native})
-
-                  ;; telescope interface for vim.ui.select.
-                  (use^ :nvim-telescope/telescope-ui-select.nvim
-                        {:as :ui-select})
+                  (use^ :junegunn/fzf.vim {:requires :junegunn/fzf
+                                           :setup #(do
+                                                     (g! fzf_command_prefix :Fzf)
+                                                     (lazy-hotpot))
+                                           :config #(require :thinkofher.core.plugins.fzf)})
 
                   ;; Collection of base16-based colorschemes for Vim.
                   (use^ :chriskempson/base16-vim
@@ -89,8 +84,7 @@
                   ;; It displays a popup with possible key bindings of the command
                   ;; you started typing.
                   (use^ :folke/which-key.nvim
-                        {:after :telescope
-                         :config #(let [wk (require :which-key)]
+                        {:config #(let [wk (require :which-key)]
                                     (do
                                       (wk.register {:f {:name :find}
                                                     :p {:name :packer}
