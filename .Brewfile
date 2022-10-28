@@ -30,6 +30,7 @@ brew "pinentry"
 brew "gnupg"
 brew "go"
 brew "golangci-lint"
+brew "delve"
 brew "harfbuzz"
 brew "graphviz"
 brew "hugo"
@@ -61,7 +62,10 @@ brew "zig"
 brew "zola"
 brew "zsh-syntax-highlighting"
 brew "clojure/tools/clojure"
-brew "superfly/tap/flyctl"
+
+# Skip, because it doesn't work with CLT 14.0. After official release of CLT 14.1,
+# it will be possible to install this.
+# brew "superfly/tap/flyctl"
 
 cask "alacritty"
 cask "anki"
