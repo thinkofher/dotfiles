@@ -29,6 +29,9 @@
                     (lspfuzzy.setup {})
                     (require :thinkofher.core.langs.lsp))})
 
+  ;; Vim plugin for Delve, Golang debugger
+  (use^ :sebdah/vim-delve {:ft [:go]})
+
   ;; Support for .editorconfig file.
   (use :editorconfig/editorconfig-vim)
 
