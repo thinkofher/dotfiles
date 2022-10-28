@@ -11,14 +11,6 @@
       :once false
       :callback #(vim.lsp.buf.format)})
 
-(**> create-autocmd :BufEnter
-     {:group :Go
-      :desc "Setup makeprg command for Go files"
-      :pattern :*.go
-      :nested false
-      :once false
-      :callback #(set! makeprg "go build ./...")})
-
 (when-no-editorconfig (let [go-tabs (fn [...]
                                       (set! noexpandtab)
                                       (set! tabstop 4)
