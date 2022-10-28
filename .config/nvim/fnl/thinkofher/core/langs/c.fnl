@@ -5,6 +5,8 @@
 ;; C, Cpp auto command group
 (**> create-augroup :CFamily {})
 
+(local c-cpp-patterns [:*.c :*.cpp :*.h :*.hpp])
+
 ;; run clang-format before every buffer write
 (**> create-autocmd :BufWritePre
      {:group :CFamily
@@ -17,8 +19,7 @@
 (when-no-editorconfig (let [c-tabs (fn [...]
                                      (set! tabstop 2)
                                      (set! softtabstop 2)
-                                     (set! shiftwidth 2))
-                            c-cpp-patterns [:*.c :*.cpp :*.h :*.hpp]]
+                                     (set! shiftwidth 2))]
                         (**> create-autocmd :BufEnter
                              {:group :CFamily
                               :desc "Setup size of tabs for c/cpp files."
