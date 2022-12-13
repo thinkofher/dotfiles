@@ -24,3 +24,5 @@ alias agep="age -R $HOME/.config/age/keys.pub"
 # git utilities
 alias commit-types="cat $HOME/.config/git/commit-types"
 alias ct="cat $HOME/.config/git/commit-types"
+
+alias s="kitty +kitten ssh"
