@@ -32,6 +32,16 @@
   ;; Vim plugin for Delve, Golang debugger
   (use^ :sebdah/vim-delve {:ft [:go]})
 
+  ;; Vim Erlang plugins collection.
+  (use^ :vim-erlang/vim-erlang-runtime {:ft [:erlang]
+                                        :requires [:vim-erlang/vim-erlang-compiler
+                                                   :vim-erlang/vim-erlang-omnicomplete
+                                                   :vim-erlang/vim-erlang-tags]
+                                        :setup #(do
+                                                  (g! erlang_tags_otp 1)
+                                                  (g! erlang_show_errors 0)
+                                                  (g! erlang_quickfix_support 1))})
+
   ;; Support for .editorconfig file.
   (use :editorconfig/editorconfig-vim)
 
