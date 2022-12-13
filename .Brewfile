@@ -67,6 +67,7 @@ brew "clojure/tools/clojure"
 # it will be possible to install this.
 # brew "superfly/tap/flyctl"
 
+cask "gcc-arm-embedded"
 cask "alacritty"
 cask "anki"
 cask "dotnet-sdk"
