@@ -53,6 +53,48 @@
 ;; enable mouse support
 (set! mouse :a)
 
+(fn last [list n]
+  "last returns last n elements of list. If n is not specified it
+  returns only the single last element."
+  (let [len (length list)
+        shift (if n (- len (- n 1)) len)]
+    (vim.list_slice list shift len)))
+
+(fn join [strings sep]
+  "join joins together strings elements from given list
+  with seperator between them."
+  (let [len (length strings)
+        last-elem (if (> len 0) (. strings len) "")
+        without-last (vim.list_slice strings 1 (- len 1))]
+    (var res "")
+    (each [_ s (ipairs without-last)]
+      (set res (.. res s sep)))
+    (.. res last-elem)))
+
+(fn _G.short_path []
+  "short_path returns short version of current file's name. Filenames other
+  than the current one, are replaced with theirs first letter."
+  (let [filename (vim.fn.expand "%")
+        splitted (vim.split filename "/")
+        len (length splitted)
+        last (. splitted len)]
+    (if (= len 1)
+        filename
+        ;; current opened filed is not in the directory
+        (do
+          ;; remove last element from table
+          (table.remove splitted len)
+          (let [only-first-letters (vim.tbl_map #($1:sub 1 1) splitted)
+                longer-than-four (> (length only-first-letters) 4)
+                truncate #(vim.list_slice $1 1 4)
+                truncated (if longer-than-four (truncate only-first-letters)
+                              only-first-letters)]
+            (.. (if longer-than-four "..." "") (join truncated "/") "/" last))))))
+
+;; setup terminal title
+(set! title)
+(set! titlestring "%{v:progname} [%{v:lua.short_path()} %l,%c %p%{'%'}]")
+
 ;; setup grep program if ripgrep is available
 ;;
 ;; search for the exact word foo (not foobar):
