@@ -1,6 +1,10 @@
 #!/bin/zsh
 # .zshrc.functions
 
+function mango() {
+    go doc $1 | less
+}
+
 function cheat() { # display cheat sheet for given topic
     curl -sL cheat.sh/$1 | less -r
 }
