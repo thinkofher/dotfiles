@@ -28,6 +28,9 @@ compinit
 # user specific zsh functions
 fpath+=$HOME/.local/share/zsh/site-functions
 
+# nix zsh site functions
+fpath+=$HOME/.nix-profile/share/zsh/site-functions
+
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
@@ -46,6 +49,8 @@ export PATH
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.nix-profile/share/fzf/key-bindings.zsh ] && source ~/.nix-profile/share/fzf/key-bindings.zsh
+[ -f ~/.nix-profile/share/fzf/completion.zsh ] && source ~/.nix-profile/share/fzf/completion.zsh
 
 # cargo
 [ -f ~/.cargo/env ] && source ~/.cargo/env
@@ -61,5 +66,3 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
-
-pfetch
