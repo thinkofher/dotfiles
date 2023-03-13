@@ -1,5 +1,5 @@
 ;; overall settings
-(import-macros {: rem! : set! : set+} :hibiscus.vim)
+(import-macros {: rem! : set! : set+ : g!} :hibiscus.vim)
 
 ;; Basics ;;
 
@@ -129,4 +129,5 @@
 
 ;; gui settings for neovide
 (when vim.g.neovide
-  (set! guifont "Inconsolata:h15"))
+  (set! guifont "Inconsolata:h15")
+  (g! neovide_cursor_vfx_mode "ripple"))
