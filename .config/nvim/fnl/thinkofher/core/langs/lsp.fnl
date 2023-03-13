@@ -87,6 +87,36 @@
                   :callback    #(vim.lsp.buf.format)
                   :description "Format file"}])
 
+(fn setup-icons []
+  (let [kinds vim.lsp.protocol.CompletionItemKind
+        icons {:Text ""
+               :Method ""
+               :Function ""
+               :Constructor ""
+               :Field "ﰠ"
+               :Variable ""
+               :Class "ﴯ"
+               :Interface ""
+               :Module ""
+               :Property "ﰠ"
+               :Unit "塞"
+               :Value ""
+               :Enum ""
+               :Keyword ""
+               :Snippet ""
+               :Color ""
+               :File ""
+               :Reference ""
+               :Folder ""
+               :EnumMember ""
+               :Constant ""
+               :Struct "פּ"
+               :Event ""
+               :Operator ""
+               :TypeParameter ""}]
+    (each [i kind (ipairs kinds)]
+           (tset kinds i (or (. icons kind) kind)))))
+
 (fn lsp-on-attach [client bufnr]
   "Attaches key mappings and commands for language server protocol."
   ;; Configure vim diagnostics.
@@ -123,12 +153,20 @@
                        _ (error (string.format "%s is not table nor string, but %s"
                                                (vim.inspect lhs) (type lhs)))))]
     (add-sub)
+
+    ;; Use custom nerd-font icons when using neovide GUI client.
+    (when vim.g.neovide
+      (setup-icons))
+
     (each [key value (pairs options)]
       (**> buf-set-option bufnr key value))
+
     (each [_ opts (ipairs lsp-maps)]
       (set-keymap opts.keymap opts.callback opts.description))))
 
 ;; Setup built-in LSP for each lsp server from above list.
 (each [_ server (ipairs servers)]
-  (let [config (. lsp-config server)]
-    (config.setup {:on_attach lsp-on-attach})))
+  (let [config (. lsp-config server)
+        capabilities (vim.lsp.protocol.make_client_capabilities)]
+    (config.setup {:on_attach lsp-on-attach
+                   :capabilities capabilities})))
