@@ -115,7 +115,7 @@
                :Operator ""
                :TypeParameter ""}]
     (each [i kind (ipairs kinds)]
-           (tset kinds i (or (. icons kind) kind)))))
+      (tset kinds i (or (. icons kind) kind)))))
 
 (fn lsp-on-attach [client bufnr]
   "Attaches key mappings and commands for language server protocol."
@@ -153,14 +153,11 @@
                        _ (error (string.format "%s is not table nor string, but %s"
                                                (vim.inspect lhs) (type lhs)))))]
     (add-sub)
-
     ;; Use custom nerd-font icons when using neovide GUI client.
     (when vim.g.neovide
       (setup-icons))
-
     (each [key value (pairs options)]
       (**> buf-set-option bufnr key value))
-
     (each [_ opts (ipairs lsp-maps)]
       (set-keymap opts.keymap opts.callback opts.description))))
 
@@ -168,5 +165,4 @@
 (each [_ server (ipairs servers)]
   (let [config (. lsp-config server)
         capabilities (vim.lsp.protocol.make_client_capabilities)]
-    (config.setup {:on_attach lsp-on-attach
-                   :capabilities capabilities})))
+    (config.setup {:on_attach lsp-on-attach : capabilities})))
