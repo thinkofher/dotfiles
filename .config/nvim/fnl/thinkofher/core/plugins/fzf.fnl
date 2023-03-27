@@ -1,4 +1,5 @@
 (import-macros {: g!} :hibiscus.vim)
+(import-macros {: **>} :thinkofher.macros)
 
 (let [find-files-mappings [:<C-p> :<leader>ff]]
   (each [_ mapping (ipairs find-files-mappings)]
@@ -17,3 +18,10 @@
 
 (vim.keymap.set :n :<leader>fg ":FzfRg<CR>" {:desc "Live grep"})
 (vim.keymap.set :n :<leader>fb ":FzfBuffers<CR>" {:desc "Find buffer"})
+
+;; automatically close buffer with fzf after losing focus 
+(**> create-autocmd :FileType
+     {:pattern :fzf
+      :once false
+      :callback #(**> create-autocmd :WinLeave
+                      {:buffer (. $1 :buf) :command :close! :nested true})})
