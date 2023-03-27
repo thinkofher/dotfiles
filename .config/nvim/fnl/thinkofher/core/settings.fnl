@@ -129,5 +129,5 @@
 
 ;; gui settings for neovide
 (when vim.g.neovide
-  (set! guifont "Inconsolata:h15")
-  (g! neovide_cursor_vfx_mode "ripple"))
+  (set! guifont "Inconsolata:h14")
+  (g! neovide_cursor_vfx_mode :ripple))
