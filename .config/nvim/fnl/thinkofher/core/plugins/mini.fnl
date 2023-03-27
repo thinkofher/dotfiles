@@ -6,13 +6,32 @@
   (when (= 0 (vim.fn.isdirectory sessions-path))
     (vim.fn.mkdir sessions-path)))
 
-(local theme (require :mini.base16))
-
 (fn just-call [sf ...]
   (sf))
 
 (fn call-with-config [sf config]
   (sf config))
+
+(fn statusline-active []
+  (let [(mode mode-hl) (MiniStatusline.section_mode {:trunc_width 120})
+        git (MiniStatusline.section_git {:trunc_width 75})
+        diagnostics (MiniStatusline.section_diagnostics {:trunc_width 75})
+        filename (MiniStatusline.section_filename {:trunc_width 140})
+        fileinfo (MiniStatusline.section_fileinfo {:trunc_width 120})
+        location (MiniStatusline.section_location {:trunc_width 75})
+        groups [{:hl mode-hl :strings [mode]}
+                {:hl :MiniStatuslineDevinfo :strings [git diagnostics]}
+                "%<"
+                ;; Mark general truncate point
+                {:hl :MiniStatuslineFilename :strings [filename]}
+                "%="
+                ;; End left alignment
+                {:hl :MiniStatuslineFileinfo :strings [fileinfo]}
+                {:hl mode-hl :strings [location]}]]
+    (MiniStatusline.combine_groups groups)))
+
+(local statusline-config {:content {:active statusline-active}
+                          :set_vim_settings false})
 
 ;; fnlfmt: skip
 (let [mini-plugins [[:misc       just-call {}]
@@ -21,7 +40,8 @@
                                                    :set_vim_settings true}]
                     [:cursorword just-call {}]
                     [:comment    just-call {}]
-                    [:bufremove  just-call {}]]]
+                    [:bufremove  just-call {}]
+                    [:statusline call-with-config statusline-config]]]
   (each [_ [sub-pkg config-func config-args] (ipairs mini-plugins)]
     (let [pkg-name (.. :mini. sub-pkg)
           pkg (require pkg-name)]
