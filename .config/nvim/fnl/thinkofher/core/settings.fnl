@@ -53,6 +53,12 @@
 ;; enable mouse support
 (set! mouse :a)
 
+;; disable language providers (use lua and vimscript plugins only)
+(g! loaded_python3_provider 0)
+(g! loaded_ruby_provider 0)
+(g! loaded_perl_provider 0)
+(g! loaded_node_provider 0)
+
 (fn last [list n]
   "last returns last n elements of list. If n is not specified it
   returns only the single last element."
@@ -123,7 +129,7 @@
 ;;
 ;; Example usage with lua:
 ;;   :lua P(1, 2, 3, 4)
-(tset _G :P vim.pretty_print)
+(tset _G :P vim.print)
 
 ;; GUI ;;
 
