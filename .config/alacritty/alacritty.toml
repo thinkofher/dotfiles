@@ -1,0 +1,27 @@
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 13.0
+normal = { family = "Inconsolata", style = "Regular" }
+bold = { family = "Inconsolata", style = "Bold" }
+offset = { x = 0, y = 0 }
+
+[shell]
+args = ["-pf", "bdudek"]
+program = "/usr/bin/login"
+
+[window]
+title = "haha terminal go ^C^C^C^C^C^C^C^C"
+opacity = 0.9
+blur = true
+padding = { x = 3, y = 3 }
+dynamic_padding = true
+
+[bell]
+animation = "EaseOutCubic"
+duration = 5
+color = "#ffffff"
+
+[selection]
+save_to_clipboard = true

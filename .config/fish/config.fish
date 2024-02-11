@@ -6,7 +6,7 @@
 # top of the bash, so i don't have to hustle with all the ENV variables.
 
 # neovim aliases
-alias v "nvim -u ~/.config/nvim/clean.vim"
+alias v "nvim -u NONE"
 alias e v
 alias vi nvim
 alias vim nvim
@@ -21,7 +21,7 @@ alias gowtf "go clean -cache -modcache -i -r"
 alias commit-types "cat $HOME/.config/git/commit-types"
 alias ct "cat $HOME/.config/git/commit-types"
 
-source /opt/homebrew/opt/asdf/asdf.fish
+source /opt/homebrew/opt/asdf/libexec/asdf.fish
 
 fish_add_path /opt/homebrew/bin
 
