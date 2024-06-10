@@ -166,3 +166,12 @@
   (let [config (. lsp-config server)
         capabilities (vim.lsp.protocol.make_client_capabilities)]
     (config.setup {:on_attach lsp-on-attach : capabilities})))
+
+;; If you load nvim-lspconfig on the FileType event then you need to trigger it
+;; again. Basically nvim-lspconfig uses that autocmd event to auto trigger the
+;; detection and automatic starting of language servers. After you have
+;; lspconfig loaded and run your config setups then you just want to call
+;; vim.api.nvim_exec_autocmds("FileType", {})
+;;
+;; Source: https://www.reddit.com/r/neovim/comments/14cikep/comment/jokw2j6
+(**> exec-autocmds "FileType" {})
