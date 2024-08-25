@@ -55,7 +55,7 @@ export PATH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # asdf
-[ -f $BREW_PREFIX/opt/asdf/asdf.sh ] && source $BREW_PREFIX/opt/asdf/asdf.sh
+[ -f $BREW_PREFIX/opt/asdf/libexec/asdf.sh ] && source $BREW_PREFIX/opt/asdf/libexec/asdf.sh
 
 # cargo
 [ -f ~/.cargo/env ] && source ~/.cargo/env
