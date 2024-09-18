@@ -3,8 +3,8 @@ TERM = "xterm-256color"
 
 [font]
 size = 13.0
-normal = { family = "Inconsolata", style = "Regular" }
-bold = { family = "Inconsolata", style = "Bold" }
+normal = { family = "Iosevka Term", style = "Regular" }
+bold = { family = "Iosevka Term", style = "Bold" }
 offset = { x = 0, y = 0 }
 
 [shell]
