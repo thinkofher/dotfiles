@@ -85,7 +85,10 @@
                  {:sub         :formatting
                   :keymap      [:<leader>wf :<leader>lf]
                   :callback    #(vim.lsp.buf.format)
-                  :description "Format file"}])
+                  :description "Format file"}
+                 {:sub         :inlay_hints
+                  :keymap      [:<leader>ih]
+                  :callback    #(vim.lsp.inlay_hint.enable (not (vim.lsp.inlay_hint.is_enabled)))}])
 
 (fn setup-icons []
   (let [kinds vim.lsp.protocol.CompletionItemKind
@@ -165,7 +168,15 @@
 (each [_ server (ipairs servers)]
   (let [config (. lsp-config server)
         capabilities (vim.lsp.protocol.make_client_capabilities)]
-    (config.setup {:on_attach lsp-on-attach : capabilities})))
+    (config.setup {:on_attach lsp-on-attach
+                   : capabilities
+                   :settings {:gopls {:hints {:assignVariableTypes false
+                                              :compositeLiteralFields true
+                                              :compositeLiteralTypes true
+                                              :constantValues true
+                                              :functionTypeParameters true
+                                              :parameterNames true
+                                              :rangeVariableTypes true}}}})))
 
 ;; If you load nvim-lspconfig on the FileType event then you need to trigger it
 ;; again. Basically nvim-lspconfig uses that autocmd event to auto trigger the

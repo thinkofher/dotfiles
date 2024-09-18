@@ -89,11 +89,6 @@
                                                      (lazy-hotpot))
                                            :config #(require :thinkofher.core.plugins.fzf)})
 
-                  ;; Collection of base16-based colorschemes for Vim.
-                  (use^ :chriskempson/base16-vim
-                        {:setup #(lazy-hotpot)
-                         :config #(require :thinkofher.core.theme)})
-
                   ;; It displays a popup with possible key bindings of the command
                   ;; you started typing.
                   (use^ :folke/which-key.nvim
