@@ -1,5 +1,0 @@
-(require :thinkofher.core.packer)
-(require :thinkofher.core.settings)
-(require :thinkofher.core.auto)
-(require :thinkofher.core.keymaps)
-(require :thinkofher.core.plugins)
