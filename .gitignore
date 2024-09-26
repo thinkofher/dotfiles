@@ -1,1 +1,4 @@
 .backup
+
+# ignore my session file
+.session.vim
