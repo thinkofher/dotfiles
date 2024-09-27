@@ -56,6 +56,7 @@ brew "zig"
 brew "zola"
 brew "zsh-syntax-highlighting"
 brew "clojure/tools/clojure"
+brew "lazygit"
 
 # Skip, because it doesn't work with CLT 14.0. After official release of CLT 14.1,
 # it will be possible to install this.
