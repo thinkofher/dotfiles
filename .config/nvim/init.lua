@@ -25,7 +25,12 @@ vim.g.maplocalleader = "\\"
 require("lazy").setup({
   spec = {
     -- import your plugins
-    { "thinkofher/pabianice" , opts = {} }
+    {
+      "thinkofher/pabianice",
+      opts = {
+        gui_font = "GohuFont uni14 Nerd Font:h14",
+      },
+    }
   },
 
   -- Configure any other settings here. See the documentation for more details.
