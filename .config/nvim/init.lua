@@ -28,6 +28,7 @@ require("lazy").setup({
     {
       "thinkofher/pabianice",
       opts = {
+        icons = true,
         gui_font = "GohuFont uni14 Nerd Font:h14",
       },
     }
