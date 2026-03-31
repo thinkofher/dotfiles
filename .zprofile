@@ -20,3 +20,6 @@ export PATH="/Users/bdudek/.deta/bin:$PATH"
 
 # Rancher Desktop
 export PATH="$HOME/.rd/bin:$PATH"
+
+# ripgrep config file
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
